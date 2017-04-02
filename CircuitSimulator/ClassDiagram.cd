@@ -1,0 +1,951 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CCapacitor" Collapsed="true">
+    <Position X="0.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABCAIAAAAAAAYFAAAAAAABAAAAABQIgAACAAAAOQAAA=</HashCode>
+      <FileName>Capacitor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CGround" Collapsed="true">
+    <Position X="3" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABCAAAEAAAAAAEABAAAAABAAAAABQAgAAAAAAAAAAgA=</HashCode>
+      <FileName>Ground.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CProgrammableVoltageSource" Collapsed="true">
+    <Position X="5.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AhCAAAAAAAAAIEACAEAAABQAQAABQggAGgARAAAAIAg=</HashCode>
+      <FileName>ProgrammableVoltageSource.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CResistor" Collapsed="true">
+    <Position X="7.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABCAMAAAAAAABEAAAAAAABAAAAABQAgAAAAAAAOAAGA=</HashCode>
+      <FileName>Resistor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimulationUtils" Collapsed="true">
+    <Position X="56.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SimulationUtils.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Terminal" Collapsed="true">
+    <Position X="58.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABgAEAEAkAAABAIAAAAAABAAAAABAAAAABAAABAAAAA=</HashCode>
+      <FileName>Terminal.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CWire" Collapsed="true">
+    <Position X="55" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBgAgIAAAAAAAAAAAAAAIAAAAAABAAAAAAASAAMAQAA=</HashCode>
+      <FileName>Wire.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CGrid">
+    <Position X="71.75" Y="2.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABBAAACAACAAAAABAAAAAAQACAAEAAAAEKA=</HashCode>
+      <FileName>Grid.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CGridUtils">
+    <Position X="68.25" Y="1" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAgAAAAAAAAAACAAAAAAAAAAAAAAABAAAIAAAA=</HashCode>
+      <FileName>GridUtils.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="sc_xTheGrid" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TestQt" Collapsed="true">
+    <Position X="60.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQIgCAABAEBAEAgAKBAQIgBABAARIBIAAAAASCKAAwA=</HashCode>
+      <FileName>testqt.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ComponentDialog" Collapsed="true">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ComponentDialog.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPPainter" Collapsed="true">
+    <Position X="63.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAIAQAiAIAIAEAIAAAAQQAAEQIAAAAAAgAAEAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPLayer" Collapsed="true">
+    <Position X="58.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAQAABAAAAQABCAEAAQAoAgACAABAAI=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPLayerable" Collapsed="true">
+    <Position X="27.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAAAAAgBAAAQAAgCAQIAAAEABAEAgIwCIBQCDEQAACA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPRange" Collapsed="true">
+    <Position X="65.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>sBgAEAkAAAAQAAIAAIAAAQABAAAAAIAAAAAAAAAAIAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPMarginGroup" Collapsed="true">
+    <Position X="62" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAEABAAABAAAAQAAAAAAAAAIAAQAAAAQAI=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPLayoutElement" Collapsed="true">
+    <Position X="42.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EIsYAAUAABBIQBAEEQMQIgFBAAGSAIAAAIACCIAEoAQ=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPLayout" Collapsed="true">
+    <Position X="40" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAIAAAAAABAIBAECAAAAAAgAAQAAAAAICACIAAFAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPLayoutGrid" Collapsed="true">
+    <Position X="39" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAESgAEAQBCGABKEAgAAAAAoAQQCAACEsYICIAQhBAQ=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPLayoutInset" Collapsed="true">
+    <Position X="41.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAAAEwEAAAAAAAAAgCAAAAChAQQAAAIAIQACIAABAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPLineEnding" Collapsed="true">
+    <Position X="60.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAABABAAAAAJIAASEIQAAAABAAEAAgAAAAQAAAAAAQ=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPGrid" Collapsed="true">
+    <Position X="50.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAIAAAEAAgAAEBDpAAACAIAJABIAAAIAEhACAAAg=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPAxis" Collapsed="true">
+    <Position X="52.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>LznJ2LFvwf6QJ3jNlx4Ty0b9DDaw0KU/OS7TKXFvsG4=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPAbstractPlottable" Collapsed="true">
+    <Position X="8.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAMYEAIAEpJAgAqRARoUABBAAhAMgIBEFQ4KjgGCACA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPItemAnchor" Collapsed="true">
+    <Position X="3.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAFwAAAAAAAAAAAAABAAQAAAAAAEAQAAIEgCAAAAAAI=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPItemPosition" Collapsed="true">
+    <Position X="3.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAEAEAABECAEEAAQgAEUQAAggRBVACBEAiABIIADAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPAbstractItem" Collapsed="true">
+    <Position X="25.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQFAiEAEAAAAIAwRAUIAIAAFAAAAgIAgBQQCCgAQIKA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCustomPlot" Collapsed="true">
+    <Position X="55" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>oMpoDJhKoDVNITLUba+zuIDwCkAatMReJXwQjKHRsoU=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPColorGradient" Collapsed="true">
+    <Position X="62" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAALEAASAAAAAASACAgAAQIECAAAAAiEACBAAIACAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPAxisRect" Collapsed="true">
+    <Position X="43.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAsYmEARkAhAADQAQKsIKAngiEEaBoVQAeRQAAKEuCA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPAbstractLegendItem" Collapsed="true">
+    <Position X="45.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAMAAAAAgAAABAiQBQIACAAAAACAgoAERAQCCgCAACA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPPlottableLegendItem" Collapsed="true">
+    <Position X="45.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAABAABEAAAAAAAIACAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPLegend" Collapsed="true">
+    <Position X="39" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>8AoMjMAAwoABAAiFAAaUKQEIADWogsBGQAQCDECCJGI=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPPlotTitle" Collapsed="true">
+    <Position X="48" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAMQAAAAgBAAAECQBAIACACCAACAgqAMRAQCCkCAACA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPColorScaleAxisRectPrivate" Collapsed="true">
+    <Position X="43.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAABQAAAAAAAAAAgIAgAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPColorScale" Collapsed="true">
+    <Position X="36.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEMASEIAAARAABgASEEAIBBoARARCJBACQDAAEAEAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPData" Collapsed="true">
+    <Position X="55" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAEAAAAAAAAgCAAAAAQkAAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPGraph" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ARM4gQIAQAKCAHAAFAMmAEISgcGjgADQAgAyQQCARBA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPCurveData" Collapsed="true">
+    <Position X="65.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABEAAAAAAAAACAAAAQAAAAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPCurve" Collapsed="true">
+    <Position X="14.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AZcAgQIgYAAAgEAAEAYAAAAQAUAhAACAAAASBACAAEI=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPBarsGroup" Collapsed="true">
+    <Position X="60.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AFAAAgABAABEAAAEAIAAIIAAAAEBIAAAJiEgAAAgQEA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPBarData" Collapsed="true">
+    <Position X="58.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAEAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPBars" Collapsed="true">
+    <Position X="5.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kAOAjQKAAAEABAAAUAIAGgIQAQABoAAAAEESgACAACA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPStatisticalBox" Collapsed="true">
+    <Position X="9.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoMAJIIIAhAipAgAQAoEBQCAgAECCAQQAAEaDoCAVRA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPColorMapData" Collapsed="true">
+    <Position X="63.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEEAAAAABAgABEgQEAAAAAggBCQARAAAAAi0EqCgYCA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPColorMap" Collapsed="true">
+    <Position X="12" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAsASGIkAARAARgCQBIAAgAoAAAGAxAACAASBECAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPFinancialData" Collapsed="true">
+    <Position X="56.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAECBIAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPFinancial" Collapsed="true">
+    <Position X="6" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAMChxKQEQAIBAAAUAoAZAAKERAhgAAAAAAyABCAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPItemStraightLine" Collapsed="true">
+    <Position X="16.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAACAAAAAiACAAAoAgAAAAAgAAAAAEQACgAAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPItemLine" Collapsed="true">
+    <Position X="18.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAYAAACgAAAgACgCAoAAAAAQAAAAAAAEQACgAAADgA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPItemCurve" Collapsed="true">
+    <Position X="21" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAYAAACgAAAgACgAAoEAAAAQAABAQAAEQACgAAABgA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPItemRect" Collapsed="true">
+    <Position X="23.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgQAAAEAoAAgBCAAAoEABgAAEAIAEAAEQAChAICkAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPItemText" Collapsed="true">
+    <Position X="25.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACoQACAkBoAQgFCAAAqEIByiCECIgASMVRALhBIKkgg=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPItemEllipse" Collapsed="true">
+    <Position X="27.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAoQAAAEAoAYgBCAAQoEABgAIAAIAAAAEQAChAICkAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPItemPixmap" Collapsed="true">
+    <Position X="30" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgQAAAEAAMAgBCAAAoAQAgCAUEIgAACkSACggYAkAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPItemTracer" Collapsed="true">
+    <Position X="32.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BIgQAAAQAoAIgAiBAIoEIBIACAAcACgAEQAChAAiACA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCPItemBracket" Collapsed="true">
+    <Position X="34.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAgQAABEAAAAgACAAEoQAAAAAAAsAIgAEQACgAAAgAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVoltageSource" Collapsed="true">
+    <Position X="9.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABCAIAAAABAAAEAAAEAAABAAAAoBQQgAAAAAAgCAIAA=</HashCode>
+      <FileName>Comp_VoltageSource.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IComponent" Collapsed="true">
+    <Position X="3.75" Y="3.25" Width="1.5" />
+    <NestedTypes>
+      <Typedef Name="IComponent::DialogSettingsMap" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>IComponent.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>EpiAoAEAAAAAAECRAAAAoBBAAAEQQAgAQQACAACEEgA=</HashCode>
+      <FileName>IComponent.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mv_SettingsDialog" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CSTGRegctangle" Collapsed="true">
+    <Position X="65.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAIAAAAAAAABAAAAAAAgAAAAAAACAAAAAAA=</HashCode>
+      <FileName>STGRectangle.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ui_Dialog" Collapsed="true">
+    <Position X="0.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAIAAAAAAAAAAAAAEAAAAAQAIAAAAQAAAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\ui_ComponentDialog.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ui_MainWindow" Collapsed="true">
+    <Position X="0.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAIAAAAAAAAAAAIAAABQAIAAAIKAAAcAAAEA=</HashCode>
+      <FileName>GeneratedFiles\ui_testqt.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Solver::Circuit" Collapsed="true">
+    <Position X="60.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEARAEAAAgAAAAAAIAESAIAEAJAADAAAUQAAAAAAAE=</HashCode>
+      <FileName>Circuit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Solver::CEdge" Collapsed="true">
+    <Position X="55" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQEAAAAABAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Edge.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Solver::GaussElimination" Collapsed="true">
+    <Position X="56.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAIIAAAAAAABAAEAAAAAAAACIggAQAAAAAAAAA=</HashCode>
+      <FileName>GaussElimination.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Solver::CNode" Collapsed="true">
+    <Position X="62" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAFAAAAAAACAAAAAAAAAAAACAAAAAAAAAAAAADEgA=</HashCode>
+      <FileName>Node.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Solver::CNodePotential" Collapsed="true">
+    <Position X="63.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEgAAAAAAAEAAAEAABEAAAAAAACAAAAAQAAAKCAKABA=</HashCode>
+      <FileName>NodePotential.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ui::Dialog" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\ui_ComponentDialog.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ui::MainWindow">
+    <Position X="0.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\ui_testqt.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QGraphicsScene" Collapsed="true">
+    <Position X="71.25" Y="0.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>BF5HCBSkAkDIrNUUYAi6aRBBAkBUgNaQGEDYAkucAQI=</HashCode>
+      <FileName>i:\qt\qt5.4.1\5.4\msvc2013_opengl\include\qtwidgets\qgraphicsscene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="TickLabelData" Collapsed="true">
+    <Position X="60.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAEAAAAAAACAAAEAAAAAAEAAQBAAAAAAQ=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_ComponentDialog_t" Collapsed="true">
+    <Position X="58.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_ComponentDialog.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_IComponent_t" Collapsed="true">
+    <Position X="62" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_IComponent.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPScatterStyle_t" Collapsed="true">
+    <Position X="65.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPPainter_t" Collapsed="true">
+    <Position X="60.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPLayer_t" Collapsed="true">
+    <Position X="56.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPLayerable_t" Collapsed="true">
+    <Position X="58.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPMarginGroup_t" Collapsed="true">
+    <Position X="58.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPLayoutElement_t" Collapsed="true">
+    <Position X="62" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPLayout_t" Collapsed="true">
+    <Position X="60.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPLayoutGrid_t" Collapsed="true">
+    <Position X="63.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPLayoutInset_t" Collapsed="true">
+    <Position X="65.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPLineEnding_t" Collapsed="true">
+    <Position X="56.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPGrid_t" Collapsed="true">
+    <Position X="63.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPAxis_t" Collapsed="true">
+    <Position X="56.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPAbstractPlottable_t" Collapsed="true">
+    <Position X="55" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPAbstractItem_t" Collapsed="true">
+    <Position X="63.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCustomPlot_t" Collapsed="true">
+    <Position X="56.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPColorGradient_t" Collapsed="true">
+    <Position X="63.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPAxisRect_t" Collapsed="true">
+    <Position X="58.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPAbstractLegendItem_t" Collapsed="true">
+    <Position X="65.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPPlottableLegendItem_t" Collapsed="true">
+    <Position X="62" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPLegend_t" Collapsed="true">
+    <Position X="55" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPPlotTitle_t" Collapsed="true">
+    <Position X="63.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPColorScaleAxisRectPrivate_t" Collapsed="true">
+    <Position X="56.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPColorScale_t" Collapsed="true">
+    <Position X="55" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPGraph_t" Collapsed="true">
+    <Position X="62" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPCurve_t" Collapsed="true">
+    <Position X="58.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPBarsGroup_t" Collapsed="true">
+    <Position X="62" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPBars_t" Collapsed="true">
+    <Position X="60.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPStatisticalBox_t" Collapsed="true">
+    <Position X="55" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPColorMap_t" Collapsed="true">
+    <Position X="65.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPFinancial_t" Collapsed="true">
+    <Position X="60.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPItemStraightLine_t" Collapsed="true">
+    <Position X="63.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPItemLine_t" Collapsed="true">
+    <Position X="58.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPItemCurve_t" Collapsed="true">
+    <Position X="55" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPItemRect_t" Collapsed="true">
+    <Position X="62" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPItemText_t" Collapsed="true">
+    <Position X="65.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPItemEllipse_t" Collapsed="true">
+    <Position X="56.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPItemPixmap_t" Collapsed="true">
+    <Position X="60.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPItemTracer_t" Collapsed="true">
+    <Position X="55" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCPItemBracket_t" Collapsed="true">
+    <Position X="65.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_qcustomplot.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_CSTGRegctangle_t" Collapsed="true">
+    <Position X="60.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_STGRectangle.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_TestQt_t" Collapsed="true">
+    <Position X="58.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>GeneratedFiles\Debug\moc_testqt.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Solver::EDGE" Collapsed="true">
+    <Position X="55" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAIAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Circuit.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="`anonymous-namespace'::initializer" Collapsed="true">
+    <Position X="56.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAEA=</HashCode>
+      <FileName>GeneratedFiles\qrc_testqt.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="Solver::EDGE_VEC" Collapsed="true">
+    <Position X="55" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Circuit.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="QCPDataMap" Collapsed="true">
+    <Position X="55" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="QCPDataMapIterator" Collapsed="true">
+    <Position X="56.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="QCPDataMutableMapIterator" Collapsed="true">
+    <Position X="58.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="QCPCurveDataMap" Collapsed="true">
+    <Position X="62" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="QCPCurveDataMapIterator" Collapsed="true">
+    <Position X="63.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="QCPCurveDataMutableMapIterator" Collapsed="true">
+    <Position X="65.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="QCPBarDataMap" Collapsed="true">
+    <Position X="56.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="QCPBarDataMapIterator" Collapsed="true">
+    <Position X="58.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="QCPBarDataMutableMapIterator" Collapsed="true">
+    <Position X="60.25" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="QCPFinancialDataMap" Collapsed="true">
+    <Position X="60.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="QCPFinancialDataMapIterator" Collapsed="true">
+    <Position X="62" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="QCPFinancialDataMutableMapIterator" Collapsed="true">
+    <Position X="63.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="QCP::MarginSide" Collapsed="true">
+    <Position X="58.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAABAAAAAIAAAAAIAAAAIAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="QCP::AntialiasedElement" Collapsed="true">
+    <Position X="55" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAACIACAAAAAACAQQAAAAAAAAAhAEABAgAAAAAAAABA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="QCP::PlottingHint" Collapsed="true">
+    <Position X="60.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAACAAIAAAAgAAAAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="QCP::Interaction" Collapsed="true">
+    <Position X="56.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAEAAAAAAAAAAAAABAAACCAAQEAAAAAAIAAAAA=</HashCode>
+      <FileName>qcustomplot.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

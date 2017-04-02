@@ -1,0 +1,160 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (TestQt.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Moc'ing testqt.h...
+  Uic'ing testqt.ui...
+  Moc'ing AudioDriverDialog.h...
+  Moc'ing ComponentDialog.h...
+  Moc'ing qcustomplot.h...
+  Moc'ing IComponent.h...
+C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\TestQt\TestQt\IComponent.h(84): warning : Class IComponent implements the interface QGraphicsItem but does not list it in Q_INTERFACES. qobject_cast to QGraphicsItem will not work!
+  Moc'ing STGRectangle.h...
+  Rcc'ing testqt.qrc...
+RCC : warning : No resources in 'C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\TestQt\TestQt\testqt.qrc'.
+  
+  Uic'ing ComponentDialog.ui...
+  Uic'ing AudioDriverDialog.ui...
+  AudioDriverDialog.cpp
+  Capacitor.cpp
+C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\TestQt\TestQt\SimulationUtils.h(37): warning C4091: 'static ': ignored on left of 'SimulationUtils::ElectronicElements' when no variable is declared
+  Circuit.cpp
+  Unknown compiler version - please run the configure tests and report the results
+C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\TestQt\TestQt\SimulationUtils.h(37): warning C4091: 'static ': ignored on left of 'SimulationUtils::ElectronicElements' when no variable is declared
+  ComponentDialog.cpp
+  Comp_VoltageSource.cpp
+C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\TestQt\TestQt\SimulationUtils.h(37): warning C4091: 'static ': ignored on left of 'SimulationUtils::ElectronicElements' when no variable is declared
+  Edge.cpp
+C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\TestQt\TestQt\SimulationUtils.h(37): warning C4091: 'static ': ignored on left of 'SimulationUtils::ElectronicElements' when no variable is declared
+  GaussElimination.cpp
+  Unknown compiler version - please run the configure tests and report the results
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xutility(2372): warning C4996: 'std::copy::_Unchecked_iterators::_Deprecate': Call to 'std::copy' with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xutility(2372): note: see declaration of 'std::copy::_Unchecked_iterators::_Deprecate'
+  C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\Libraries\boost_1_58_0\boost/numeric/ublas/storage.hpp(204): note: see reference to function template instantiation '_OutIt *std::copy<double*,double*>(_InIt,_InIt,_OutIt)' being compiled
+          with
+          [
+              _OutIt=double *,
+              _InIt=double *
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\Libraries\boost_1_58_0\boost/numeric/ublas/storage.hpp(201): note: while compiling class template member function 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &boost::numeric::ublas::unbounded_array<T,std::allocator<T>>::operator =(const boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &)'
+          with
+          [
+              T=double
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\Libraries\boost_1_58_0\boost/numeric/ublas/matrix.hpp(310): note: see reference to function template instantiation 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &boost::numeric::ublas::unbounded_array<T,std::allocator<T>>::operator =(const boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &)' being compiled
+          with
+          [
+              T=double
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\Libraries\boost_1_58_0\boost/numeric/ublas/matrix.hpp(102): note: see reference to class template instantiation 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>>' being compiled
+          with
+          [
+              T=double
+          ]
+  c:\users\szabolcs\documents\circuitsimulator\simulator project source code\testqt\testqt\GaussElimination.h(22): note: see reference to class template instantiation 'boost::numeric::ublas::matrix<double,boost::numeric::ublas::row_major,boost::numeric::ublas::unbounded_array<T,std::allocator<T>>>' being compiled
+          with
+          [
+              T=double
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xmemory(102): warning C4996: 'std::uninitialized_copy::_Unchecked_iterators::_Deprecate': Call to 'std::uninitialized_copy' with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xmemory(102): note: see declaration of 'std::uninitialized_copy::_Unchecked_iterators::_Deprecate'
+  C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\Libraries\boost_1_58_0\boost/numeric/ublas/storage.hpp(94): note: see reference to function template instantiation '_FwdIt *std::uninitialized_copy<const double*,double*>(_InIt,_InIt,_FwdIt)' being compiled
+          with
+          [
+              _FwdIt=double *,
+              _InIt=const double *
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\Libraries\boost_1_58_0\boost/numeric/ublas/storage.hpp(89): note: while compiling class template member function 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>>::unbounded_array(const boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &)'
+          with
+          [
+              T=double
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\Libraries\boost_1_58_0\boost/numeric/ublas/matrix.hpp(162): note: see reference to function template instantiation 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>>::unbounded_array(const boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &)' being compiled
+          with
+          [
+              T=double
+          ]
+  moc_AudioDriverDialog.cpp
+  moc_ComponentDialog.cpp
+  moc_IComponent.cpp
+C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\TestQt\TestQt\SimulationUtils.h(37): warning C4091: 'static ': ignored on left of 'SimulationUtils::ElectronicElements' when no variable is declared
+  moc_qcustomplot.cpp
+  moc_STGRectangle.cpp
+  moc_testqt.cpp
+C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\TestQt\TestQt\SimulationUtils.h(37): warning C4091: 'static ': ignored on left of 'SimulationUtils::ElectronicElements' when no variable is declared
+  Grid.cpp
+  GridUtils.cpp
+  Ground.cpp
+C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\TestQt\TestQt\SimulationUtils.h(37): warning C4091: 'static ': ignored on left of 'SimulationUtils::ElectronicElements' when no variable is declared
+  IComponent.cpp
+C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\TestQt\TestQt\SimulationUtils.h(37): warning C4091: 'static ': ignored on left of 'SimulationUtils::ElectronicElements' when no variable is declared
+  main.cpp
+C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\TestQt\TestQt\SimulationUtils.h(37): warning C4091: 'static ': ignored on left of 'SimulationUtils::ElectronicElements' when no variable is declared
+  Microphone.cpp
+C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\TestQt\TestQt\SimulationUtils.h(37): warning C4091: 'static ': ignored on left of 'SimulationUtils::ElectronicElements' when no variable is declared
+  Node.cpp
+C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\TestQt\TestQt\SimulationUtils.h(37): warning C4091: 'static ': ignored on left of 'SimulationUtils::ElectronicElements' when no variable is declared
+  Generating Code...
+  Compiling...
+  NodePotential.cpp
+  Unknown compiler version - please run the configure tests and report the results
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xutility(2372): warning C4996: 'std::copy::_Unchecked_iterators::_Deprecate': Call to 'std::copy' with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xutility(2372): note: see declaration of 'std::copy::_Unchecked_iterators::_Deprecate'
+  C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\Libraries\boost_1_58_0\boost/numeric/ublas/storage.hpp(204): note: see reference to function template instantiation '_OutIt *std::copy<double*,double*>(_InIt,_InIt,_OutIt)' being compiled
+          with
+          [
+              _OutIt=double *,
+              _InIt=double *
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\Libraries\boost_1_58_0\boost/numeric/ublas/storage.hpp(201): note: while compiling class template member function 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &boost::numeric::ublas::unbounded_array<T,std::allocator<T>>::operator =(const boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &)'
+          with
+          [
+              T=double
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\Libraries\boost_1_58_0\boost/numeric/ublas/matrix.hpp(310): note: see reference to function template instantiation 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &boost::numeric::ublas::unbounded_array<T,std::allocator<T>>::operator =(const boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &)' being compiled
+          with
+          [
+              T=double
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\Libraries\boost_1_58_0\boost/numeric/ublas/matrix.hpp(102): note: see reference to class template instantiation 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>>' being compiled
+          with
+          [
+              T=double
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\TestQt\TestQt\NodePotential.h(20): note: see reference to class template instantiation 'boost::numeric::ublas::matrix<double,boost::numeric::ublas::row_major,boost::numeric::ublas::unbounded_array<T,std::allocator<T>>>' being compiled
+          with
+          [
+              T=double
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xmemory(102): warning C4996: 'std::uninitialized_copy::_Unchecked_iterators::_Deprecate': Call to 'std::uninitialized_copy' with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xmemory(102): note: see declaration of 'std::uninitialized_copy::_Unchecked_iterators::_Deprecate'
+  C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\Libraries\boost_1_58_0\boost/numeric/ublas/storage.hpp(94): note: see reference to function template instantiation '_FwdIt *std::uninitialized_copy<const double*,double*>(_InIt,_InIt,_FwdIt)' being compiled
+          with
+          [
+              _FwdIt=double *,
+              _InIt=const double *
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\Libraries\boost_1_58_0\boost/numeric/ublas/storage.hpp(89): note: while compiling class template member function 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>>::unbounded_array(const boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &)'
+          with
+          [
+              T=double
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\Libraries\boost_1_58_0\boost/numeric/ublas/matrix.hpp(162): note: see reference to function template instantiation 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>>::unbounded_array(const boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &)' being compiled
+          with
+          [
+              T=double
+          ]
+  ProgrammableVoltageSource.cpp
+C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\TestQt\TestQt\SimulationUtils.h(37): warning C4091: 'static ': ignored on left of 'SimulationUtils::ElectronicElements' when no variable is declared
+  qcustomplot.cpp
+  Resistor.cpp
+C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\TestQt\TestQt\SimulationUtils.h(37): warning C4091: 'static ': ignored on left of 'SimulationUtils::ElectronicElements' when no variable is declared
+  SimulationUtils.cpp
+c:\users\szabolcs\documents\circuitsimulator\simulator project source code\testqt\testqt\SimulationUtils.h(37): warning C4091: 'static ': ignored on left of 'SimulationUtils::ElectronicElements' when no variable is declared
+  STGRectangle.cpp
+  testqt.cpp
+C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\TestQt\TestQt\SimulationUtils.h(37): warning C4091: 'static ': ignored on left of 'SimulationUtils::ElectronicElements' when no variable is declared
+  Unknown compiler version - please run the configure tests and report the results
+  Wire.cpp
+C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\TestQt\TestQt\SimulationUtils.h(37): warning C4091: 'static ': ignored on left of 'SimulationUtils::ElectronicElements' when no variable is declared
+  Generating Code...
+  qrc_testqt.cpp
+  TestQt.vcxproj -> C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\TestQt\x64\Debug\CircuitSimulator.exe
+  TestQt.vcxproj -> C:\Users\Szabolcs\Documents\CircuitSimulator\Simulator Project Source Code\TestQt\x64\Debug\CircuitSimulator.pdb (Full PDB)

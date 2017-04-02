@@ -1,0 +1,44 @@
+﻿Build started 7/2/2015 8:30:01 PM.
+     1>Project "C:\Users\Szabi\Documents\Visual Studio 2013\Projects\TestQt\TestQt\TestQt.vcxproj" on node 2 (Build target(s)).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(935,5): warning MSB8027: Two or more files with the name of moc_AudioDriverDialog.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are GeneratedFiles\Debug\moc_AudioDriverDialog.cpp, GeneratedFiles\Release\moc_AudioDriverDialog.cpp.
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(935,5): warning MSB8027: Two or more files with the name of moc_ComponentDialog.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are GeneratedFiles\Debug\moc_ComponentDialog.cpp, GeneratedFiles\Release\moc_ComponentDialog.cpp.
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(935,5): warning MSB8027: Two or more files with the name of moc_IComponent.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are GeneratedFiles\Debug\moc_IComponent.cpp, GeneratedFiles\Release\moc_IComponent.cpp.
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(935,5): warning MSB8027: Two or more files with the name of moc_qcustomplot.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are GeneratedFiles\Debug\moc_qcustomplot.cpp, GeneratedFiles\Release\moc_qcustomplot.cpp.
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(935,5): warning MSB8027: Two or more files with the name of moc_STGRectangle.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are GeneratedFiles\Debug\moc_STGRectangle.cpp, GeneratedFiles\Release\moc_STGRectangle.cpp.
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(935,5): warning MSB8027: Two or more files with the name of moc_testqt.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are GeneratedFiles\Debug\moc_testqt.cpp, GeneratedFiles\Release\moc_testqt.cpp.
+     1>Link:
+         I:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Szabi\Documents\Visual Studio 2013\Projects\TestQt\Win32\Release\\TestQt.exe" /NOLOGO /LIBPATH:I:\School\Licenta\CIRCUIT_SIMULATOR\pa_stable_v19_20140130\portaudio\build\msvc\Win32\Debug /LIBPATH:I:\School\Licenta\CIRCUIT_SIMULATOR\pa_stable_v19_20140130\portaudio\build\msvc\Win32\Release /LIBPATH:I:\QT\Qt5.4.1\5.4\msvc2013_opengl\lib qtmain.lib Qt5Core.lib Qt5Gui.lib Qt5Widgets.lib Qt5PrintSupport.lib portaudio_x86.lib Qt5PlatformSupportd.lib rpcrt4.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:"C:\Users\Szabi\Documents\Visual Studio 2013\Projects\TestQt\Win32\Release\TestQt.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Szabi\Documents\Visual Studio 2013\Projects\TestQt\Win32\Release\TestQt.lib" /MACHINE:X86 /SAFESEH Release\AudioDriverDialog.obj
+         Release\Capacitor.obj
+         Release\Circuit.obj
+         Release\ComponentDialog.obj
+         Release\Comp_VoltageSource.obj
+         Release\Edge.obj
+         Release\GaussElimination.obj
+         Release\qrc_testqt.obj
+         Release\moc_AudioDriverDialog.obj
+         Release\moc_ComponentDialog.obj
+         Release\moc_IComponent.obj
+         Release\moc_qcustomplot.obj
+         Release\moc_STGRectangle.obj
+         Release\moc_testqt.obj
+         Release\Grid.obj
+         Release\GridUtils.obj
+         Release\Ground.obj
+         Release\IComponent.obj
+         Release\main.obj
+         Release\Microphone.obj
+         Release\Node.obj
+         Release\NodePotential.obj
+         Release\ProgrammableVoltageSource.obj
+         Release\qcustomplot.obj
+         Release\Resistor.obj
+         Release\SimulationUtils.obj
+         Release\STGRectangle.obj
+         Release\testqt.obj
+         Release\Wire.obj
+         TestQt.vcxproj -> C:\Users\Szabi\Documents\Visual Studio 2013\Projects\TestQt\Win32\Release\TestQt.exe
+     1>Done Building Project "C:\Users\Szabi\Documents\Visual Studio 2013\Projects\TestQt\TestQt\TestQt.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.95
