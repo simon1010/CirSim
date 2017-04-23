@@ -43,9 +43,9 @@ IComponent(ac_Position, ac_pScene, ac_pParent)
     mv_pAudioBuffers[i] = new SAMPLE[FRAMES_PER_BUFFER];
   }
 
-  mv_bMaydenVoyage = true;  
+  mv_bMaydenVoyage = true;
+  mv_bIsStreamOpen = false;
   mf_ConstructDialog();
- 
 }
 
 void CMicrophone::mf_ConstructDialog()
@@ -152,8 +152,10 @@ void CMicrophone::mf_SetupHardware()
     error = true;
 
     err = Pa_StartStream(mv_pAudioInputStream);
-  if (err != paNoError)
-    error = true;
+    if (err != paNoError)
+      error = true;
+    else
+      mv_bIsStreamOpen = true;
 }
 
 CMicrophone::~CMicrophone()
@@ -162,8 +164,11 @@ CMicrophone::~CMicrophone()
 
 void CMicrophone::mf_PreDestroy()
 {
-  Pa_CloseStream(mv_pAudioInputStream);
-  Pa_Terminate();
+  if (mv_bIsStreamOpen == true)
+  {
+    Pa_CloseStream(mv_pAudioInputStream);
+    Pa_Terminate();
+  }
 }
 
 QRectF CMicrophone::boundingRect() const

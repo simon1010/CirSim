@@ -36,7 +36,9 @@ private:
   
   /* Rubberband selection aid */
   QRubberBand *rubberBand;
-  QPoint *rubberBandStartsFrom;
+  QPoint rubberBandStartsFrom;
+  QRect  rubberBandItemSelectionRectangle;
+
 
   /* Wire aid */
   QPointF *mv_LineStartsFrom;

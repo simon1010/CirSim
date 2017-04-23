@@ -1,3 +1,6 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (TestQt.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Circuit.cpp
+  Unknown compiler version - please run the configure tests and report the results
+C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\CircuitSimulator\SimulationUtils.h(37): warning C4091: 'static ': ignored on left of 'SimulationUtils::ElectronicElements' when no variable is declared
   CircuitSimulator.vcxproj -> C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\x64\Debug\CircuitSimulator.exe
   CircuitSimulator.vcxproj -> C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\x64\Debug\CircuitSimulator.pdb (Full PDB)

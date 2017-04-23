@@ -384,9 +384,10 @@ void TestQt::mousePressEvent(QMouseEvent * event)
         break;
       case SimulationUtils::ElectronicElements::Element_Total:
         grabMouse();
-        rubberBandStartsFrom = new QPoint(QCursor::pos());
+        rubberBandStartsFrom = QPoint(event->pos());
         rubberBand = new QRubberBand(QRubberBand::Rectangle);//new rectangle band
-        rubberBand->setGeometry(QRect(*rubberBandStartsFrom, QSize(1, 1)));
+        rubberBand->setGeometry(QRect(mapToGlobal(rubberBandStartsFrom), QSize(1, 1)));
+        rubberBandItemSelectionRectangle = QRect(rubberBandStartsFrom, QSize(1, 1));
         rubberBand->show();
         QMainWindow::mousePressEvent(event);
         return;
@@ -455,7 +456,8 @@ void TestQt::mouseMoveEvent(QMouseEvent * event)
     }
     
     QCursor::setPos(QPoint(MouseBoundary_x, MouseBoundary_y));
-    rubberBand->setGeometry(QRect(*rubberBandStartsFrom, mapToGlobal(event->pos())).normalized());
+    rubberBand->setGeometry(QRect(mapToGlobal(rubberBandStartsFrom), mapToGlobal(event->pos())).normalized());
+    rubberBandItemSelectionRectangle = QRect(rubberBandStartsFrom, event->pos());
   }
   /* End rubberband event handling */
 
@@ -468,7 +470,7 @@ void TestQt::mouseMoveEvent(QMouseEvent * event)
     mv_SpawnWire->setLine(QLineF(*mv_LineStartsFrom, *mv_LineEndAt));
   }
   char lv_szLogging[100];
-  sprintf_s(lv_szLogging, "Cursor < %d | %d >", QCursor::pos().x(), QCursor::pos().y());
+  sprintf_s(lv_szLogging, "Cursor < %d | %d >", /*QCursor::pos().x()*/event->pos().x(), /*QCursor::pos().y()*/event->pos().y());
 
   sc_xWriteStatus(lv_szLogging);
 
@@ -483,8 +485,8 @@ void TestQt::mouseReleaseEvent(QMouseEvent * event)
   if (SelectedElemenet == SimulationUtils::Element_Total)
   {
     // TODO : Must Revisit when time
-    const QRect lc_RubberBandRectangle = rubberBand->rect();
-    const QPoint lc_RubberBandPosition = mapTo(this, rubberBand->pos());
+    const QRect lc_RubberBandRectangle = rubberBandItemSelectionRectangle;//rubberBand->rect();
+    const QPoint lc_RubberBandPosition = mapTo(this, QPoint(rubberBandItemSelectionRectangle.x(), rubberBandItemSelectionRectangle.y())); //mapTo(this, rubberBand->pos());
    
     mv_SelectedItems = CGridUtils::sc_xTheGrid->items(
       qreal(lc_RubberBandPosition.x()),

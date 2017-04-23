@@ -60,6 +60,7 @@ private:
   PaStream *mv_pAudioInputStream;
   void * mv_pAudioData;
   bool mv_bMaydenVoyage;
+  bool mv_bIsStreamOpen;
   int mv_nSelectedInputDeviceIndex;
 
 protected:

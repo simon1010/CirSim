@@ -59,6 +59,13 @@ namespace Solver{
     /**/
     /**/
     /* End most probably useless */
+    
+    // add a bit of stability
+    if (lv_UnhadledTerminals.size() == 0)
+    {
+      CGridUtils::sc_xTheGrid->mf_SetGridText("Nothing to Solve!");
+      return;
+    }
 
     for (QGraphicsItem * it : av_QList_AllElements)
     {
