@@ -1,0 +1,15 @@
+﻿  Moc'ing IComponent.h...
+C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\CompLib\Local\Include\IComponent.h(84): warning : Class IComponent implements the interface QGraphicsItem but does not list it in Q_INTERFACES. qobject_cast to QGraphicsItem will not work!
+  moc_IComponent.cpp
+C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\CompLib\Export\Include\SimulationUtils.h(37): warning C4091: 'static ': ignored on left of 'SimulationUtils::ElectronicElements' when no variable is declared
+  complib.cpp
+  Grid.cpp
+  GridUtils.cpp
+  IComponent.cpp
+C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\CompLib\Export\Include\SimulationUtils.h(37): warning C4091: 'static ': ignored on left of 'SimulationUtils::ElectronicElements' when no variable is declared
+  SimulationUtils.cpp
+C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\CompLib\Export\Include\SimulationUtils.h(37): warning C4091: 'static ': ignored on left of 'SimulationUtils::ElectronicElements' when no variable is declared
+  Generating Code...
+     Creating library C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\x64\Debug\CompLib.lib and object C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\x64\Debug\CompLib.exp
+  CompLib.vcxproj -> C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\x64\Debug\CompLib.dll
+  CompLib.vcxproj -> C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\x64\Debug\CompLib.pdb (Full PDB)
