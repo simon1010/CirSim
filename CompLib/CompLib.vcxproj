@@ -27,10 +27,15 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Local\Code\Capacitor.cpp" />
     <ClCompile Include="Local\Code\complib.cpp" />
+    <ClCompile Include="Local\Code\Comp_VoltageSource.cpp" />
     <ClCompile Include="Local\Code\Grid.cpp" />
     <ClCompile Include="Local\Code\GridUtils.cpp" />
+    <ClCompile Include="Local\Code\Ground.cpp" />
     <ClCompile Include="Local\Code\IComponent.cpp" />
+    <ClCompile Include="Local\Code\ProgrammableVoltageSource.cpp" />
+    <ClCompile Include="Local\Code\Resistor.cpp" />
     <ClCompile Include="Local\Code\SimulationUtils.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -1,9 +1,13 @@
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\ui\x64\debug\vc140.pdb
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\ui\x64\debug\ui.obj
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\ui\x64\debug\componentdialog.obj
+c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\ui\x64\debug\audiodriverdialog.obj
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\ui\x64\debug\moc_componentdialog.obj
+c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\ui\x64\debug\moc_audiodriverdialog.obj
+c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\ui\generatedfiles\debug\moc_audiodriverdialog.cpp
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\ui\generatedfiles\debug\moc_componentdialog.cpp
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\ui\generatedfiles\ui_componentdialog.h
+c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\ui\generatedfiles\ui_audiodriverdialog.h
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\x64\debug\ui.ilk
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\x64\debug\ui.dll
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\x64\debug\ui.pdb
