@@ -7,7 +7,9 @@
 #include <qgraphicsitem.h>
 
 
-class CVoltageSource : public IComponent
+#include <complib_global.h>
+
+class COMPLIB_EXPORT CVoltageSource : public IComponent
 {
 public:
   //CVoltageSource(QGraphicsScene *ac_pScene, QGraphicsItem *ac_pParent = 0);

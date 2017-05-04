@@ -7,7 +7,9 @@
 
 typedef float SAMPLE;
 
-class SimulationUtils
+#include <complib_global.h>
+
+class COMPLIB_EXPORT SimulationUtils
 {
 public:
 
@@ -22,7 +24,7 @@ public:
   static int AvailableSamples;
 
   // http://doc.qt.io/qt-4.8/qgraphicsitem.html#type
-  static enum ElectronicElements
+  enum ElectronicElements
   {
     Element_Terminal = 65536, 
     Element_Resistor,

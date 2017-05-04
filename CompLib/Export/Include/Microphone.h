@@ -10,7 +10,9 @@
 #include <pa_asio.h>
 #include <mutex>
 
-class CMicrophone : public IComponent
+#include <complib_global.h>
+
+class COMPLIB_EXPORT CMicrophone : public IComponent
 {
 public:
   CMicrophone(QPointF ac_Position, QGraphicsScene *ac_pScene, QGraphicsView *ac_pParent = 0);

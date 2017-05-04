@@ -4,9 +4,11 @@
 #define AUDIO_DRIVER_DIALOG_H
 
 #include <QDialog>
-#include "ui_AudioDriverDialog.h"
+#include <ui_AudioDriverDialog.h>
 
-class AudioDriverDialog : public QDialog, public Ui::DriverDialog
+#include <ui_global.h>
+
+class UI_EXPORT AudioDriverDialog : public QDialog, public Ui::DriverDialog
 {
   Q_OBJECT
 

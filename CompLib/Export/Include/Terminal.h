@@ -9,7 +9,9 @@
 
 // Always call setPos(); !!!
 // Use paint(.., bool) with boolean
-class Terminal : public QGraphicsItem
+#include <complib_global.h>
+
+class COMPLIB_EXPORT Terminal : public QGraphicsItem
 {
 public:
 
@@ -67,6 +69,7 @@ public:
   __forceinline bool mf_bConnect()
   {
     mv_bIsConnected = true;
+    return mv_bIsConnected;
   }
 
 private:

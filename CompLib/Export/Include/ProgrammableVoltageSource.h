@@ -7,7 +7,9 @@
 #include <qgraphicsitem.h>
 
 
-class CProgrammableVoltageSource : public IComponent
+#include <complib_global.h>
+
+class COMPLIB_EXPORT CProgrammableVoltageSource : public IComponent
 {
   enum Waveform
   {

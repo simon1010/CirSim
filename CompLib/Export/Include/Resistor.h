@@ -9,7 +9,9 @@
 #include <QWidget>
 
 
-class CResistor : public IComponent
+#include <complib_global.h>
+
+class COMPLIB_EXPORT CResistor : public IComponent
 {
 public:
   CResistor(QPointF ac_Position, QGraphicsScene *ac_pScene, QGraphicsView *ac_pParent = 0);

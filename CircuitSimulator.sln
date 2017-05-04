@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CircuitSimulator", "CircuitSimulator\CircuitSimulator.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C977AD4D-3B3C-4F24-AA4B-12E944AFC116} = {C977AD4D-3B3C-4F24-AA4B-12E944AFC116}
+		{458D1D7D-9EA4-4372-980A-0C2873A996F7} = {458D1D7D-9EA4-4372-980A-0C2873A996F7}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CompLib", "CompLib\CompLib.vcxproj", "{458D1D7D-9EA4-4372-980A-0C2873A996F7}"
 	ProjectSection(ProjectDependencies) = postProject

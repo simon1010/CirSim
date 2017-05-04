@@ -5,7 +5,9 @@
 #ifndef GRIDUTILS_H
 #define GRIDUTILS_H
 
-class CGridUtils
+#include <complib_global.h>
+
+class COMPLIB_EXPORT CGridUtils
 {
 public:
 

@@ -4,7 +4,9 @@
 
 #include <qgraphicsscene.h>
 #include <QResizeEvent>
-class CGrid : public QGraphicsScene
+#include <complib_global.h>
+
+class COMPLIB_EXPORT CGrid : public QGraphicsScene
 {
 public:
   CGrid(QObject *parent = nullptr, const unsigned ac_nGridSize = 0);

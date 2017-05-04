@@ -8,7 +8,9 @@
 #include <QPainter>
 #include <QWidget>
 
-class CCapacitor : public IComponent
+#include <complib_global.h>
+
+class COMPLIB_EXPORT CCapacitor : public IComponent
 {
 public:
   CCapacitor(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphicsView *ac_pPrent);

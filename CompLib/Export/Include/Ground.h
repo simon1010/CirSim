@@ -6,7 +6,9 @@
 #include <IComponent.h>
 #include <SimulationUtils.h>
 
-class CGround : public IComponent
+#include <complib_global.h>
+
+class COMPLIB_EXPORT CGround : public IComponent
 {
 public:
   
