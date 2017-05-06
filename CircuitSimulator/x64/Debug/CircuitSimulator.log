@@ -1,13 +1,121 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (TestQt.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Uic'ing testqt.ui...
+  Moc'ing testqt.h...
+  Moc'ing STGRectangle.h...
+  Moc'ing qcustomplot.h...
+  Rcc'ing testqt.qrc...
+RCC : warning : No resources in 'C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\CircuitSimulator\testqt.qrc'.
+  
+  moc_qcustomplot.cpp
+  moc_STGRectangle.cpp
+  moc_testqt.cpp
   Circuit.cpp
   Unknown compiler version - please run the configure tests and report the results
   Edge.cpp
-  moc_testqt.cpp
-  Node.cpp
-  Wire.cpp
+  GaussElimination.cpp
+  Unknown compiler version - please run the configure tests and report the results
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xutility(2372): warning C4996: 'std::copy::_Unchecked_iterators::_Deprecate': Call to 'std::copy' with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xutility(2372): note: see declaration of 'std::copy::_Unchecked_iterators::_Deprecate'
+  C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\Libraries\boost_1_58_0\boost/numeric/ublas/storage.hpp(204): note: see reference to function template instantiation '_OutIt *std::copy<double*,double*>(_InIt,_InIt,_OutIt)' being compiled
+          with
+          [
+              _OutIt=double *,
+              _InIt=double *
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\Libraries\boost_1_58_0\boost/numeric/ublas/storage.hpp(201): note: while compiling class template member function 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &boost::numeric::ublas::unbounded_array<T,std::allocator<T>>::operator =(const boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &)'
+          with
+          [
+              T=double
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\Libraries\boost_1_58_0\boost/numeric/ublas/matrix.hpp(310): note: see reference to function template instantiation 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &boost::numeric::ublas::unbounded_array<T,std::allocator<T>>::operator =(const boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &)' being compiled
+          with
+          [
+              T=double
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\Libraries\boost_1_58_0\boost/numeric/ublas/matrix.hpp(102): note: see reference to class template instantiation 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>>' being compiled
+          with
+          [
+              T=double
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\CircuitSimulator\Local\Include\GaussElimination.h(22): note: see reference to class template instantiation 'boost::numeric::ublas::matrix<double,boost::numeric::ublas::row_major,boost::numeric::ublas::unbounded_array<T,std::allocator<T>>>' being compiled
+          with
+          [
+              T=double
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xmemory(102): warning C4996: 'std::uninitialized_copy::_Unchecked_iterators::_Deprecate': Call to 'std::uninitialized_copy' with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xmemory(102): note: see declaration of 'std::uninitialized_copy::_Unchecked_iterators::_Deprecate'
+  C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\Libraries\boost_1_58_0\boost/numeric/ublas/storage.hpp(94): note: see reference to function template instantiation '_FwdIt *std::uninitialized_copy<const double*,double*>(_InIt,_InIt,_FwdIt)' being compiled
+          with
+          [
+              _FwdIt=double *,
+              _InIt=const double *
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\Libraries\boost_1_58_0\boost/numeric/ublas/storage.hpp(89): note: while compiling class template member function 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>>::unbounded_array(const boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &)'
+          with
+          [
+              T=double
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\Libraries\boost_1_58_0\boost/numeric/ublas/matrix.hpp(162): note: see reference to function template instantiation 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>>::unbounded_array(const boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &)' being compiled
+          with
+          [
+              T=double
+          ]
   main.cpp
+  Node.cpp
+  NodePotential.cpp
+  Unknown compiler version - please run the configure tests and report the results
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xutility(2372): warning C4996: 'std::copy::_Unchecked_iterators::_Deprecate': Call to 'std::copy' with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xutility(2372): note: see declaration of 'std::copy::_Unchecked_iterators::_Deprecate'
+  C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\Libraries\boost_1_58_0\boost/numeric/ublas/storage.hpp(204): note: see reference to function template instantiation '_OutIt *std::copy<double*,double*>(_InIt,_InIt,_OutIt)' being compiled
+          with
+          [
+              _OutIt=double *,
+              _InIt=double *
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\Libraries\boost_1_58_0\boost/numeric/ublas/storage.hpp(201): note: while compiling class template member function 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &boost::numeric::ublas::unbounded_array<T,std::allocator<T>>::operator =(const boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &)'
+          with
+          [
+              T=double
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\Libraries\boost_1_58_0\boost/numeric/ublas/matrix.hpp(310): note: see reference to function template instantiation 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &boost::numeric::ublas::unbounded_array<T,std::allocator<T>>::operator =(const boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &)' being compiled
+          with
+          [
+              T=double
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\Libraries\boost_1_58_0\boost/numeric/ublas/matrix.hpp(102): note: see reference to class template instantiation 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>>' being compiled
+          with
+          [
+              T=double
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\CircuitSimulator\Local\Include\NodePotential.h(20): note: see reference to class template instantiation 'boost::numeric::ublas::matrix<double,boost::numeric::ublas::row_major,boost::numeric::ublas::unbounded_array<T,std::allocator<T>>>' being compiled
+          with
+          [
+              T=double
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xmemory(102): warning C4996: 'std::uninitialized_copy::_Unchecked_iterators::_Deprecate': Call to 'std::uninitialized_copy' with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xmemory(102): note: see declaration of 'std::uninitialized_copy::_Unchecked_iterators::_Deprecate'
+  C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\Libraries\boost_1_58_0\boost/numeric/ublas/storage.hpp(94): note: see reference to function template instantiation '_FwdIt *std::uninitialized_copy<const double*,double*>(_InIt,_InIt,_FwdIt)' being compiled
+          with
+          [
+              _FwdIt=double *,
+              _InIt=const double *
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\Libraries\boost_1_58_0\boost/numeric/ublas/storage.hpp(89): note: while compiling class template member function 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>>::unbounded_array(const boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &)'
+          with
+          [
+              T=double
+          ]
+  C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\Libraries\boost_1_58_0\boost/numeric/ublas/matrix.hpp(162): note: see reference to function template instantiation 'boost::numeric::ublas::unbounded_array<T,std::allocator<T>>::unbounded_array(const boost::numeric::ublas::unbounded_array<T,std::allocator<T>> &)' being compiled
+          with
+          [
+              T=double
+          ]
+  qcustomplot.cpp
+  STGRectangle.cpp
   testqt.cpp
   Unknown compiler version - please run the configure tests and report the results
+  Wire.cpp
   Generating Code...
+  qrc_testqt.cpp
   CircuitSimulator.vcxproj -> C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\x64\Debug\CircuitSimulator.exe
   CircuitSimulator.vcxproj -> C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\x64\Debug\CircuitSimulator.pdb (Full PDB)

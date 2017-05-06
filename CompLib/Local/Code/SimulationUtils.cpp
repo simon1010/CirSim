@@ -1,4 +1,4 @@
-#include "SimulationUtils.h"
+#include <SimulationUtils.h>
 
 QTime SimulationUtils::SimulationTime = QTime::currentTime();
 
