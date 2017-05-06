@@ -57,10 +57,6 @@ void TestQt::mf_SetupPlotter()
   ui.Plotter->graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20))); // first graph will be filled with translucent blue
   ui.Plotter->graph(0)->setAdaptiveSampling(true);
   ui.Plotter->graph(0)->setAntialiasedFill(false);
-  ui.Plotter->addGraph(); // blue dot
-  ui.Plotter->graph(1)->setPen(QPen(Qt::blue));
-  ui.Plotter->graph(1)->setLineStyle(QCPGraph::lsNone);
-  ui.Plotter->graph(1)->setScatterStyle(QCPScatterStyle::ssDisc);
  
  // (see QCPAxisRect::setupFullAxesBox for a quicker method to do this)
   ui.Plotter->xAxis->setTickLabelType(QCPAxis::ltDateTime);
@@ -114,8 +110,6 @@ void TestQt::update()
     else
     {
       ui.Plotter->graph(0)->addData(key, value0[0]);
-      ui.Plotter->graph(1)->clearData();
-      ui.Plotter->graph(1)->addData(key, value0[0]);
     }
        
     // remove data of lines that's outside visible range:
@@ -508,6 +502,7 @@ void TestQt::mouseReleaseEvent(QMouseEvent * event)
     releaseMouse();
     rubberBand->hide();// hide on mouse Release
     rubberBand->clearMask();
+    grabKeyboard();
   }
 
   if (SelectedElemenet == SimulationUtils::Element_Wire)
@@ -524,11 +519,13 @@ void TestQt::keyPressEvent(QKeyEvent *event)
   switch (event->key())
   {
   case Qt::Key_Delete:
-    for (QGraphicsItem *it : mv_SelectedItems)
+  case Qt::Key_Backspace:
+    for (auto it : mv_SelectedItems)
     {
       CGridUtils::sc_xTheGrid->removeItem(it);
     }
     mv_SelectedItems.clear();
+    releaseKeyboard();
     break;
   case Qt::Key_S:
     //SimulationUtils::SimulationTime = QTime::currentTime();

@@ -181,7 +181,8 @@ void IComponent::keyPressEvent(QKeyEvent *event)
   {
     switch (event->key())
     {
-    case Qt::Key_Delete :
+    case Qt::Key_Backspace:
+    case Qt::Key_Delete:
       mv_bHasKeyboard = false;
       ungrabKeyboard();
       CGridUtils::sc_xTheGrid->removeItem(this);
