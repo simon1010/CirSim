@@ -46,7 +46,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(749, 586);
+        MainWindow->resize(1628, 1200);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
@@ -73,6 +73,7 @@ public:
         gridLayout_2->setSizeConstraint(QLayout::SetNoConstraint);
         Plotter = new QCustomPlot(groupBox);
         Plotter->setObjectName(QStringLiteral("Plotter"));
+        Plotter->setMinimumSize(QSize(0, 200));
 
         gridLayout_2->addWidget(Plotter, 0, 0, 1, 1);
 
@@ -91,7 +92,7 @@ public:
         MainWindow->setStatusBar(statusbar);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 749, 21));
+        menuBar->setGeometry(QRect(0, 0, 1628, 38));
         MainWindow->setMenuBar(menuBar);
 
         retranslateUi(MainWindow);
