@@ -1,4 +1,4 @@
-#include "Wire.h"
+#include <Wire.h>
 #include <qgraphicssceneevent.h>
 #include <QPainter>
 #include <GridUtils.h>
@@ -64,7 +64,7 @@ void CWire::paint(QPainter *ac_pPainter, const QStyleOptionGraphicsItem *ac_pOpt
   QLineF lv_TheLine = this->line();
   mv_Terminal_1->setPos(lv_TheLine.p1());
   mv_Terminal_2->setPos(lv_TheLine.p2());
-  
+
   mv_Terminal_1->paint(ac_pPainter, ac_pOption, ac_pParent, true);
   mv_Terminal_2->paint(ac_pPainter, ac_pOption, ac_pParent, true);
 
@@ -73,7 +73,12 @@ void CWire::paint(QPainter *ac_pPainter, const QStyleOptionGraphicsItem *ac_pOpt
 
 void CWire::setLine(const QLineF & ac_Line)
 {
-  QLineF lv_LineAdjustedToGrid(CGridUtils::sf_xAdjustPositionToGrid(ac_Line.p1()), CGridUtils::sf_xAdjustPositionToGrid(ac_Line.p2()));
+  // Get the points and adjust their position so that they are at the center of the cursor.
+  auto const lv_StartPointF = QPointF(ac_Line.p1().x() - 6, ac_Line.p1().y() - 6);
+  auto const lv_EndPointF   = QPointF(ac_Line.p2().x() - 6, ac_Line.p2().y() - 6);
+
+
+  QLineF lv_LineAdjustedToGrid(CGridUtils::sf_xAdjustPositionToGrid(lv_StartPointF), CGridUtils::sf_xAdjustPositionToGrid(lv_EndPointF));
   QGraphicsLineItem::setLine(lv_LineAdjustedToGrid);
 }
 
@@ -85,6 +90,7 @@ void CWire::keyPressEvent(QKeyEvent *event)
     switch (event->key())
     {
     case Qt::Key_Delete:
+    case Qt::Key_Backspace:
       CGridUtils::sc_xTheGrid->removeItem(this);
       break;
     }

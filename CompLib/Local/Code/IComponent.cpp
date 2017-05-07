@@ -93,53 +93,18 @@ QVariant IComponent::itemChange(GraphicsItemChange change, const QVariant &value
 
   if ((change == ItemPositionChange || change == ItemPositionHasChanged) && scene())
   {
-    QPointF SceneCorner = mv_pParent->mapToGlobal(mv_pParent->pos());
- 
-    QPointF MousePosition = QCursor::pos();
-    QPointF newPos(MousePosition.x() - SceneCorner.x() + 15, MousePosition.y() - SceneCorner.y() + 15); // value.toPointF(); 
-    
-    if (QApplication::mouseButtons() == Qt::LeftButton && (nullptr != CGridUtils::sc_xTheGrid))
+    QVariant lv_UpperChangeReturn = __super::itemChange(change, value);
+    if(lv_UpperChangeReturn.canConvert<QPointF>())
     {
-      const unsigned lc_nGridSize = CGridUtils::sc_xTheGrid->mf_nGetGridSize();
-      QVariant ReferenceVariant = QGraphicsItem::itemChange(change, value);
-      return CGridUtils::sf_xAdjustPositionToGrid(newPos);
+      QPointF lv_RecalculatedPoint = lv_UpperChangeReturn.value<QPointF>();
+      auto lv_adjustedToGrigPosition = CGridUtils::sf_xAdjustPositionToGrid(lv_RecalculatedPoint);
+
+      return lv_adjustedToGrigPosition;
     }
-    else 
-    {
-      return newPos;
-    }
-  }  
-  else
-    return QGraphicsItem::itemChange(change, value);
+  }
+
+  return __super::itemChange(change, value);
 }
-
-
-/*   if (pChange == ItemPositionChange && scene())
-    {
-        // value is the new position.
-        QPointF newPos = pValue.toPointF();
-        QRectF rect = scene()->sceneRect();
-        if (!rect.contains(newPos))
-        {
-            double rectBottom = rect.bottom() + MAP_SCENE_DIFF;
-            // Keep the item inside the scene rect.
-            double posX = qMin(rect.right(), qMax(newPos.x(), rect.left()));
-            double posY = qMin(rectBottom, qMax(newPos.y(), rect.top()));
-            newPos = QPointF(posX, posY);
-
-            return newPos;
-        }
-    }
-    else if(pChange == ItemPositionHasChanged)
-    {
-        QPointF endPoint(pValue.toPointF().x(), pValue.toPointF().y());
-        QPointF startPoint = mpParent->pos();
-        mpCombineLine->setLine(QLineF(startPoint, endPoint));
-
-        return QPointF(pValue.toPointF().x(), pValue.toPointF().y());
-    }
-
-    return QGraphicsItem::itemChange(pChange, pValue);*/
 
 void IComponent::mousePressEvent(QGraphicsSceneMouseEvent *ac_pMouseEvent)
 {

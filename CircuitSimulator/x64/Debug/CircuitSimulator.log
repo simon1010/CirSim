@@ -1,5 +1,15 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (TestQt.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  moc_testqt.cpp
+  Circuit.cpp
+  Unknown compiler version - please run the configure tests and report the results
+  Edge.cpp
+  Node.cpp
+  Wire.cpp
+  main.cpp
   testqt.cpp
   Unknown compiler version - please run the configure tests and report the results
+  Generating Code...
+NodePotential.obj : warning LNK4099: PDB 'vc141.pdb' was not found with 'NodePotential.obj' or at 'C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\x64\Debug\vc141.pdb'; linking object as if no debug info
+GaussElimination.obj : warning LNK4099: PDB 'vc141.pdb' was not found with 'GaussElimination.obj' or at 'C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\x64\Debug\vc141.pdb'; linking object as if no debug info
   CircuitSimulator.vcxproj -> C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\x64\Debug\CircuitSimulator.exe
   CircuitSimulator.vcxproj -> C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\x64\Debug\CircuitSimulator.pdb (Full PDB)
