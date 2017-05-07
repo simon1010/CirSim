@@ -20,8 +20,6 @@ mv_pParent(ac_pPrent)
     QGraphicsItem::ItemSendsGeometryChanges);
 
   setAcceptHoverEvents(true);
-  
-  //mv_bHasKeyboard = false;
 }
 
 IComponent::IComponent(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphicsView *ac_pPrent) : QGraphicsItem(nullptr),
@@ -38,8 +36,6 @@ mv_pParent(ac_pPrent)
   setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 
   setPos(CGridUtils::sf_xAdjustPositionToGrid(ac_Position));
-
- // mv_bHasKeyboard = false;
 }
 
 IComponent::~IComponent()
@@ -77,27 +73,14 @@ void IComponent::paint(QPainter *lc_pPainter, const QStyleOptionGraphicsItem *ac
 
 QVariant IComponent::itemChange(GraphicsItemChange change, const QVariant &value)
 {
-  //if (change == ItemSelectedChange)
-  //{
-  //  if (mv_bHasKeyboard)
-  //  {
-  //    mv_bHasKeyboard = false;
-  //    ungrabKeyboard();
-  //  }
-  //  else
-  //  {
-  //    mv_bHasKeyboard = true;
-  //    grabKeyboard();
-  //  }      
-  //}
-
-  if (change == ItemSelectedChange) {
-    bool* lv_isOk = new bool(true);
-    int selectionValue = value.toInt(lv_isOk);
+  if (change == ItemSelectedChange)
+  {
+    bool lv_isOk = false;
+    int selectionValue = value.toInt(&lv_isOk);
     
-    if (*lv_isOk && selectionValue == 1)
+    if (lv_isOk && selectionValue == 1)
       grabKeyboard();
-    else if (*lv_isOk && selectionValue == 0)
+    else if (lv_isOk && selectionValue == 0)
       ungrabKeyboard();
   }
 
@@ -159,7 +142,6 @@ void IComponent::keyPressEvent(QKeyEvent *event)
     case Qt::Key_Delete:
     {
       mv_bHasKeyboard = false;
-     // ungrabKeyboard();
       CGridUtils::sc_xTheGrid->removeItem(this);
       mf_PreDestroy();
     } break;
