@@ -1,3 +1,7 @@
+# Output directories
+x64/
+Debug/
+
 # Compiled Object files
 *.slo
 *.lo
