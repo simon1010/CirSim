@@ -502,7 +502,12 @@ void TestQt::mouseReleaseEvent(QMouseEvent * event)
     releaseMouse();
     rubberBand->hide();// hide on mouse Release
     rubberBand->clearMask();
-    grabKeyboard();
+    
+    // Grab keyboard only if the rubber band has a size.
+    // Otherwise the circuit components cannot handle key-press events themselves
+    auto const lc_RubberBandSize = rubberBand->size();
+    if( lc_RubberBandSize.width() > 5 || lc_RubberBandSize.height() > 5 )
+      grabKeyboard();
   }
 
   if (SelectedElemenet == SimulationUtils::Element_Wire)

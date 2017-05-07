@@ -21,7 +21,7 @@ mv_pParent(ac_pPrent)
 
   setAcceptHoverEvents(true);
   
-  mv_bHasKeyboard = false;
+  //mv_bHasKeyboard = false;
 }
 
 IComponent::IComponent(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphicsView *ac_pPrent) : QGraphicsItem(nullptr),
@@ -39,7 +39,7 @@ mv_pParent(ac_pPrent)
 
   setPos(CGridUtils::sf_xAdjustPositionToGrid(ac_Position));
 
-  mv_bHasKeyboard = false;
+ // mv_bHasKeyboard = false;
 }
 
 IComponent::~IComponent()
@@ -77,19 +77,30 @@ void IComponent::paint(QPainter *lc_pPainter, const QStyleOptionGraphicsItem *ac
 
 QVariant IComponent::itemChange(GraphicsItemChange change, const QVariant &value)
 {
-  if (change == ItemSelectedChange)
-  {
-    if (mv_bHasKeyboard)
-    {
-      mv_bHasKeyboard = false;
-      ungrabKeyboard();
-    }
-    else
-    {
-      mv_bHasKeyboard = true;
+  //if (change == ItemSelectedChange)
+  //{
+  //  if (mv_bHasKeyboard)
+  //  {
+  //    mv_bHasKeyboard = false;
+  //    ungrabKeyboard();
+  //  }
+  //  else
+  //  {
+  //    mv_bHasKeyboard = true;
+  //    grabKeyboard();
+  //  }      
+  //}
+
+  if (change == ItemSelectedChange) {
+    bool* lv_isOk = new bool(true);
+    int selectionValue = value.toInt(lv_isOk);
+    
+    if (*lv_isOk && selectionValue == 1)
       grabKeyboard();
-    }      
+    else if (*lv_isOk && selectionValue == 0)
+      ungrabKeyboard();
   }
+
 
   if ((change == ItemPositionChange || change == ItemPositionHasChanged) && scene())
   {
@@ -97,9 +108,7 @@ QVariant IComponent::itemChange(GraphicsItemChange change, const QVariant &value
     if(lv_UpperChangeReturn.canConvert<QPointF>())
     {
       QPointF lv_RecalculatedPoint = lv_UpperChangeReturn.value<QPointF>();
-      auto lv_adjustedToGrigPosition = CGridUtils::sf_xAdjustPositionToGrid(lv_RecalculatedPoint);
-
-      return lv_adjustedToGrigPosition;
+      return CGridUtils::sf_xAdjustPositionToGrid(lv_RecalculatedPoint);
     }
   }
 
@@ -148,11 +157,16 @@ void IComponent::keyPressEvent(QKeyEvent *event)
     {
     case Qt::Key_Backspace:
     case Qt::Key_Delete:
+    {
       mv_bHasKeyboard = false;
-      ungrabKeyboard();
+     // ungrabKeyboard();
       CGridUtils::sc_xTheGrid->removeItem(this);
       mf_PreDestroy();
-      break;
+    } break;
+    case Qt::Key_R:
+    {
+      this->setRotation(this->rotation() + 90);
+    } break;
     }
   }
 }
