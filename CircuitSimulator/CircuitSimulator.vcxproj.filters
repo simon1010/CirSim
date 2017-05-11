@@ -44,6 +44,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_testqt.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="Local\Code\CircuitComposer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_testqt.h" />
@@ -66,6 +69,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Local\Include\Wire.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Local\Include\CircuitComposer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

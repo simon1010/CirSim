@@ -21,6 +21,8 @@ int CMicrophone::BuffersInUse = 0;
 SAMPLE** CMicrophone::mv_pAudioBuffers = nullptr;
 std::mutex CMicrophone::AcquisitionGuard;
 
+int CMicrophone::sv_nMicrophoneID = 0;
+
 CMicrophone::CMicrophone(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphicsView *ac_pParent) :
 IComponent(ac_Position, ac_pScene, ac_pParent)
 {
@@ -46,6 +48,8 @@ IComponent(ac_Position, ac_pScene, ac_pParent)
   mv_bMaydenVoyage = true;
   mv_bIsStreamOpen = false;
   mf_ConstructDialog();
+
+  ++sv_nMicrophoneID;
 }
 
 void CMicrophone::mf_ConstructDialog()
@@ -209,6 +213,11 @@ QString CMicrophone::mf_ToolTipGetValue()
 QString CMicrophone::mf_ToolTipGetUnit()
 {
   return QString("");
+}
+
+const int CMicrophone::mf_nGetInstanceNumber() const
+{
+  return sv_nMicrophoneID;
 }
 
 int CMicrophone::mf_nGetImpedance()

@@ -56,6 +56,8 @@ private:
   virtual QString mf_ToolTipGetValue();
   virtual QString mf_ToolTipGetUnit();
 
+  virtual const int mf_nGetInstanceNumber() const;
+
   /* Specific */
   void mf_ConstructDialog();
 
@@ -64,6 +66,8 @@ private:
   bool mv_bMaydenVoyage;
   bool mv_bIsStreamOpen;
   int mv_nSelectedInputDeviceIndex;
+
+  static int sv_nMicrophoneID;
 
 protected:
   void mf_ShowSettingsDialog();

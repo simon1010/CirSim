@@ -132,6 +132,12 @@ const QString IComponent::mf_szGetCompName() const
   return mv_sCompName;
 }
 
+const QString IComponent::mf_szGetCompID() const
+{
+  auto const IDString = SimulationUtils::string_format("%s%nN%n", mf_szGetCompName(), mf_nGetInstanceNumber(), sv_nCompNumber);
+  return QString(IDString.data());
+}
+
 void IComponent::keyPressEvent(QKeyEvent *event)
 {
   if (this->isSelected())

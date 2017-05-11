@@ -33,6 +33,8 @@ public:
 private:
   static const double sc_dfDefaultCapacitance;
 
+  static int sv_nCapacitorID;
+
   Terminal *mv_Terminal_1;
   Terminal *mv_Terminal_2;
   
@@ -44,6 +46,8 @@ private:
   virtual QString mf_ToolTipGetType();
   virtual QString mf_ToolTipGetValue();
   virtual QString mf_ToolTipGetUnit();
+
+  virtual const int mf_nGetInstanceNumber() const;
 };
 
 #endif

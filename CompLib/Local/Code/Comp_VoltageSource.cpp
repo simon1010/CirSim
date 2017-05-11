@@ -83,6 +83,16 @@ QString CVoltageSource::mf_ToolTipGetUnit()
   return QString(" V");
 }
 
+const int CVoltageSource::mf_nGetInstanceNumber() const
+{
+  return 0;
+}
+
+void CVoltageSource::Process_(DspSignalBus & inputs, DspSignalBus & outputs)
+{
+  // TODO: IMPLEMENT
+}
+
 IComponent::DialogSettingsMap CVoltageSource::mf_GetDialogSettingsMap()
 {
   DialogSettingsMap lv_Variables;

@@ -1,5 +1,8 @@
 #include "Resistor.h"
 
+// Used to identify each resistor in the classic notation: e.g. R1, R2, ... Rn 
+int CResistor::sv_nResistorID = 0;
+
 CResistor::CResistor(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphicsView *ac_pParent) : 
 IComponent(ac_Position, ac_pScene, ac_pParent)
 {
@@ -13,6 +16,9 @@ IComponent(ac_Position, ac_pScene, ac_pParent)
   mf_AddTerminal(mv_Terminal_2);
 
   mv_nResistance = 50;
+
+  // Simple instance counter for ID
+  ++sv_nResistorID;
 }
 
 CResistor::~CResistor()
@@ -61,6 +67,13 @@ QString CResistor::mf_ToolTipGetUnit()
   return QString(" OHM");
 }
 
+
+// This is where the magic happens
+void CResistor::Process_(DspSignalBus & inputs, DspSignalBus & outputs)
+{
+  //TODO: IMPLEMENT
+}
+
 int CResistor::mf_nGetResistance()
 {
   return mv_nResistance;
@@ -91,4 +104,9 @@ SAMPLE* CResistor::mf_dfGetVoltage(int &av_nAvailableSamples)
   SAMPLE * sample = new SAMPLE;
   *sample = 5;
   return sample;
+}
+
+const int CResistor::mf_nGetInstanceNumber() const
+{
+  return sv_nResistorID;
 }

@@ -40,6 +40,7 @@ public:
   virtual void mf_DerivedPaint(QPainter *lc_pPainter, const QStyleOptionGraphicsItem *ac_pOption, QWidget *ac_pParent) = 0;
   
   virtual const QString mf_szGetCompName() const;
+  const QString mf_szGetCompID() const;
   void mf_AddTerminal(Terminal *ac_Terminal);
   Terminal* mf_OtherTerminal(Terminal * ac_NotThisTerminal) const;
   void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
@@ -72,6 +73,9 @@ protected:
 
   QSet<Terminal *> mv_Terminals;
   QGraphicsView *mv_pParent;
+
+  virtual const int mf_nGetInstanceNumber() const = 0;
+
 private:
 
   bool mv_bHasKeyboard;

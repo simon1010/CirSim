@@ -4,10 +4,13 @@
 
 #include <QTime>
 #include <functional>
-
+#include <string>
+#include <stdio.h>
+#include <memory>
 typedef float SAMPLE;
 
 #include <complib_global.h>
+#include <QtWidgets\qgraphicsitem.h>
 
 class COMPLIB_EXPORT SimulationUtils
 {
@@ -38,6 +41,16 @@ public:
     Element_Total
   }; 
 
+  static void sf_PrintElementsToFile(const QList<QGraphicsItem*>& ac_QList_AllElements, const char * ac_LogFile);
+
+  template<typename ... Args>
+  static std::string string_format(const std::string& format, Args ... args)
+  {
+    size_t size = std::snprintf(nullptr, 0, format.c_str(), args ...) + 1; // Extra space for '\0'
+    std::unique_ptr<char[]> buf(new char[size]);
+    std::snprintf(buf.get(), size, format.c_str(), args ...);
+    return std::string(buf.get(), buf.get() + size - 1); // We don't want the '\0' inside
+  }
 };
 
 #endif

@@ -66,8 +66,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>..\Libraries\pa_stable_v19_20140130\portaudio\include;.\CircuitSimulator\Local\Include;..\Libraries\boost_1_58_0;.\CircuitSimulator\Export\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>..\Libraries\pa_stable_v19_20140130\portaudio\build\msvc\Win32\Release;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\Libraries\pa_stable_v19_20140130\portaudio\include;.\CircuitSimulator\Local\Include;..\Libraries\boost_1_58_0;.\CircuitSimulator\Export\Include;..\Libraries\DSPatch\include\;$(IncludePath)</IncludePath>
+    <LibraryPath>..\Libraries\pa_stable_v19_20140130\portaudio\build\msvc\Win32\Release;..\Libraries\DSPatch\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
@@ -103,7 +103,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;QT_PRINTSUPPORT_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\CompLib\GeneratedFiles\;$(ProjectDir)..\UI\GeneratedFiles\;$(ProjectDir)..\UI\Export\Include\;$(ProjectDir)..\CompLib\Export\Include\;$(ProjectDir)..\..\Libraries\pa_stable_v19_20140130\portaudio\include;$(ProjectDir)..\..\Libraries\boost_1_58_0;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtPrintSupport;$(ProjectDir)Local\Include;$(ProjectDir)Export\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\CompLib\GeneratedFiles\;$(ProjectDir)..\UI\GeneratedFiles\;$(ProjectDir)..\UI\Export\Include\;$(ProjectDir)..\CompLib\Export\Include\;$(ProjectDir)..\..\Libraries\pa_stable_v19_20140130\portaudio\include;$(ProjectDir)..\..\Libraries\boost_1_58_0;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtPrintSupport;$(ProjectDir)Local\Include;$(ProjectDir)Export\Include;$(ProjectDir)..\..\Libraries\DSPatch\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -115,7 +115,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(ProjectDir)..\x64\Debug;$(QTDIR)\lib;..\Libraries\pa_stable_v19_20140130\portaudio\build\msvc\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>UI.lib;CompLib.lib;qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;Qt5PrintSupportd.lib;$(ProjectDir)..\..\Libraries\pa_stable_v19_20140130\portaudio\build\msvc\x64\Release\portaudio_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>UI.lib;CompLib.lib;qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;Qt5PrintSupportd.lib;$(ProjectDir)..\..\Libraries\pa_stable_v19_20140130\portaudio\build\msvc\x64\Release\portaudio_x64.lib;$(ProjectDir)..\..\Libraries\DSPatch\lib\DSPatch.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -190,6 +190,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Local\Code\Circuit.cpp" />
+    <ClCompile Include="Local\Code\CircuitComposer.cpp" />
     <ClCompile Include="Local\Code\Edge.cpp" />
     <ClCompile Include="Local\Code\GaussElimination.cpp" />
     <ClCompile Include="Local\Code\main.cpp" />
@@ -223,6 +224,7 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_testqt.h" />
     <ClInclude Include="Local\Include\Circuit.h" />
+    <ClInclude Include="Local\Include\CircuitComposer.h" />
     <ClInclude Include="Local\Include\Edge.h" />
     <ClInclude Include="Local\Include\GaussElimination.h" />
     <ClInclude Include="Local\Include\Matrix.h" />
@@ -237,7 +239,7 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing testqt.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_PRINTSUPPORT_LIB  "-I$(ProjectDir)..\CompLib\GeneratedFiles" "-I$(ProjectDir)..\UI\GeneratedFiles" "-I$(ProjectDir)..\UI\Export\Include" "-I$(ProjectDir)..\CompLib\Export\Include" "-I$(ProjectDir)..\..\Libraries\pa_stable_v19_20140130\portaudio\include" "-I$(ProjectDir)..\..\Libraries\boost_1_58_0" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtPrintSupport" "-I$(ProjectDir)Local\Include" "-I$(ProjectDir)Export\Include"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_PRINTSUPPORT_LIB  "-I$(ProjectDir)..\CompLib\GeneratedFiles" "-I$(ProjectDir)..\UI\GeneratedFiles" "-I$(ProjectDir)..\UI\Export\Include" "-I$(ProjectDir)..\CompLib\Export\Include" "-I$(ProjectDir)..\..\Libraries\pa_stable_v19_20140130\portaudio\include" "-I$(ProjectDir)..\..\Libraries\boost_1_58_0" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtPrintSupport" "-I$(ProjectDir)Local\Include" "-I$(ProjectDir)Export\Include" "-I$(ProjectDir)..\..\Libraries\DSPatch\include"</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing testqt.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
@@ -255,7 +257,7 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing STGRectangle.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_PRINTSUPPORT_LIB  "-I$(ProjectDir)..\CompLib\GeneratedFiles" "-I$(ProjectDir)..\UI\GeneratedFiles" "-I$(ProjectDir)..\UI\Export\Include" "-I$(ProjectDir)..\CompLib\Export\Include" "-I$(ProjectDir)..\..\Libraries\pa_stable_v19_20140130\portaudio\include" "-I$(ProjectDir)..\..\Libraries\boost_1_58_0" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtPrintSupport" "-I$(ProjectDir)Local\Include" "-I$(ProjectDir)Export\Include"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_PRINTSUPPORT_LIB  "-I$(ProjectDir)..\CompLib\GeneratedFiles" "-I$(ProjectDir)..\UI\GeneratedFiles" "-I$(ProjectDir)..\UI\Export\Include" "-I$(ProjectDir)..\CompLib\Export\Include" "-I$(ProjectDir)..\..\Libraries\pa_stable_v19_20140130\portaudio\include" "-I$(ProjectDir)..\..\Libraries\boost_1_58_0" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtPrintSupport" "-I$(ProjectDir)Local\Include" "-I$(ProjectDir)Export\Include" "-I$(ProjectDir)..\..\Libraries\DSPatch\include"</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing STGRectangle.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
@@ -273,7 +275,7 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing qcustomplot.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_PRINTSUPPORT_LIB  "-I$(ProjectDir)..\CompLib\GeneratedFiles" "-I$(ProjectDir)..\UI\GeneratedFiles" "-I$(ProjectDir)..\UI\Export\Include" "-I$(ProjectDir)..\CompLib\Export\Include" "-I$(ProjectDir)..\..\Libraries\pa_stable_v19_20140130\portaudio\include" "-I$(ProjectDir)..\..\Libraries\boost_1_58_0" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtPrintSupport" "-I$(ProjectDir)Local\Include" "-I$(ProjectDir)Export\Include"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_PRINTSUPPORT_LIB  "-I$(ProjectDir)..\CompLib\GeneratedFiles" "-I$(ProjectDir)..\UI\GeneratedFiles" "-I$(ProjectDir)..\UI\Export\Include" "-I$(ProjectDir)..\CompLib\Export\Include" "-I$(ProjectDir)..\..\Libraries\pa_stable_v19_20140130\portaudio\include" "-I$(ProjectDir)..\..\Libraries\boost_1_58_0" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtPrintSupport" "-I$(ProjectDir)Local\Include" "-I$(ProjectDir)Export\Include" "-I$(ProjectDir)..\..\Libraries\DSPatch\include"</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing qcustomplot.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>

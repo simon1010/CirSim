@@ -6,6 +6,8 @@
 
 const double CCapacitor::sc_dfDefaultCapacitance = 500; //microFarads
 
+int CCapacitor::sv_nCapacitorID = 0;
+
 CCapacitor::CCapacitor(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphicsView *ac_pPrent) : IComponent(ac_Position, ac_pScene, ac_pPrent)
 {
   mv_sCompID = QString("C");
@@ -18,6 +20,8 @@ CCapacitor::CCapacitor(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphics
   mf_AddTerminal(mv_Terminal_2);
 
   mf_SetCapacitance(sc_dfDefaultCapacitance);
+
+  ++sv_nCapacitorID;
 }
 
 CCapacitor::~CCapacitor()
@@ -76,6 +80,11 @@ QString CCapacitor::mf_ToolTipGetValue()
 QString CCapacitor::mf_ToolTipGetUnit()
 {
   return QString(" uF");
+}
+
+const int CCapacitor::mf_nGetInstanceNumber() const
+{
+  return sv_nCapacitorID;
 }
 
 IComponent::DialogSettingsMap CCapacitor::mf_GetDialogSettingsMap()

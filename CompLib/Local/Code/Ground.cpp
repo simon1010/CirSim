@@ -3,6 +3,8 @@
 #include <QPainter>
 #include <QWidget>
 
+int CGround::sv_nGroundID = 0;
+
 CGround::CGround(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphicsView *ac_pPrent) : IComponent(ac_Position, ac_pScene, ac_pPrent)
 {
   mv_sCompID = QString("G");
@@ -11,6 +13,8 @@ CGround::CGround(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphicsView *
   mv_Terminal = new Terminal(ac_pScene, this);
 
   mf_AddTerminal(mv_Terminal);
+
+  ++sv_nGroundID;
 }
 
 
@@ -46,4 +50,9 @@ SAMPLE* CGround::mf_dfGetVoltage(int &av_nAvailableSamples)
   SAMPLE * sample = new SAMPLE;
   *sample = 0;
   return sample;
+}
+
+const int CGround::mf_nGetInstanceNumber() const
+{
+  return sv_nGroundID;
 }

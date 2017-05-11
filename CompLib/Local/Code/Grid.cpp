@@ -91,3 +91,9 @@ void CGrid::mf_AddToGridText(const QString& ac_szTextToAdd)
 {
   mv_szTheGridText += ac_szTextToAdd;
 }
+/*
+const QList<IComponent*>& CGrid::items(QRectF ac_itemsBoundingRect) const
+{
+  auto const lc_ListGraphicItems = __super::items(ac_itemsBoundingRect);
+  // TODO move code from CCircuit to identify a list of IComponents, to make our life eazier
+}*/

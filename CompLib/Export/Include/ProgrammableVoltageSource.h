@@ -36,17 +36,20 @@ public:
   double mf_dfGetMaxVoltage() const;
   
   SAMPLE *mf_dfGetVoltage(int& av_nSamplesAvailable);
-  
-
+ 
   const static double sc_dfDefaultMaxVoltage;
 
 private:
   //virtual DialogSettingsMap mf_GetDialogSettingsMap();
   //virtual void mf_SetDialogSettingsMap(DialogSettingsMap ac_NewSettings);
 
+  static int sv_nPVSID;
+
   virtual QString mf_ToolTipGetType();
   virtual QString mf_ToolTipGetValue();
   virtual QString mf_ToolTipGetUnit();
+
+  virtual const int mf_nGetInstanceNumber() const;
 
   Terminal *mv_Terminal_Plus;
   Terminal *mv_Terminal_Minus;

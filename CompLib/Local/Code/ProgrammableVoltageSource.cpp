@@ -9,6 +9,8 @@
 
 const double CProgrammableVoltageSource::sc_dfDefaultMaxVoltage = 5.0;
 
+int CProgrammableVoltageSource::sv_nPVSID = 0;
+
 CProgrammableVoltageSource::CProgrammableVoltageSource(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphicsView *ac_pPrent) : IComponent(ac_Position, ac_pScene, ac_pPrent)
 {
   mv_sCompID = QString("E");
@@ -29,6 +31,8 @@ CProgrammableVoltageSource::CProgrammableVoltageSource(QPointF ac_Position, QGra
   mv_dfBias = 0.;
 
   mv_Waveform = CProgrammableVoltageSource::Waveform::WF_AC;
+
+  ++sv_nPVSID;
 }
 
 
@@ -87,6 +91,11 @@ QString CProgrammableVoltageSource::mf_ToolTipGetValue()
 QString CProgrammableVoltageSource::mf_ToolTipGetUnit()
 {
   return QString(" V");
+}
+
+const int CProgrammableVoltageSource::mf_nGetInstanceNumber() const
+{
+  return sv_nPVSID;
 }
 
 double triangleFunc(double x)

@@ -26,9 +26,13 @@ public:
 private:
   Terminal *mv_Terminal;
 
+  static int sv_nGroundID;
+
   virtual QString mf_ToolTipGetType(){ return QString("Ground"); }
   virtual QString mf_ToolTipGetValue(){ return QString(""); };
   virtual QString mf_ToolTipGetUnit(){ return QString(""); };
+
+  virtual const int mf_nGetInstanceNumber() const;
 };
 
 #endif // COMP_VOLTAGESOURCE_H

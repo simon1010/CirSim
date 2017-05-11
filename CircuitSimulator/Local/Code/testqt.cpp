@@ -18,6 +18,7 @@
 #include <Ground.h>
 #include <Wire.h>
 #include <Circuit.h>
+#include <CircuitComposer.h>
 #include <Capacitor.h>
 #include <qcustomplot.h>
 #include <Microphone.h>
@@ -555,14 +556,16 @@ void TestQt::keyPressEvent(QKeyEvent *event)
 
     */
 
+    auto const lc_GUICircuitElements = CGridUtils::sc_xTheGrid->items(CGridUtils::sc_xTheGrid->itemsBoundingRect());
+    auto const lc_CircuitComposer = std::make_shared<CCircuitComposer>(lc_GUICircuitElements);
 
-    Solver::Circuit *TheCircuit = new Solver::Circuit(CGridUtils::sc_xTheGrid->items(CGridUtils::sc_xTheGrid->itemsBoundingRect()));
 
-    const unsigned int lc_nNrofConnectedObjects = TheCircuit->mf_nConnectedElements();
+    //Solver::Circuit *TheCircuit = new Solver::Circuit(lc_GUICircuit);
+    //const unsigned int lc_nNrofConnectedObjects = TheCircuit->mf_nConnectedElements();
 
-    char log[100];
-    sprintf(log, "Connected elements: %d", lc_nNrofConnectedObjects);
-    sc_xWriteStatus(log);
+    //char log[100];
+    //sprintf(log, "Connected elements: %d", lc_nNrofConnectedObjects);
+    //sc_xWriteStatus(log);
 
     break;
   }

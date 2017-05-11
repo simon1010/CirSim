@@ -5,6 +5,7 @@
 #include <qgraphicsscene.h>
 #include <QResizeEvent>
 #include <complib_global.h>
+#include <IComponent.h>
 
 class COMPLIB_EXPORT CGrid : public QGraphicsScene
 {
@@ -23,6 +24,9 @@ public:
   QString mf_szGetTheGridText() const;
   void mf_SetGridText(const QString& ac_szTextToSet);
   void mf_AddToGridText(const QString& ac_szTextToAdd);
+
+  // Overriden public method from QGraphicsScene
+  //const QList<IComponent*>& items(QRectF ac_itemsBoundingRect) const;
 
 private:
   const unsigned int mc_nGridSize;

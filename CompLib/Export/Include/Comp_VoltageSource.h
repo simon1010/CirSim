@@ -6,10 +6,11 @@
 #include <IComponent.h>
 #include <qgraphicsitem.h>
 
+#include <DSPatch\DspComponent.h>
 
 #include <complib_global.h>
 
-class COMPLIB_EXPORT CVoltageSource : public IComponent
+class COMPLIB_EXPORT CVoltageSource : public IComponent, public DspComponent
 {
 public:
   //CVoltageSource(QGraphicsScene *ac_pScene, QGraphicsItem *ac_pParent = 0);
@@ -35,11 +36,17 @@ private:
   virtual QString mf_ToolTipGetValue();
   virtual QString mf_ToolTipGetUnit();
 
+  virtual const int mf_nGetInstanceNumber() const;
+
   Terminal *mv_Terminal_Plus;
   Terminal *mv_Terminal_Minus;
 
   /*Processing*/
   double mv_dfVoltage;
+
+  // Inherited virtual method from DspComponent
+private:
+  virtual void Process_(DspSignalBus& inputs, DspSignalBus& outputs);
 };
 
 #endif // COMP_VOLTAGESOURCE_H
