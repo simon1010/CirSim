@@ -537,7 +537,9 @@ void TestQt::mouseReleaseEvent(QMouseEvent * event)
 
 void TestQt::ms_xSaveProject()
 {
-  SimulationUtils::sf_PrintElementsToFile(CGridUtils::sc_xTheGrid->items(CGridUtils::sc_xTheGrid->itemsBoundingRect()), "c:\\CIRSIM_LOGGING\\Project.json");
+  auto fileName = QFileDialog::getSaveFileName(this, tr("Save Project File"), "c:\\", tr("JSON File (*.json)"));
+
+  SimulationUtils::sf_PrintElementsToFile(CGridUtils::sc_xTheGrid->items(CGridUtils::sc_xTheGrid->itemsBoundingRect()), fileName.toStdString().c_str());//"c:\\CIRSIM_LOGGING\\Project.json");
 }
 
 void TestQt::ms_xOpenProject()
