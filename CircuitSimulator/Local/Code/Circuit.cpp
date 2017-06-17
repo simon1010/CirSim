@@ -9,9 +9,8 @@
 #include <Resistor.h>
 #include <Wire.h>
 #include <Comp_VoltageSource.h>
+#include <DispatchSolver.h>
 // add isTerminalCOnnected() to check for infinite loops within path search
-
-
 
 namespace Solver{
 
@@ -201,7 +200,10 @@ namespace Solver{
      
     }
     LogFile << "Edges in circuit: " << mv_nEdges << std::endl;
-    
+
+    // Instantiate the brand new solver
+    CDispatchSolver lv_DispatchSolver(mv_AllEdgesInCircuit, mv_Nodes_List);
+
     /*
        The algorithm of the method is the following:
     1. The matrix Ue and G are given.
@@ -239,7 +241,7 @@ namespace Solver{
 
     mv_nLoops = mv_nEdges - mv_nNodes;
 
-    ublas::matrix<int> B(mv_nLoops, mv_nEdges,0);
+    /*ublas::matrix<int> B(mv_nLoops, mv_nEdges,0);
     ublas::matrix<int> A(mv_nNodes, mv_nEdges,0);
     ublas::matrix<double> G(mv_nEdges, mv_nEdges, 0);
     ublas::matrix<double> Ue(mv_nEdges, 1, 0);
@@ -280,23 +282,24 @@ namespace Solver{
           }
         }
       }
-    }
+    }*/
        
     /*std::stringstream buffer;
-std::streambuf * old = std::cout.rdbuf(buffer.rdbuf());
+      std::streambuf * old = std::cout.rdbuf(buffer.rdbuf());
 
-std::cout << "Bla" << std::endl;
+      std::cout << "Bla" << std::endl;
 
-std::string text = buffer.str(); // text will now contain "Bla\n"*/
+    std::string text = buffer.str(); // text will now contain "Bla\n"*/
 
-    std::cout << "\nIncidence Matrix :" << A << std::endl;
+   /* std::cout << "\nIncidence Matrix :" << A << std::endl;
     std::cout << "Voltage source Matrix: " << Ue << std::endl;
     std::cout << "Conductance Matrix: " << G << std::endl;
-    
-    /*End matrix Construction*/
-    NodePotentialSolver = new CNodePotential(G,Ue,A);
-    NodePotentialSolver->mf_Solve();
+    */
 
+
+   /* NodePotentialSolver = new CNodePotential(G,Ue,A);
+    NodePotentialSolver->mf_Solve();
+*/
    /* std::cout << "   At      " << NodePotentialSolver->At << std::endl;
     std::cout << "   AG      " << NodePotentialSolver->AG << std::endl;
     std::cout << "   Gp      " << NodePotentialSolver->Gp << std::endl;
@@ -305,8 +308,8 @@ std::string text = buffer.str(); // text will now contain "Bla\n"*/
     std::cout << "   IpSC    " << NodePotentialSolver->IpSC << std::endl;
     std::cout << "   Vp      " << NodePotentialSolver->Vp << std::endl;*/
     
-    std::cout << "   U      " << NodePotentialSolver->U << std::endl;
-    std::cout << "   I      " << NodePotentialSolver->I << std::endl;
+   /* std::cout << "   U      " << NodePotentialSolver->U << std::endl;
+    std::cout << "   I      " << NodePotentialSolver->I << std::endl;*/
 
     std::string text = buffer.str();
     CGridUtils::sc_xTheGrid->mf_SetGridText(text.data());

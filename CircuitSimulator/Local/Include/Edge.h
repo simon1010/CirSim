@@ -7,7 +7,7 @@
 #include <Node.h>
 
 namespace Solver{
-  class CEdge
+  /*class CEdge
   {
   public:
     CEdge();
@@ -20,7 +20,19 @@ namespace Solver{
     const CNode * mv_Node_2;
 
     std::list<QGraphicsItem* > mv_listComponents;
+  };*/
+  
+  struct EDGE
+  {
+    std::vector<QGraphicsItem*> Components;
+    CNode FromNode;
+    CNode ToNode;
   };
+
+  // map of edges and the node they belong to
+  typedef std::vector<EDGE> EDGE_VEC;
+
+
 }
 #endif
 

@@ -115,7 +115,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(ProjectDir)..\x64\Debug;$(QTDIR)\lib;..\Libraries\pa_stable_v19_20140130\portaudio\build\msvc\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>UI.lib;CompLib.lib;qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;Qt5PrintSupportd.lib;$(ProjectDir)..\..\Libraries\pa_stable_v19_20140130\portaudio\build\msvc\x64\Release\portaudio_x64.lib;$(ProjectDir)..\..\Libraries\DSPatch\lib\DSPatch.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>UI.lib;CompLib.lib;qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;Qt5PrintSupportd.lib;$(ProjectDir)..\..\Libraries\pa_stable_v19_20140130\portaudio\build\msvc\x64\Release\portaudio_x64.lib;$(ProjectDir)..\..\Libraries\DSpatch\x64\DSPatch.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -191,6 +191,7 @@
     </ClCompile>
     <ClCompile Include="Local\Code\Circuit.cpp" />
     <ClCompile Include="Local\Code\CircuitComposer.cpp" />
+    <ClCompile Include="Local\Code\DispatchSolver.cpp" />
     <ClCompile Include="Local\Code\Edge.cpp" />
     <ClCompile Include="Local\Code\GaussElimination.cpp" />
     <ClCompile Include="Local\Code\main.cpp" />
@@ -225,6 +226,7 @@
     <ClInclude Include="GeneratedFiles\ui_testqt.h" />
     <ClInclude Include="Local\Include\Circuit.h" />
     <ClInclude Include="Local\Include\CircuitComposer.h" />
+    <ClInclude Include="Local\Include\DispatchSolver.h" />
     <ClInclude Include="Local\Include\Edge.h" />
     <ClInclude Include="Local\Include\GaussElimination.h" />
     <ClInclude Include="Local\Include\Matrix.h" />

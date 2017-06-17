@@ -113,3 +113,16 @@ SAMPLE* CVoltageSource::mf_dfGetVoltage(int &av_nAvailableSamples)
   *sample = mf_dfGetVoltage();
   return sample;
 }
+
+void CVoltageSource::mf_Save(QJsonObject &json)
+{
+  json["name"] = "CVoltageSource";
+  json["positionX"] = this->pos().x();
+  json["positionY"] = this->pos().y();
+  json["voltage"] = mf_dfGetVoltage();
+}
+
+void CVoltageSource::mf_Load(QJsonObject & json)
+{
+  mv_dfVoltage = json["voltage"].toDouble();
+}

@@ -256,3 +256,7 @@ void IComponent::ms_xRemove()
   CGridUtils::sc_xTheGrid->removeItem(this);
   mf_PreDestroy();
 }
+
+void IComponent::mf_Load(QJsonObject & json)
+{
+}

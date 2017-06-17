@@ -25,6 +25,8 @@ namespace Solver{
     // the node is built from these terminals
     std::list<Terminal*> mv_Terminals;
   };
+
+  typedef std::vector<CNode> NODE_VEC;
 }
 #endif
 

@@ -23,17 +23,6 @@ using namespace boost::numeric;
 
 namespace Solver{
 
-
-  //typedef std::vector<QGraphicsItem*> EDGE;
-  struct EDGE
-  {
-    std::vector<QGraphicsItem*> Components;
-    CNode FromNode;
-    CNode ToNode;
-  };
-  // map of edges and the node they belong to
-  typedef std::vector<EDGE> EDGE_VEC;
-
   class Circuit
   {
   public:
@@ -47,7 +36,7 @@ namespace Solver{
     int mv_nEdges;
     int mv_nNodes;
     int mv_nLoops;
-    std::vector<CNode> mv_Nodes_List;
+    NODE_VEC mv_Nodes_List;
     
     int mv_nTotalElements;
     int mv_nConnectedElements;

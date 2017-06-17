@@ -23,6 +23,8 @@ public:
 
   double mf_dfGetVoltage();
   SAMPLE* mf_dfGetVoltage(int &av_nAvailableSamples);
+
+  void mf_Save(QJsonObject &json);
 private:
   Terminal *mv_Terminal;
 

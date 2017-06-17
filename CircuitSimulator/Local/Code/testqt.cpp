@@ -22,6 +22,9 @@
 #include <Capacitor.h>
 #include <qcustomplot.h>
 #include <Microphone.h>
+#include <qjsonarray.h>
+#include <qjsondocument.h>
+#include <qjsonobject.h>
 
 const unsigned int TestQt::sc_nGridSize = 10;
 
@@ -39,7 +42,7 @@ TestQt::TestQt(QWidget *parent)
   ui.graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   
   mf_SetupPlotter();
-
+  mf_SetupFactory();
   mf_SetupLogger();
   mf_TestElements();
 
@@ -49,6 +52,21 @@ TestQt::TestQt(QWidget *parent)
   mv_SimulationTimer.start(0);
   connect(&mv_SimulationTimer, SIGNAL(timeout()), this, SLOT(update()));
 
+  // Handle saving
+  new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_S), this, SLOT(ms_xSaveProject()));
+
+  // Handle loading
+  new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_O), this, SLOT(ms_xOpenProject()));
+
+}
+
+void TestQt::mf_SetupFactory()
+{
+  TypeMap["CResistor"]                  = &createInstance<CResistor>;
+  TypeMap["CVoltageSource"]             = &createInstance<CVoltageSource>;
+  TypeMap["CCapacitor"]                 = &createInstance<CCapacitor>;
+  TypeMap["CMicrophone"]                = &createInstance<CMicrophone>;
+  TypeMap["CProgrammableVoltageSource"] = &createInstance<CProgrammableVoltageSource>;
 }
 
 void TestQt::mf_SetupPlotter()
@@ -212,10 +230,10 @@ void TestQt::mf_TestElements()
 { 
   ui.graphicsView->setScene(CGridUtils::sc_xTheGrid);
 
-  IComponent *R1 = new CResistor(QPoint(275,290), CGridUtils::sc_xTheGrid, ui.graphicsView);
+  IComponent *R1 = new CResistor(QPoint(390,280), CGridUtils::sc_xTheGrid, ui.graphicsView);
   CGridUtils::sc_xTheGrid->addItem(R1);
 
-  IComponent *R2 = new CMicrophone(QPoint(400, 290), CGridUtils::sc_xTheGrid, ui.graphicsView);
+  IComponent *R2 = new CMicrophone(QPoint(270, 280), CGridUtils::sc_xTheGrid, ui.graphicsView);
   CGridUtils::sc_xTheGrid->addItem(R2);
 
   CWire *WR1N = new CWire(QPoint(300, 300), CGridUtils::sc_xTheGrid, ui.graphicsView);
@@ -226,12 +244,12 @@ void TestQt::mf_TestElements()
   WNR2->setLine(QLineF(360, 300, 400, 300));
   CGridUtils::sc_xTheGrid->addItem(WNR2);
 
-  IComponent *E2 = new CVoltageSource(QPoint(350, 300), CGridUtils::sc_xTheGrid, ui.graphicsView);
+  IComponent *E2 = new CVoltageSource(QPoint(340, 290), CGridUtils::sc_xTheGrid, ui.graphicsView);
   CGridUtils::sc_xTheGrid->addItem(E2);
 
   static_cast<CVoltageSource*>(E2)->mf_SetVoltage(4.);
 
-  IComponent *E1 = new CVoltageSource(QPoint(270, 300), CGridUtils::sc_xTheGrid, ui.graphicsView);
+  IComponent *E1 = new CVoltageSource(QPoint(260, 290), CGridUtils::sc_xTheGrid, ui.graphicsView);
   CGridUtils::sc_xTheGrid->addItem(E1);
 
   CWire *WR2N = new CWire(QPoint(420, 290), CGridUtils::sc_xTheGrid, ui.graphicsView);
@@ -253,9 +271,6 @@ void TestQt::mf_TestElements()
   CWire *WNDCE2 = new CWire(QPoint(360, 350), CGridUtils::sc_xTheGrid, ui.graphicsView);
   WNDCE2->setLine(QLineF(360, 350, 360, 320));
   CGridUtils::sc_xTheGrid->addItem(WNDCE2);
-
-
-  
 
  // ui.graphicsView->centerOn(0,0); // move scrollbar to show 0 , 0
 }
@@ -520,6 +535,58 @@ void TestQt::mouseReleaseEvent(QMouseEvent * event)
   QMainWindow::mouseReleaseEvent(event);
 }
 
+void TestQt::ms_xSaveProject()
+{
+  SimulationUtils::sf_PrintElementsToFile(CGridUtils::sc_xTheGrid->items(CGridUtils::sc_xTheGrid->itemsBoundingRect()), "c:\\CIRSIM_LOGGING\\Project.json");
+}
+
+void TestQt::ms_xOpenProject()
+{
+  auto fileName = QFileDialog::getOpenFileName(this, tr("Open Project File"), "c:\\", tr("JSON File (*.json *.JSON)"));
+
+  // todo clear grid! & file name correctness!
+  QFile loadFile(fileName);
+
+  if (!loadFile.open(QIODevice::ReadOnly)) {
+    qWarning("Couldn't open save file.");
+    return;
+  }
+  
+  CGridUtils::sc_xTheGrid->clear();
+  mf_SetupLogger();
+
+  QByteArray lv_SavedData = loadFile.readAll();
+  QJsonDocument lv_LoadedDoc(QJsonDocument::fromJson(lv_SavedData));
+  QJsonObject lv_JSonObject = lv_LoadedDoc.object();
+  QJsonArray lv_ComponentArray = lv_JSonObject["components"].toArray();
+  for (int CompIdx = 0; CompIdx < lv_ComponentArray.size(); ++CompIdx)
+  {  
+    QJsonObject ComponentJSonObject = lv_ComponentArray[CompIdx].toObject();
+    QString lv_ComponentType = ComponentJSonObject["name"].toString();
+    if (lv_ComponentType == QString("CWire"))
+    {
+      auto x1 = ComponentJSonObject["positionX1"].toInt();
+      auto y1 = ComponentJSonObject["positionY1"].toInt();
+
+      auto x2 = ComponentJSonObject["positionX2"].toInt();
+      auto y2 = ComponentJSonObject["positionY2"].toInt();
+
+      CWire * lv_newWire = new CWire(QPoint(x1, y2), CGridUtils::sc_xTheGrid, ui.graphicsView);
+      lv_newWire->setLine(QLineF(x1, y1, x2, y2));
+      CGridUtils::sc_xTheGrid->addItem(lv_newWire);
+    }
+    else
+    {
+      auto x = ComponentJSonObject["positionX"].toInt() - 10;
+      auto y = ComponentJSonObject["positionY"].toInt() - 10;
+
+      IComponent* lv_Component = TypeMap[lv_ComponentType.toStdString()](QPointF(x, y), CGridUtils::sc_xTheGrid, ui.graphicsView);
+      CGridUtils::sc_xTheGrid->addItem(lv_Component);
+      lv_Component->mf_Load(ComponentJSonObject);
+    }
+  }
+}
+
 void TestQt::keyPressEvent(QKeyEvent *event)
 {
   switch (event->key())
@@ -560,7 +627,7 @@ void TestQt::keyPressEvent(QKeyEvent *event)
     auto const lc_CircuitComposer = std::make_shared<CCircuitComposer>(lc_GUICircuitElements);
 
 
-    //Solver::Circuit *TheCircuit = new Solver::Circuit(lc_GUICircuit);
+    //Solver::Circuit TheCircuit(lc_GUICircuitElements);
     //const unsigned int lc_nNrofConnectedObjects = TheCircuit->mf_nConnectedElements();
 
     //char log[100];

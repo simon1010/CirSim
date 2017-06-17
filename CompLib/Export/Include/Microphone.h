@@ -38,6 +38,8 @@ public:
     void *userData);
   
 
+  void mf_Save(QJsonObject &json);
+
   static SAMPLE ** mv_pAudioBuffers;
   static int BuffersInUse;
   static std::mutex AcquisitionGuard;

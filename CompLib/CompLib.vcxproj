@@ -34,10 +34,12 @@
     <ClCompile Include="Local\Code\GridUtils.cpp" />
     <ClCompile Include="Local\Code\Ground.cpp" />
     <ClCompile Include="Local\Code\IComponent.cpp" />
+    <ClCompile Include="Local\Code\IDispatchComponent.cpp" />
     <ClCompile Include="Local\Code\Microphone.cpp" />
     <ClCompile Include="Local\Code\ProgrammableVoltageSource.cpp" />
     <ClCompile Include="Local\Code\Resistor.cpp" />
     <ClCompile Include="Local\Code\SimulationUtils.cpp" />
+    <ClCompile Include="Local\Code\Wire.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Export\Include\Capacitor.h" />
@@ -46,12 +48,14 @@
     <ClInclude Include="Export\Include\Grid.h" />
     <ClInclude Include="Export\Include\GridUtils.h" />
     <ClInclude Include="Export\Include\Ground.h" />
+    <ClInclude Include="Export\Include\IDispatchComponent.h" />
     <ClInclude Include="Export\Include\Microphone.h" />
     <ClInclude Include="Export\Include\ProgrammableVoltageSource.h" />
     <ClInclude Include="Export\Include\Resistor.h" />
     <ClInclude Include="Export\Include\SimulationUtils.h" />
     <ClInclude Include="Export\Include\Terminal.h" />
     <ClInclude Include="Export\Include\complib_global.h" />
+    <ClInclude Include="Export\Include\Wire.h" />
     <CustomBuild Include="Export\Include\IComponent.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing IComponent.h...</Message>
@@ -169,7 +173,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).dll</OutputFile>
       <AdditionalLibraryDirectories>$(ProjectDir)..\x64\Debug;$(QTDIR)\lib;..\Libraries\pa_stable_v19_20140130\portaudio\build\msvc\x64\Release;..\LIbraries\DSPatch\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(ProjectDir)..\..\Libraries\DSPatch\lib\DSPatch.lib;UI.lib;qtmaind.lib;Qt5Guid.lib;Qt5Cored.lib;Qt5Widgetsd.lib;$(ProjectDir)..\..\Libraries\pa_stable_v19_20140130\portaudio\build\msvc\x64\Release\portaudio_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)..\..\Libraries\DSPatch\x64\DSPatch.lib;UI.lib;qtmaind.lib;Qt5Guid.lib;Qt5Cored.lib;Qt5Widgetsd.lib;$(ProjectDir)..\..\Libraries\pa_stable_v19_20140130\portaudio\build\msvc\x64\Release\portaudio_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>

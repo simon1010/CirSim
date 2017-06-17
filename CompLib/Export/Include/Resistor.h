@@ -12,7 +12,7 @@
 
 #include <complib_global.h>
 
-class COMPLIB_EXPORT CResistor : public IComponent, public DspComponent
+class COMPLIB_EXPORT CResistor : public IComponent
 {
 public:
   CResistor(QPointF ac_Position, QGraphicsScene *ac_pScene, QGraphicsView *ac_pParent = 0);
@@ -30,6 +30,9 @@ public:
 
   double mf_dfGetVoltage();
   SAMPLE* mf_dfGetVoltage(int &av_nAvailableSamples);
+
+  void mf_Save(QJsonObject &json);
+  void mf_Load(QJsonObject &json) override;
 
 private:
 

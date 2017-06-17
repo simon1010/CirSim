@@ -37,6 +37,8 @@ public:
   
   SAMPLE *mf_dfGetVoltage(int& av_nSamplesAvailable);
  
+  void mf_Save(QJsonObject &json);
+
   const static double sc_dfDefaultMaxVoltage;
 
 private:

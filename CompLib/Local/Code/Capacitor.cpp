@@ -112,3 +112,16 @@ SAMPLE* CCapacitor::mf_dfGetVoltage(int &av_nAvailableSamples)
   *sample = 200;
   return sample;
 }
+
+void CCapacitor::mf_Save(QJsonObject &json)
+{
+  json["name"] = "CCapacitor";
+  json["positionX"] = this->pos().x();
+  json["positionY"] = this->pos().y();
+  json["capcitance"] = mf_dfGetCapacitance();
+}
+
+void CCapacitor::mf_Load(QJsonObject & json)
+{
+  mv_dfCapacitance = json["capcitance"].toDouble();
+}

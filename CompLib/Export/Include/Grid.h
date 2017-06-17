@@ -26,7 +26,7 @@ public:
   void mf_AddToGridText(const QString& ac_szTextToAdd);
 
   // Overriden public method from QGraphicsScene
-  //const QList<IComponent*>& items(QRectF ac_itemsBoundingRect) const;
+  //const QList<IComponent*> items(QRectF ac_itemsBoundingRect) const;
 
 private:
   const unsigned int mc_nGridSize;

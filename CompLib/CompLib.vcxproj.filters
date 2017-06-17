@@ -71,6 +71,12 @@
     <ClInclude Include="Export\Include\Resistor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Export\Include\IDispatchComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Export\Include\Wire.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Local\Code\complib.cpp">
@@ -110,6 +116,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Local\Code\Microphone.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Local\Code\IDispatchComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Local\Code\Wire.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -56,3 +56,10 @@ const int CGround::mf_nGetInstanceNumber() const
 {
   return sv_nGroundID;
 }
+
+void CGround::mf_Save(QJsonObject &json)
+{
+  json["name"] = "CGround";
+  json["positionX"] = this->pos().x();
+  json["positionY"] = this->pos().y();
+}

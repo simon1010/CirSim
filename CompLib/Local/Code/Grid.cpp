@@ -92,8 +92,21 @@ void CGrid::mf_AddToGridText(const QString& ac_szTextToAdd)
   mv_szTheGridText += ac_szTextToAdd;
 }
 /*
-const QList<IComponent*>& CGrid::items(QRectF ac_itemsBoundingRect) const
+const QList<IComponent*> CGrid::items(QRectF ac_itemsBoundingRect) const
 {
+  QList<IComponent*> lv_ComponentList;
   auto const lc_ListGraphicItems = __super::items(ac_itemsBoundingRect);
-  // TODO move code from CCircuit to identify a list of IComponents, to make our life eazier
+  for (QGraphicsItem* it : lc_ListGraphicItems)
+  {
+    IComponent* lv_pComponentCast = dynamic_cast<IComponent*>(it);
+    if (lv_pComponentCast != nullptr)
+    {
+      lv_ComponentList.push_back(lv_pComponentCast);
+    }
+    else
+    {
+      // we have a wire
+    }
+  }
+  return lv_ComponentList;
 }*/

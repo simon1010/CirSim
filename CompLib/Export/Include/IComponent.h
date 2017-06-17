@@ -13,13 +13,16 @@
 #include <Terminal.h>
 #include <SimulationUtils.h>
 
+#include <IDispatchComponent.h>
+#include <qjsonobject.h>
+
 class Terminal;
 // not really an interface but it's the first class to implement QGraphisItem,
 // all Elements are to derive from this
 // should handle basic grid functionality, so other objects should not bother
 #include <complib_global.h>
 
-class COMPLIB_EXPORT IComponent : public QObject, public QGraphicsItem
+class COMPLIB_EXPORT IComponent : public QObject, public QGraphicsItem, public IDispatchComponent
 {
   Q_OBJECT
 public:
@@ -44,6 +47,9 @@ public:
   void mf_AddTerminal(Terminal *ac_Terminal);
   Terminal* mf_OtherTerminal(Terminal * ac_NotThisTerminal) const;
   void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
+
+  virtual void mf_Save(QJsonObject &json) = 0;
+  virtual void mf_Load(QJsonObject &json);
 
 protected:
   // Offers basic snap-to-grid functionality, probably not compatible with all elements

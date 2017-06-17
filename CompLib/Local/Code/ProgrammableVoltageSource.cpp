@@ -131,6 +131,13 @@ SAMPLE* CProgrammableVoltageSource::mf_dfGetVoltage(int &av_nAvailableSamples)
     return sample;  
 }
 
+void CProgrammableVoltageSource::mf_Save(QJsonObject &json)
+{
+  json["name"] = "CProgrammableVoltageSource";
+  json["positionX"] = this->pos().x();
+  json["positionY"] = this->pos().y();
+}
+
 //
 //IComponent::DialogSettingsMap CProgrammableVoltageSource::mf_GetDialogSettingsMap()
 //{

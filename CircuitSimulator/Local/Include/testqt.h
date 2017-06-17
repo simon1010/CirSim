@@ -10,6 +10,9 @@
 #include <SimulationUtils.h>
 #include <QTimer>
 
+// Component factory
+template<typename T> IComponent * createInstance(QPointF& p, CGrid * g, QGraphicsView * mw) { return new T(p, g, mw); }
+typedef std::map<std::string, IComponent*(*)(QPointF&, CGrid *, QGraphicsView *)> map_type;
 
 class TestQt : public QMainWindow
 {
@@ -27,6 +30,10 @@ public slots:
   void update();
   
 private:
+  // Component factory
+  void TestQt::mf_SetupFactory();
+  map_type TypeMap;
+
   QTimer mv_SimulationTimer;
   Ui_MainWindow ui;
 
@@ -71,6 +78,9 @@ private:
   void pushBtn();
   void ShowContextMenu(const QPoint& pos);
   
+  void ms_xSaveProject();
+  void ms_xOpenProject();
+
   void ms_xSelectRectangle();
   void ms_xSelectDCSource(); 
   void ms_xSelectWire();
@@ -80,5 +90,7 @@ private:
   void ms_xSelectCapacitor();
   void ms_xSelectMicrophone();
 };
+
+
 
 #endif // TESTQT_H

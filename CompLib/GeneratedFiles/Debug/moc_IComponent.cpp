@@ -107,6 +107,8 @@ void *IComponent::qt_metacast(const char *_clname)
         return static_cast<void*>(const_cast< IComponent*>(this));
     if (!strcmp(_clname, "QGraphicsItem"))
         return static_cast< QGraphicsItem*>(const_cast< IComponent*>(this));
+    if (!strcmp(_clname, "IDispatchComponent"))
+        return static_cast< IDispatchComponent*>(const_cast< IComponent*>(this));
     return QObject::qt_metacast(_clname);
 }
 

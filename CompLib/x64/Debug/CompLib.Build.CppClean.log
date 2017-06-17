@@ -3,6 +3,7 @@ c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\complib\x64\debug\simul
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\complib\x64\debug\resistor.obj
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\complib\x64\debug\programmablevoltagesource.obj
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\complib\x64\debug\microphone.obj
+c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\complib\x64\debug\idispatchcomponent.obj
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\complib\x64\debug\icomponent.obj
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\complib\x64\debug\ground.obj
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\complib\x64\debug\gridutils.obj
@@ -11,6 +12,7 @@ c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\complib\x64\debug\comp_
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\complib\x64\debug\complib.obj
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\complib\x64\debug\capacitor.obj
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\complib\x64\debug\moc_icomponent.obj
+c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\complib\x64\debug\wire.obj
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\x64\debug\complib.lib
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\x64\debug\complib.exp
 c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\complib\generatedfiles\debug\moc_icomponent.cpp

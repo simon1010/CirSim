@@ -295,3 +295,9 @@ void CMicrophone::mf_ShowSettingsDialog()
   }
 }
 
+void CMicrophone::mf_Save(QJsonObject &json)
+{
+  json["name"] = "CMicrophone";
+  json["positionX"] = this->pos().x();
+  json["positionY"] = this->pos().y();
+}

@@ -110,3 +110,17 @@ const int CResistor::mf_nGetInstanceNumber() const
 {
   return sv_nResistorID;
 }
+
+
+void CResistor::mf_Save(QJsonObject &json)
+{
+  json["name"] = "CResistor";
+  json["positionX"] = this->pos().x();
+  json["positionY"] = this->pos().y();
+  json["resistance"] = mf_nGetResistance();
+}
+
+void CResistor::mf_Load(QJsonObject & json)
+{
+  mv_nResistance = json["resistance"].toDouble();
+}

@@ -3,7 +3,8 @@
 #define CIRCUITCOMPOSER_H
 
 #include <QtWidgets\qgraphicsitem.h>
-
+#include <Terminal.h>
+#include <Node.h>
 #include <DSPatch.h>
 
 class CCircuitComposer
@@ -14,7 +15,7 @@ public:
 
 private:
   void mf_InterpretQGrapghicsItems(const QList<QGraphicsItem*>& av_QList_AllElements);
-
+  DspCircuit mv_TheCircuit;
 };
 
 #endif // !CIRCUITCOMPOSER_H

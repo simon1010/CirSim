@@ -10,7 +10,7 @@
 
 #include <complib_global.h>
 
-class COMPLIB_EXPORT CVoltageSource : public IComponent, public DspComponent
+class COMPLIB_EXPORT CVoltageSource : public IComponent
 {
 public:
   //CVoltageSource(QGraphicsScene *ac_pScene, QGraphicsItem *ac_pParent = 0);
@@ -25,6 +25,9 @@ public:
   void mf_SetVoltage(const double ac_dfVoltage);
   double mf_dfGetVoltage();
   SAMPLE* mf_dfGetVoltage(int &av_nAvailableSamples);
+
+  void mf_Save(QJsonObject &json);
+  void mf_Load(QJsonObject &json) override;
   
   const static double sc_dfDefaultVoltage;
 

@@ -47,6 +47,9 @@
     <ClCompile Include="Local\Code\CircuitComposer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Local\Code\DispatchSolver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_testqt.h" />
@@ -72,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Local\Include\CircuitComposer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Local\Include\DispatchSolver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
