@@ -26,10 +26,9 @@ void CCircuitComposer::mf_InterpretQGrapghicsItems(const QList<QGraphicsItem*>& 
     {
       mv_TheCircuit.AddComponent(*lv_pComponentCast);
     }
-    else
-    {
-      // we have a wire -> find out who it connects to and add it to the circiut
-      CWire * lv_pWire = dynamic_cast<CWire*>(lv_pComponentCast);
-    }
   }
+
+  auto const componentCount = mv_TheCircuit.GetComponentCount();
+  // make the connections
+
 }
