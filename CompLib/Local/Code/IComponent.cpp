@@ -9,8 +9,10 @@
 
 unsigned int IComponent::sv_nCompNumber = 0;
 
-IComponent::IComponent( QGraphicsScene* ac_pScene, QGraphicsView *ac_pPrent) : QGraphicsItem(nullptr),
-mv_pParent(ac_pPrent)
+IComponent::IComponent( QGraphicsScene* ac_pScene, QGraphicsView *ac_pPrent, const int ac_nPorts) 
+: QGraphicsItem(nullptr)
+, IDispatchComponent(ac_nPorts)
+, mv_pParent(ac_pPrent)
 {
   ++sv_nCompNumber;
 
@@ -22,8 +24,10 @@ mv_pParent(ac_pPrent)
   setAcceptHoverEvents(true);
 }
 
-IComponent::IComponent(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphicsView *ac_pPrent) : QGraphicsItem(nullptr),
-mv_pParent(ac_pPrent)
+IComponent::IComponent(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphicsView *ac_pPrent, const int ac_nPorts)
+: QGraphicsItem(nullptr)
+, IDispatchComponent(ac_nPorts)
+, mv_pParent(ac_pPrent)
 {
   ++sv_nCompNumber;
   // Must Revisit, check flags
@@ -156,6 +160,17 @@ void IComponent::keyPressEvent(QKeyEvent *event)
       this->setRotation(this->rotation() + 90);
     } break;
     }
+  }
+}
+
+Terminal* IComponent::mf_GetTerminal(const int ac_nIdx) const
+{
+  auto begin = mv_Terminals.begin();
+  auto end = mv_Terminals.end();
+  for (int i = 0; i < mv_Terminals.size() && begin != end; i++, begin++)
+  {
+    if (i == ac_nIdx)
+      return *begin;
   }
 }
 

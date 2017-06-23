@@ -26,8 +26,8 @@ class COMPLIB_EXPORT IComponent : public QObject, public QGraphicsItem, public I
 {
   Q_OBJECT
 public:
-  IComponent(QGraphicsScene *ac_pScene, QGraphicsView *parent = 0);
-  IComponent(QPointF ac_Position, QGraphicsScene *ac_pScene, QGraphicsView *parent = 0);
+  IComponent(QGraphicsScene *ac_pScene, QGraphicsView *parent = 0, const int ac_nPorts = 2);
+  IComponent(QPointF ac_Position, QGraphicsScene *ac_pScene, QGraphicsView *parent = 0, const int ac_nPorts = 2);
   ~IComponent();
 
 
@@ -41,11 +41,16 @@ public:
   void update(const QRectF & rect = QRectF());
   virtual void paint(QPainter *lc_pPainter, const QStyleOptionGraphicsItem *ac_pOption, QWidget *ac_pParent);
   virtual void mf_DerivedPaint(QPainter *lc_pPainter, const QStyleOptionGraphicsItem *ac_pOption, QWidget *ac_pParent) = 0;
-  
+
   virtual const QString mf_szGetCompName() const;
   const QString mf_szGetCompID() const;
   void mf_AddTerminal(Terminal *ac_Terminal);
   Terminal* mf_OtherTerminal(Terminal * ac_NotThisTerminal) const;
+  Terminal* mf_GetTerminal(const int ac_nIdx) const;
+  __forceinline QSet<Terminal *> mf_GetTerminalSet() const {
+    return mv_Terminals;
+  }
+
   void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
 
   virtual void mf_Save(QJsonObject &json) = 0;

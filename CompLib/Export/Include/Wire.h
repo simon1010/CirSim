@@ -24,6 +24,22 @@ public:
   int type() const { return Type; }
 
   virtual Terminal* mf_OtherTerminal(Terminal * ac_NotThisTerminal)const;
+  
+  __forceinline Terminal* mf_GetTerminal(const int ac_nIdx)const
+  {
+    if (ac_nIdx == 0)
+      return mv_Terminal_1;
+    else if (ac_nIdx == 1)
+      return mv_Terminal_2;
+    return nullptr;
+  }
+
+  __forceinline QSet<Terminal *> mf_GetTerminalSet() const {
+    QSet<Terminal*> lv_TerminalList;
+    lv_TerminalList.insert(mv_Terminal_1);
+    lv_TerminalList.insert(mv_Terminal_2);
+    return lv_TerminalList;
+  }
 
   void mf_Save(QJsonObject &json);
 

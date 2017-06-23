@@ -39,6 +39,8 @@ public:
  
   void mf_Save(QJsonObject &json);
 
+  void Process_(DspSignalBus & inputs, DspSignalBus & outputs);
+
   const static double sc_dfDefaultMaxVoltage;
 
 private:
@@ -64,6 +66,19 @@ private:
   double mv_dfFreqT0;
   double mv_dfBias; 
 
+  //iugiuygcusdgcaiuysdgcudgsy
+  double mf_dfGetSweep(const int64_t ac_nTickDuration);
+
+  typedef IDispatchComponent _super;
+
+  double mc_dfStartFreq;
+  double mc_dfStopFreq;
+  double mc_dfSweepDuration;
+  double mv_dfCurrentOut;
+  bool mv_bIncrement;
+  int mv_nIncrement;
+  double mv_tElapsedTime;
+  double mv_VoltageOut;
 };
 
 #endif // COMP_VOLTAGESOURCE_H

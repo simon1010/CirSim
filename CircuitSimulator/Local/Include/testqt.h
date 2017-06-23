@@ -9,7 +9,7 @@
 #include <QRubberBand>
 #include <SimulationUtils.h>
 #include <QTimer>
-
+#include <CircuitComposer.h>
 // Component factory
 template<typename T> IComponent * createInstance(QPointF& p, CGrid * g, QGraphicsView * mw) { return new T(p, g, mw); }
 typedef std::map<std::string, IComponent*(*)(QPointF&, CGrid *, QGraphicsView *)> map_type;
@@ -34,6 +34,10 @@ private:
   void TestQt::mf_SetupFactory();
   map_type TypeMap;
 
+  // DSP
+  shared_ptr<Solver::CCircuitComposer> mv_CircuitComposer;
+  // DSP 
+ 
   QTimer mv_SimulationTimer;
   Ui_MainWindow ui;
 

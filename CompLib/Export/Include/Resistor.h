@@ -40,6 +40,9 @@ private:
   Terminal *mv_Terminal_1;
   Terminal *mv_Terminal_2;
 
+  double mv_dfVoltageAcrossResistor;
+  double mv_dfCurrent;
+
   static int sv_nResistorID;
 
   virtual DialogSettingsMap mf_GetDialogSettingsMap();
@@ -51,8 +54,9 @@ private:
 
   const int mf_nGetInstanceNumber() const;
   // Inherited virtual method from DspComponent
-private:
+protected:
   virtual void Process_(DspSignalBus& inputs, DspSignalBus& outputs);
+
  };
 
 #endif

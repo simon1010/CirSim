@@ -22,6 +22,13 @@ CCapacitor::CCapacitor(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphics
   mf_SetCapacitance(sc_dfDefaultCapacitance);
 
   ++sv_nCapacitorID;
+
+  mv_dfCapVoltage = NAN;
+  mv_dfCurrent = NAN;
+  mv_EquivalentResistance = NAN;
+  mv_dfPreviousOutputVoltage = 0.;
+  mv_dfoutputVoltage = 0.;
+
 }
 
 CCapacitor::~CCapacitor()
@@ -102,14 +109,14 @@ void CCapacitor::mf_SetDialogSettingsMap(IComponent::DialogSettingsMap ac_Settin
 
 double CCapacitor::mf_dfGetVoltage()
 {
-  return 200;
+  return mv_dfoutputVoltage;
 }
 
 SAMPLE* CCapacitor::mf_dfGetVoltage(int &av_nAvailableSamples)
 {
   av_nAvailableSamples = 1;
   SAMPLE * sample = new SAMPLE;
-  *sample = 200;
+  *sample = mv_dfoutputVoltage;
   return sample;
 }
 
@@ -124,4 +131,78 @@ void CCapacitor::mf_Save(QJsonObject &json)
 void CCapacitor::mf_Load(QJsonObject & json)
 {
   mv_dfCapacitance = json["capcitance"].toDouble();
+}
+
+void CCapacitor::Process_(DspSignalBus &inputs, DspSignalBus &outputs)
+{
+  // inputs
+  double lv_P0_VoltageIn = NAN;
+  double lv_P0_CurrentIn = NAN;
+  double lv_P1_VoltageIn = NAN;
+  double lv_P1_CurrentIn = NAN;
+
+  // outputs
+  double lv_P0_VoltageOut = NAN;
+  double lv_P0_CurrentOut = NAN;
+  double lv_P1_VoltageOut = NAN;
+  double lv_P1_CurrentOut = NAN;
+  double lv_Reader = NAN;
+
+  // Read all inputs
+  if (inputs.GetValue(mv_Ports[0].mv_sVoltage_IN, lv_Reader)) lv_P0_VoltageIn = lv_Reader;
+  if (inputs.GetValue(mv_Ports[0].mv_sCurrent_IN, lv_Reader)) lv_P0_CurrentIn = lv_Reader;
+  if (inputs.GetValue(mv_Ports[1].mv_sVoltage_IN, lv_Reader)) lv_P1_VoltageIn = lv_Reader;
+  if (inputs.GetValue(mv_Ports[1].mv_sCurrent_IN, lv_Reader)) lv_P1_CurrentIn = lv_Reader;
+
+  if (!isnan(lv_P0_VoltageIn) && !isnan(lv_P1_VoltageIn) && !isnan(lv_P0_CurrentIn))
+  {
+    // we should not divide by 0.
+    if (lv_P0_CurrentIn != 0.)
+      mv_EquivalentResistance = lv_P0_VoltageIn / lv_P0_CurrentIn;
+    else
+      mv_EquivalentResistance = 0.;
+
+    mv_dfCapVoltage = lv_P0_VoltageIn - lv_P1_VoltageIn; // Vth
+    mf_DoCapacitor(lv_P0_VoltageIn, lv_P1_VoltageIn, inputs, outputs);
+
+    lv_P0_VoltageOut = mv_dfoutputVoltage;
+    lv_P0_CurrentOut = mv_dfCurrent;
+    lv_P1_VoltageOut = mv_dfoutputVoltage;
+    lv_P1_CurrentOut = mv_dfCurrent;
+  }
+  else
+  {
+    lv_P0_VoltageOut = lv_P1_VoltageIn;
+    lv_P0_CurrentOut = lv_P1_CurrentIn;
+    lv_P1_VoltageOut = lv_P0_VoltageIn;
+    lv_P1_CurrentOut = lv_P0_CurrentIn;
+  }
+
+  outputs.SetValue(mv_Ports[0].mv_sVoltage_OUT, lv_P0_VoltageOut);
+  outputs.SetValue(mv_Ports[0].mv_sCurrent_OUT, lv_P0_CurrentOut);
+  outputs.SetValue(mv_Ports[1].mv_sVoltage_OUT, lv_P1_VoltageOut);
+  outputs.SetValue(mv_Ports[1].mv_sCurrent_OUT, lv_P1_CurrentOut);
+}
+
+void CCapacitor::mf_DoCapacitor(const double ac_P0_VoltageIn, const double ac_P1_VoltageIn, DspSignalBus &inputs, DspSignalBus &outputs)
+{
+  _super::Process_(inputs, outputs);
+  mv_dfResistance = /*mv_nTickDuration*/1940000 / mv_dfCapacitance; // dt / C = Rth
+  if (!isnan(mv_dfCapVoltage) && !mv_bCircuitStable)
+  {
+    mv_bCircuitStable = true;
+    // first trip
+    if (isnan(mv_dfPreviousOutputVoltage))
+    {
+      mv_dfPreviousOutputVoltage = 0.;//mv_dfResistance / (mv_dfResistance + mv_EquivalentResistance) * mv_dfCapVoltage; // may not be correct, better 0. ?
+    }
+    mv_dfoutputVoltage = ((mv_dfResistance / (mv_dfResistance + mv_EquivalentResistance)) * (mv_dfCapVoltage - mv_dfPreviousOutputVoltage)) + mv_dfPreviousOutputVoltage;
+    mv_dfPreviousOutputVoltage = mv_dfoutputVoltage;
+    mv_dfCurrent = -mv_dfCapVoltage / mv_dfResistance;//mv_dfoutputVoltage / (mv_dfResistance + mv_EquivalentResistance);
+  }
+  else if (mv_bCircuitStable)
+  {
+    mv_bCircuitStable = false;
+  }
+ // CapLog << /*mv_dfResistance * mv_dfCurrent*/mv_dfoutputVoltage << "," << mv_dfCurrent << std::endl;
 }

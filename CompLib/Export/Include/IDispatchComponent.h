@@ -30,7 +30,7 @@ typedef std::vector<Port> t_Ports;
 
 class IDispatchComponent : public DspComponent {
 protected:
-  IDispatchComponent(const int ac_nPortCount = 1);
+  IDispatchComponent(const int ac_nPortCount = 2);
 
   static bool mv_bCircuitStable;
 
@@ -53,6 +53,7 @@ protected:
   bool mv_bMaidenTrip;
   // convenience
 public:
+  const string& mv_szGetComponentID() const { return mc_sCompID; }
   t_Ports mv_Ports;
 };
 

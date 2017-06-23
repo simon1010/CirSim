@@ -27,6 +27,18 @@ public:
     mv_bIsConnected = false;
   }
 
+  __forceinline QGraphicsItem* mf_ConnectsTo() const
+  {
+    auto listOfCollidingItems = this->collidingItems();
+    
+    for (auto it : listOfCollidingItems)
+    {
+      Terminal * CollidingTerminal = dynamic_cast<Terminal*>(it);
+      if (CollidingTerminal != nullptr)
+        return CollidingTerminal->mf_pTerminalOf();
+    }
+  }
+
   __forceinline int mf_nGetPolarity() const
   {
     return mv_nPolarity;

@@ -18,7 +18,6 @@
 #include <Ground.h>
 #include <Wire.h>
 #include <Circuit.h>
-#include <CircuitComposer.h>
 #include <Capacitor.h>
 #include <qcustomplot.h>
 #include <Microphone.h>
@@ -72,10 +71,10 @@ void TestQt::mf_SetupFactory()
 void TestQt::mf_SetupPlotter()
 {
   ui.Plotter->addGraph();
-  ui.Plotter->graph(0)->setPen(QPen(Qt::blue)); // line color blue for first graph
-  ui.Plotter->graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20))); // first graph will be filled with translucent blue
+  ui.Plotter->graph(0)->setPen(QPen(Qt::red, 1)); // line color red for graph
+  //ui.Plotter->graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20))); // first graph will be filled with translucent blue
   ui.Plotter->graph(0)->setAdaptiveSampling(true);
-  ui.Plotter->graph(0)->setAntialiasedFill(false);
+  //ui.Plotter->graph(0)->setAntialiasedFill(false);
  
  // (see QCPAxisRect::setupFullAxesBox for a quicker method to do this)
   ui.Plotter->xAxis->setTickLabelType(QCPAxis::ltDateTime);
@@ -98,6 +97,9 @@ void TestQt::update()
   QString Time;
   double key = QDateTime::currentDateTime().toMSecsSinceEpoch() / 1000.0; // seconds
   Time.sprintf("Absolute time %f", key);
+
+  if(mv_CircuitComposer != nullptr)
+   mv_CircuitComposer->step();
 
  // /*test plot*/
 
@@ -605,37 +607,13 @@ void TestQt::keyPressEvent(QKeyEvent *event)
   case Qt::Key_S:
     //SimulationUtils::SimulationTime = QTime::currentTime();
     SimulationUtils::SimulationTime.start();
-    // http://www.qtcentre.org/archive/index.php/t-6640.html
-    // http ://www.thinkgeek.com/geektoys/science/
-
-    //http ://www.thedigitalmachine.net/eispice.html < ----- SOLVER
-    // http://crd-legacy.lbl.gov/~xiaoye/SuperLU/ < -- acelasi, dar in genunchi
-
-    //http://zetcode.com/gui/pyqt4/ < ----- irelevant poate
-    
-    //https://docs.python.org/2/extending/embedding.html < ------- important
-
-    //http://www.dreamincode.net/forums/topic/127903-spice-solver-using-c/
-
-  //http://stackoverflow.com/questions/607297/analog-circuit-simulation-library
-    /*
-    Ideea:
-
-    take eispice, use the sorver to solve the matrix supplied by our GUI, forward output to a python widget with pyqt4
-
-    */
 
     auto const lc_GUICircuitElements = CGridUtils::sc_xTheGrid->items(CGridUtils::sc_xTheGrid->itemsBoundingRect());
-    auto const lc_CircuitComposer = std::make_shared<CCircuitComposer>(lc_GUICircuitElements);
+    
+    Solver::Circuit TheCircuit(lc_GUICircuitElements);
+    const unsigned int lc_nNrofConnectedObjects = TheCircuit.mf_nConnectedElements();
 
-
-    //Solver::Circuit TheCircuit(lc_GUICircuitElements);
-    //const unsigned int lc_nNrofConnectedObjects = TheCircuit->mf_nConnectedElements();
-
-    //char log[100];
-    //sprintf(log, "Connected elements: %d", lc_nNrofConnectedObjects);
-    //sc_xWriteStatus(log);
-
+    mv_CircuitComposer = make_shared<Solver::CCircuitComposer>(lc_GUICircuitElements, TheCircuit.mf_AllEdgesInCircuit(), TheCircuit.mf_AllNodesInCircuit());
     break;
   }
 }
@@ -644,3 +622,24 @@ TestQt::~TestQt()
 {
 
 }
+
+
+// http://www.qtcentre.org/archive/index.php/t-6640.html
+// http ://www.thinkgeek.com/geektoys/science/
+
+//http ://www.thedigitalmachine.net/eispice.html < ----- SOLVER
+// http://crd-legacy.lbl.gov/~xiaoye/SuperLU/ < -- acelasi, dar in genunchi
+
+//http://zetcode.com/gui/pyqt4/ < ----- irelevant poate
+
+//https://docs.python.org/2/extending/embedding.html < ------- important
+
+//http://www.dreamincode.net/forums/topic/127903-spice-solver-using-c/
+
+//http://stackoverflow.com/questions/607297/analog-circuit-simulation-library
+/*
+Ideea:
+
+take eispice, use the sorver to solve the matrix supplied by our GUI, forward output to a python widget with pyqt4
+
+*/

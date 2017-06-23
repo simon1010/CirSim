@@ -41,8 +41,6 @@ private:
   Terminal *mv_Terminal_1;
   Terminal *mv_Terminal_2;
   
-  double mv_dfCapacitance;
-
   virtual DialogSettingsMap mf_GetDialogSettingsMap();
   virtual void mf_SetDialogSettingsMap(DialogSettingsMap ac_SettingsMap);
 
@@ -51,6 +49,19 @@ private:
   virtual QString mf_ToolTipGetUnit();
 
   virtual const int mf_nGetInstanceNumber() const;
+
+  typedef IDispatchComponent _super;
+
+  void Process_(DspSignalBus & inputs, DspSignalBus & outputs);
+  void mf_DoCapacitor(const double ac_P0_VoltageIn, const double ac_P1_VoltageIn, DspSignalBus &inputs, DspSignalBus &outputs);
+
+  double mv_dfCapacitance;
+  double mv_dfCurrent;
+  double mv_dfCapVoltage;
+  double mv_dfoutputVoltage;
+  double mv_dfPreviousOutputVoltage;
+  double mv_dfResistance;
+  double mv_EquivalentResistance;
 };
 
 #endif

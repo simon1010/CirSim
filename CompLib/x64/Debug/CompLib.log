@@ -1,20 +1,4 @@
-﻿  Moc'ing IComponent.h...
-C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\CompLib\Export\Include\IComponent.h(96): warning : Class IComponent implements the interface QGraphicsItem but does not list it in Q_INTERFACES. qobject_cast to QGraphicsItem will not work!
-  moc_IComponent.cpp
-  Capacitor.cpp
-  complib.cpp
-  Comp_VoltageSource.cpp
-  Grid.cpp
-  GridUtils.cpp
-  Ground.cpp
-  IComponent.cpp
-  IDispatchComponent.cpp
-  Microphone.cpp
-  ProgrammableVoltageSource.cpp
-  Resistor.cpp
-  SimulationUtils.cpp
-  Wire.cpp
-  Generating Code...
-     Creating library C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\x64\Debug\CompLib.lib and object C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\x64\Debug\CompLib.exp
+﻿  Capacitor.cpp
+c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\complib\export\include\terminal.h(40): warning C4715: 'Terminal::mf_ConnectsTo': not all control paths return a value
   CompLib.vcxproj -> C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\x64\Debug\CompLib.dll
   CompLib.vcxproj -> C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\x64\Debug\CompLib.pdb (Full PDB)

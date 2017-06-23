@@ -30,6 +30,16 @@ CProgrammableVoltageSource::CProgrammableVoltageSource(QPointF ac_Position, QGra
   mv_dfFreqT0 = 50.;
   mv_dfBias = 0.;
 
+  // DSP
+  mc_dfStartFreq = 5.;
+  mc_dfStopFreq = 50.;
+  mc_dfSweepDuration = 3.;
+
+  mv_tElapsedTime = 0;
+  mv_dfCurrentOut = NAN;
+  mv_nIncrement = 1;
+  mv_bIncrement = true;
+  // DSP
   mv_Waveform = CProgrammableVoltageSource::Waveform::WF_AC;
 
   ++sv_nPVSID;
@@ -107,28 +117,33 @@ double triangleFunc(double x)
 
 SAMPLE* CProgrammableVoltageSource::mf_dfGetVoltage(int &av_nAvailableSamples)
 {  
-  SAMPLE * sample = new SAMPLE;
-  //double w = 2 * M_PI*(sim.t - freqTimeZero)*frequency + phaseShift;
-  double t = QDateTime::currentDateTime().toMSecsSinceEpoch() / 1000.0; //SimulationUtils::SimulationTime.elapsed();
-  double w = 2 * M_PI*( t - mv_dfFreqT0)*mv_dfFrequency + mv_dfPhaseShift;
+  //SAMPLE * sample = new SAMPLE;
+  ////double w = 2 * M_PI*(sim.t - freqTimeZero)*frequency + phaseShift;
+  //double t = QDateTime::currentDateTime().toMSecsSinceEpoch() / 1000.0; //SimulationUtils::SimulationTime.elapsed();
+  //double w = 2 * M_PI*( t - mv_dfFreqT0)*mv_dfFrequency + mv_dfPhaseShift;
+  //
+  //  switch (mv_Waveform)
+  //  {
+  //  case WF_DC: *sample = mv_dfMaxVoltage + mv_dfBias; break;
+  //  case WF_AC: *sample = sin(5 * t)*mv_dfMaxVoltage + mv_dfBias; break;
+  //  case WF_SQUARE:
+  //    *sample = mv_dfBias + (((int)w % (int)(2 * M_PI) > (2 * M_PI*mv_dfDutyCycle)) ?
+  //      -mv_dfMaxVoltage : mv_dfMaxVoltage); break;
+  //  case WF_TRIANGLE:
+  //    *sample = mv_dfBias + triangleFunc((int)w % (int)(2 * M_PI))*mv_dfMaxVoltage; break;
+  //  case WF_SAWTOOTH:
+  //    *sample = mv_dfBias + ((int)w % (int)(2 * M_PI))*(mv_dfMaxVoltage / M_PI) - mv_dfMaxVoltage; break;
+  //  case WF_PULSE:
+  //    *sample = (((int)w % (int)(2 * M_PI)) < 1) ? mv_dfMaxVoltage + mv_dfBias : mv_dfBias; break;
+  //  default: *sample = 0; break;
+  //  }
+  //  av_nAvailableSamples = 1;
+  //  return sample;  
 
-    switch (mv_Waveform)
-    {
-    case WF_DC: *sample = mv_dfMaxVoltage + mv_dfBias; break;
-    case WF_AC: *sample = sin(5 * t)*mv_dfMaxVoltage + mv_dfBias; break;
-    case WF_SQUARE:
-      *sample = mv_dfBias + (((int)w % (int)(2 * M_PI) > (2 * M_PI*mv_dfDutyCycle)) ?
-        -mv_dfMaxVoltage : mv_dfMaxVoltage); break;
-    case WF_TRIANGLE:
-      *sample = mv_dfBias + triangleFunc((int)w % (int)(2 * M_PI))*mv_dfMaxVoltage; break;
-    case WF_SAWTOOTH:
-      *sample = mv_dfBias + ((int)w % (int)(2 * M_PI))*(mv_dfMaxVoltage / M_PI) - mv_dfMaxVoltage; break;
-    case WF_PULSE:
-      *sample = (((int)w % (int)(2 * M_PI)) < 1) ? mv_dfMaxVoltage + mv_dfBias : mv_dfBias; break;
-    default: *sample = 0; break;
-    }
-    av_nAvailableSamples = 1;
-    return sample;  
+  av_nAvailableSamples = 1;
+  SAMPLE * sample = new SAMPLE;
+  *sample = mv_VoltageOut;
+  return sample;
 }
 
 void CProgrammableVoltageSource::mf_Save(QJsonObject &json)
@@ -136,6 +151,49 @@ void CProgrammableVoltageSource::mf_Save(QJsonObject &json)
   json["name"] = "CProgrammableVoltageSource";
   json["positionX"] = this->pos().x();
   json["positionY"] = this->pos().y();
+}
+
+void CProgrammableVoltageSource::Process_(DspSignalBus &inputs, DspSignalBus &outputs)
+{
+  // Current
+  double lv_dfMaxCurrent = NAN;
+  bool lv_bHaveMaxCurrent = inputs.GetValue(mv_Ports[0].mv_sCurrent_IN, lv_dfMaxCurrent);
+  if (lv_bHaveMaxCurrent && !isnan(lv_dfMaxCurrent)) {
+    mv_dfCurrentOut = lv_dfMaxCurrent;
+  }
+  //mv_tElapsedTime += mv_nTickDuration;//194000;
+  _super::Process_(inputs, outputs);
+  mv_VoltageOut = mf_dfGetSweep(1940000);//mc_dfAmplitude * sin(2 * M_PI * 10 * mv_tElapsedTime * pow(10, -9));//mf_dfGetSweep(mv_nTickDuration);19400
+
+  //SweepLog << lv_VoltageOut << "," << mv_dfCurrentOut << std::endl;
+
+  outputs.SetValue(mv_Ports[1].mv_sVoltage_OUT, mv_VoltageOut);
+  outputs.SetValue(mv_Ports[1].mv_sCurrent_OUT, mv_dfCurrentOut);
+
+  outputs.SetValue(mv_Ports[0].mv_sVoltage_OUT, 0.0);
+  outputs.SetValue(mv_Ports[0].mv_sCurrent_OUT, mv_dfCurrentOut);
+}
+
+double CProgrammableVoltageSource::mf_dfGetSweep(const int64_t ac_nTickDuration)
+{
+  // Handle sweep up and then down smoothly
+  if (mv_bIncrement && mv_tElapsedTime >= (mc_dfSweepDuration / 2)) {
+    mv_bIncrement = false;
+    mv_nIncrement = -1;
+  }
+  else if (!mv_bIncrement && mv_tElapsedTime <= 0) {
+    mv_bIncrement = true;
+    mv_nIncrement = 1;
+  }
+
+  mv_tElapsedTime += ac_nTickDuration * pow(10, -9) * mv_nIncrement; // from ns to s => may produce rounding error
+  double delta = mv_tElapsedTime / mc_dfSweepDuration;
+  double t = mc_dfSweepDuration * delta;
+
+  double phase = 2 * M_PI * t * (mc_dfStartFreq + (mc_dfStopFreq - mc_dfStartFreq) * delta / 2);
+  while (phase > 2 * M_PI) phase = fmod(phase, (2 * M_PI));
+
+  return mv_dfMaxVoltage * sin(phase);
 }
 
 //

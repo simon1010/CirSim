@@ -31,6 +31,9 @@ namespace Solver{
 
     const int mf_nConnectedElements() const;
     const int mf_nTotalElements()const;
+    const EDGE_VEC& mf_AllEdgesInCircuit() const;
+    const NODE_VEC& mf_AllNodesInCircuit() const;
+
   private:
 
     int mv_nEdges;
