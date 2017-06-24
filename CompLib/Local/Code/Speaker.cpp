@@ -6,10 +6,14 @@
 #define BUFFERS             (1)
 
 double CSpeaker::mv_OutputSample = 0.;
+#include <fstream>
+static const char* sc_CapFileName = "c:\\CIRSIM_LOGGING\\SpeakerLog.csv";
+std::ofstream CapLog;
 
 CSpeaker::CSpeaker(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphicsView *ac_pParent):
   IComponent(ac_Position, ac_pScene, ac_pParent)
 {
+  CapLog.open(sc_CapFileName, std::ios_base::out);
   mv_sCompID = QString("Mic");
   mv_sCompName = mv_sCompID + QString(sv_nCompNumber);
 
@@ -44,7 +48,7 @@ void CSpeaker::mf_SetupHardware()
     _ASSERT(!"not Initialized");
   }
 
-  outputParameters.channelCount = 2;       /* stereo output */
+  outputParameters.channelCount = 1;       /* stereo output */
   outputParameters.sampleFormat = paFloat32; /* 32 bit floating point output */
   outputParameters.suggestedLatency = Pa_GetDeviceInfo(outputParameters.device)->defaultLowOutputLatency;
   outputParameters.hostApiSpecificStreamInfo = NULL;
@@ -55,7 +59,7 @@ void CSpeaker::mf_SetupHardware()
     &outputParameters,
     SAMPLE_RATE,
     FRAMES_PER_BUFFER,
-    paClipOff,      /* we won't output out of range samples so don't bother clipping them */
+    NULL,      //paClipOff         
     CSpeaker::SpeakerCallBack,
     NULL);
 
@@ -69,14 +73,17 @@ void CSpeaker::mf_SetupHardware()
 
 void CSpeaker::mf_PreDestroy()
 {
-  PaError err;
-  err = Pa_StopStream(stream);
-  if (err != paNoError) _ASSERT(!"Failed Stop");
+  if (!mv_bMaydenVoyage)
+  {
+    PaError err;
+    err = Pa_StopStream(stream);
+    if (err != paNoError) _ASSERT(!"Failed Stop");
 
-  err = Pa_CloseStream(stream);
-  if (err != paNoError) _ASSERT(!"Failed Close");
+    err = Pa_CloseStream(stream);
+    if (err != paNoError) _ASSERT(!"Failed Close");
 
-  Pa_Terminate();
+    Pa_Terminate();
+  }
 }
 
 QRectF CSpeaker::boundingRect() const
@@ -155,6 +162,9 @@ void CSpeaker::Process_(DspSignalBus &inputs, DspSignalBus &outputs)
     mv_bMaydenVoyage = false;
   }
 
+  //__super::Process_(inputs, outputs);
+  //CapLog << mv_nTickDuration  << "," << std::endl;
+
   // inputs
   double lv_P0_VoltageIn = NAN;
   double lv_P0_CurrentIn = NAN;
@@ -205,7 +215,8 @@ int CSpeaker::SpeakerCallBack(const void *inputBuffer, void *outputBuffer,
   for (i = 0; i < framesPerBuffer; i++)
   {
     *out++ = mv_OutputSample;  /* left */
-    *out++ = mv_OutputSample;  /* right */
+    //*out++ = mv_OutputSample;  /* right */
+    CapLog << mv_OutputSample << std::endl;
   }
 
   return paContinue;

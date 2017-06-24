@@ -10,6 +10,7 @@
 #include <SimulationUtils.h>
 #include <QTimer>
 #include <CircuitComposer.h>
+#include <thread>
 // Component factory
 template<typename T> IComponent * createInstance(QPointF& p, CGrid * g, QGraphicsView * mw) { return new T(p, g, mw); }
 typedef std::map<std::string, IComponent*(*)(QPointF&, CGrid *, QGraphicsView *)> map_type;
@@ -30,6 +31,9 @@ public slots:
   void update();
   
 private:
+  std::thread ProcessingCoreThread;
+  bool RunProcessing = {false};
+
   // Component factory
   void TestQt::mf_SetupFactory();
   map_type TypeMap;
@@ -66,6 +70,8 @@ private:
 
   /* Processing */
   void mf_SetupPlotter();
+
+  void DoCircuitUpdate();
 
   void mf_TestElements();
   void mf_SetupCursor();

@@ -7,7 +7,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-const double CProgrammableVoltageSource::sc_dfDefaultMaxVoltage = 5.0;
+const double CProgrammableVoltageSource::sc_dfDefaultMaxVoltage = 1.0;
 
 int CProgrammableVoltageSource::sv_nPVSID = 0;
 
@@ -31,9 +31,9 @@ CProgrammableVoltageSource::CProgrammableVoltageSource(QPointF ac_Position, QGra
   mv_dfBias = 0.;
 
   // DSP
-  mc_dfStartFreq = 5.;
-  mc_dfStopFreq = 50.;
-  mc_dfSweepDuration = 3.;
+  mc_dfStartFreq = 1.;
+  mc_dfStopFreq = 1000.;
+  mc_dfSweepDuration = 30.;
 
   mv_tElapsedTime = 0;
   mv_dfCurrentOut = NAN;
@@ -161,12 +161,15 @@ void CProgrammableVoltageSource::Process_(DspSignalBus &inputs, DspSignalBus &ou
   if (lv_bHaveMaxCurrent && !isnan(lv_dfMaxCurrent)) {
     mv_dfCurrentOut = lv_dfMaxCurrent;
   }
-  //mv_tElapsedTime += mv_nTickDuration;//194000;
+
+  mv_tElapsedTime += mv_nTickDuration;//194000;
   _super::Process_(inputs, outputs);
-  mv_VoltageOut = mf_dfGetSweep(1940000);//mc_dfAmplitude * sin(2 * M_PI * 10 * mv_tElapsedTime * pow(10, -9));//mf_dfGetSweep(mv_nTickDuration);19400
 
-  //SweepLog << lv_VoltageOut << "," << mv_dfCurrentOut << std::endl;
+  bool useSweep = false;
 
+  mv_VoltageOut = useSweep ? mf_dfGetSweep(mv_nTickDuration)
+    : mv_dfMaxVoltage * sin(2 * M_PI * 15 * mv_tElapsedTime * pow(10, -9));
+    
   outputs.SetValue(mv_Ports[1].mv_sVoltage_OUT, mv_VoltageOut);
   outputs.SetValue(mv_Ports[1].mv_sCurrent_OUT, mv_dfCurrentOut);
 

@@ -60,6 +60,14 @@ TestQt::TestQt(QWidget *parent)
 
 }
 
+TestQt::~TestQt()
+{
+  RunProcessing = false;
+  if(ProcessingCoreThread.joinable())
+    ProcessingCoreThread.join();
+  Sleep(1000);
+}
+
 void TestQt::mf_SetupFactory()
 {
   TypeMap["CResistor"]                  = &createInstance<CResistor>;
@@ -92,16 +100,15 @@ void TestQt::mf_SetupPlotter()
   ui.Plotter->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
 }
 
-// continuous loop?
+
+
+// continuous loop
 void TestQt::update()
 {
   int Elapsed = SimulationUtils::SimulationTime.elapsed();
   QString Time;
   double key = QDateTime::currentDateTime().toMSecsSinceEpoch() / 1000.0; // seconds
   Time.sprintf("Absolute time %f", key);
-
-  if(mv_CircuitComposer != nullptr)
-   mv_CircuitComposer->step();
 
  // /*test plot*/
 
@@ -558,6 +565,7 @@ void TestQt::ms_xSaveProject()
 
 void TestQt::ms_xOpenProject()
 {
+  RunProcessing = false;
   auto fileName = QFileDialog::getOpenFileName(this, tr("Open Project File"), "c:\\", tr("JSON File (*.json *.JSON)"));
 
   // todo clear grid! & file name correctness!
@@ -568,7 +576,6 @@ void TestQt::ms_xOpenProject()
     return;
   }
   
-
   CGridUtils::sc_xTheGrid->removeItem(&mv_LiveViewTime);
   CGridUtils::sc_xTheGrid->removeItem(&mv_LiveViewLogger);
   CGridUtils::sc_xTheGrid->clear();
@@ -606,6 +613,18 @@ void TestQt::ms_xOpenProject()
   }
 }
 
+void TestQt::DoCircuitUpdate()
+{
+  SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_TIME_CRITICAL);
+  while (RunProcessing)
+  {
+    if (mv_CircuitComposer != nullptr)
+      mv_CircuitComposer->step();
+    else
+      Sleep(10);
+  }
+}
+
 void TestQt::keyPressEvent(QKeyEvent *event)
 {
   switch (event->key())
@@ -629,15 +648,19 @@ void TestQt::keyPressEvent(QKeyEvent *event)
     const unsigned int lc_nNrofConnectedObjects = TheCircuit.mf_nConnectedElements();
 
     mv_CircuitComposer = make_shared<Solver::CCircuitComposer>(lc_GUICircuitElements, TheCircuit.mf_AllEdgesInCircuit(), TheCircuit.mf_AllNodesInCircuit());
+
+    if (RunProcessing)
+    {
+      RunProcessing = false;
+      if (ProcessingCoreThread.joinable())
+        ProcessingCoreThread.join();
+    }
+
+    RunProcessing = true;
+    ProcessingCoreThread = std::thread(&TestQt::DoCircuitUpdate, this);
     break;
   }
 }
-
-TestQt::~TestQt()
-{
-
-}
-
 
 // http://www.qtcentre.org/archive/index.php/t-6640.html
 // http ://www.thinkgeek.com/geektoys/science/
