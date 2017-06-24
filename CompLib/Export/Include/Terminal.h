@@ -37,6 +37,7 @@ public:
       if (CollidingTerminal != nullptr)
         return CollidingTerminal->mf_pTerminalOf();
     }
+    return nullptr;
   }
 
   __forceinline int mf_nGetPolarity() const

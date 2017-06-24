@@ -39,6 +39,7 @@
     <ClCompile Include="Local\Code\ProgrammableVoltageSource.cpp" />
     <ClCompile Include="Local\Code\Resistor.cpp" />
     <ClCompile Include="Local\Code\SimulationUtils.cpp" />
+    <ClCompile Include="Local\Code\Speaker.cpp" />
     <ClCompile Include="Local\Code\Wire.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +54,7 @@
     <ClInclude Include="Export\Include\ProgrammableVoltageSource.h" />
     <ClInclude Include="Export\Include\Resistor.h" />
     <ClInclude Include="Export\Include\SimulationUtils.h" />
+    <ClInclude Include="Export\Include\Speaker.h" />
     <ClInclude Include="Export\Include\Terminal.h" />
     <ClInclude Include="Export\Include\complib_global.h" />
     <ClInclude Include="Export\Include\Wire.h" />

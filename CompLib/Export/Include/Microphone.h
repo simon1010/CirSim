@@ -44,7 +44,7 @@ public:
   static int BuffersInUse;
   static std::mutex AcquisitionGuard;
 private:
-
+  void Process_(DspSignalBus & inputs, DspSignalBus & outputs);
   void mf_PreDestroy();
 
   /* Connection elements */
@@ -68,7 +68,8 @@ private:
   bool mv_bMaydenVoyage;
   bool mv_bIsStreamOpen;
   int mv_nSelectedInputDeviceIndex;
-
+  double mv_dfCurrentOut;
+  double mv_OutputVoltage;
   static int sv_nMicrophoneID;
 
 protected:

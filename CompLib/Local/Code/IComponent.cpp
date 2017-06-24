@@ -172,6 +172,7 @@ Terminal* IComponent::mf_GetTerminal(const int ac_nIdx) const
     if (i == ac_nIdx)
       return *begin;
   }
+  return nullptr;
 }
 
 void IComponent::mf_AddTerminal(Terminal *ac_Terminal)

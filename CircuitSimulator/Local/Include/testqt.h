@@ -60,8 +60,8 @@ private:
   QList<QGraphicsItem*> mv_SelectedItems;
 
   /* On-screen text */
-  QGraphicsTextItem *mv_LiveViewLogger; 
-  QGraphicsTextItem *mv_LiveViewTime;
+  QGraphicsTextItem mv_LiveViewLogger; 
+  QGraphicsTextItem mv_LiveViewTime;
   void mf_SetupLogger();
 
   /* Processing */
@@ -93,6 +93,7 @@ private:
   void ms_xSelectProgrammableVoltageSource();
   void ms_xSelectCapacitor();
   void ms_xSelectMicrophone();
+  void ms_xSelectSpeaker();
 };
 
 

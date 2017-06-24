@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_TestQt_t {
-    QByteArrayData data[16];
-    char stringdata0[242];
+    QByteArrayData data[17];
+    char stringdata0[260];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -46,7 +46,8 @@ QT_MOC_LITERAL(11, 129, 18), // "ms_xSelectResistor"
 QT_MOC_LITERAL(12, 148, 16), // "ms_xSelectGround"
 QT_MOC_LITERAL(13, 165, 35), // "ms_xSelectProgrammableVoltage..."
 QT_MOC_LITERAL(14, 201, 19), // "ms_xSelectCapacitor"
-QT_MOC_LITERAL(15, 221, 20) // "ms_xSelectMicrophone"
+QT_MOC_LITERAL(15, 221, 20), // "ms_xSelectMicrophone"
+QT_MOC_LITERAL(16, 242, 17) // "ms_xSelectSpeaker"
 
     },
     "TestQt\0update\0\0pushBtn\0ShowContextMenu\0"
@@ -54,7 +55,8 @@ QT_MOC_LITERAL(15, 221, 20) // "ms_xSelectMicrophone"
     "ms_xSelectRectangle\0ms_xSelectDCSource\0"
     "ms_xSelectWire\0ms_xSelectResistor\0"
     "ms_xSelectGround\0ms_xSelectProgrammableVoltageSource\0"
-    "ms_xSelectCapacitor\0ms_xSelectMicrophone"
+    "ms_xSelectCapacitor\0ms_xSelectMicrophone\0"
+    "ms_xSelectSpeaker"
 };
 #undef QT_MOC_LITERAL
 
@@ -64,7 +66,7 @@ static const uint qt_meta_data_TestQt[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      13,   14, // methods
+      14,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -72,24 +74,26 @@ static const uint qt_meta_data_TestQt[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   79,    2, 0x0a /* Public */,
-       3,    0,   80,    2, 0x08 /* Private */,
-       4,    1,   81,    2, 0x08 /* Private */,
-       6,    0,   84,    2, 0x08 /* Private */,
-       7,    0,   85,    2, 0x08 /* Private */,
-       8,    0,   86,    2, 0x08 /* Private */,
-       9,    0,   87,    2, 0x08 /* Private */,
-      10,    0,   88,    2, 0x08 /* Private */,
-      11,    0,   89,    2, 0x08 /* Private */,
-      12,    0,   90,    2, 0x08 /* Private */,
-      13,    0,   91,    2, 0x08 /* Private */,
-      14,    0,   92,    2, 0x08 /* Private */,
-      15,    0,   93,    2, 0x08 /* Private */,
+       1,    0,   84,    2, 0x0a /* Public */,
+       3,    0,   85,    2, 0x08 /* Private */,
+       4,    1,   86,    2, 0x08 /* Private */,
+       6,    0,   89,    2, 0x08 /* Private */,
+       7,    0,   90,    2, 0x08 /* Private */,
+       8,    0,   91,    2, 0x08 /* Private */,
+       9,    0,   92,    2, 0x08 /* Private */,
+      10,    0,   93,    2, 0x08 /* Private */,
+      11,    0,   94,    2, 0x08 /* Private */,
+      12,    0,   95,    2, 0x08 /* Private */,
+      13,    0,   96,    2, 0x08 /* Private */,
+      14,    0,   97,    2, 0x08 /* Private */,
+      15,    0,   98,    2, 0x08 /* Private */,
+      16,    0,   99,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QPoint,    5,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -123,6 +127,7 @@ void TestQt::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 10: _t->ms_xSelectProgrammableVoltageSource(); break;
         case 11: _t->ms_xSelectCapacitor(); break;
         case 12: _t->ms_xSelectMicrophone(); break;
+        case 13: _t->ms_xSelectSpeaker(); break;
         default: ;
         }
     }
@@ -153,13 +158,13 @@ int TestQt::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 13)
+        if (_id < 14)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 13;
+        _id -= 14;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 13)
+        if (_id < 14)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 13;
+        _id -= 14;
     }
     return _id;
 }

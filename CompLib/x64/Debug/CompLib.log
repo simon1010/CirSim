@@ -1,4 +1,3 @@
-﻿  Capacitor.cpp
-c:\users\szabolcs\documents\circuitsimulator_repo\cirsim\complib\export\include\terminal.h(40): warning C4715: 'Terminal::mf_ConnectsTo': not all control paths return a value
+﻿  Speaker.cpp
   CompLib.vcxproj -> C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\x64\Debug\CompLib.dll
   CompLib.vcxproj -> C:\Users\Szabolcs\Documents\CircuitSimulator_Repo\CirSim\x64\Debug\CompLib.pdb (Full PDB)

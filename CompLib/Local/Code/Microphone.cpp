@@ -11,8 +11,8 @@
 
 #define SAMPLE_RATE         (44100)
 #define PA_SAMPLE_TYPE      paFloat32
-#define FRAMES_PER_BUFFER   (64)
-#define BUFFERS             (40000)
+#define FRAMES_PER_BUFFER   (1)
+#define BUFFERS             (1)
 
 typedef float SAMPLE;
 
@@ -47,8 +47,9 @@ IComponent(ac_Position, ac_pScene, ac_pParent)
 
   mv_bMaydenVoyage = true;
   mv_bIsStreamOpen = false;
+  mv_OutputVoltage = 0.;
   mf_ConstructDialog();
-
+  mv_dfCurrentOut = NAN;
   ++sv_nMicrophoneID;
 }
 
@@ -177,27 +178,27 @@ void CMicrophone::mf_PreDestroy()
 
 QRectF CMicrophone::boundingRect() const
 {
-  return QRectF(QPointF(0, 0), QPointF(22, 22));
+  return QRectF(QPointF(0, 0), QPointF(20, 40));
 }
 
 void CMicrophone::mf_DerivedPaint(QPainter *ac_pPainter, const QStyleOptionGraphicsItem *ac_pOption, QWidget *ac_pParent)
 {
-  // TODO: update according to gridSize and cursor position -> ( gridSize, 0, gridSize, gridSize )  
+  QLine lv_UpperConnector(10, 0, 10, 12);
+  QLine lv_LowerConnector(10, 28, 10, 40);
+  QLine lv_Style(0, 12, 0, 28);
 
-  QLine lv_xLeftLeg(QPoint(0, 10), QPoint(3, 10));
-  QLine lv_xRightLeg(QPoint(17, 10), QPoint(20, 10));
+  QPoint lv_CircleRef(10, 20);
 
-  ac_pPainter->drawEllipse(QPointF(10,10),5,5);
-  ac_pPainter->drawLine(4, 5, 16, 5);
-  ac_pPainter->drawLine(lv_xLeftLeg);
-  ac_pPainter->drawLine(lv_xRightLeg);
+  ac_pPainter->drawLine(lv_UpperConnector);
+  ac_pPainter->drawEllipse(lv_CircleRef, 8, 8);
+  ac_pPainter->drawLine(lv_LowerConnector);
+  ac_pPainter->drawLine(lv_Style);
 
-  mv_Terminal_1->setPos(QPoint(-1, 10));
-  mv_Terminal_2->setPos(QPoint(20, 10));
+  mv_Terminal_1->setPos(9, 0);
+  mv_Terminal_2->setPos(9, 40);
 
   mv_Terminal_1->paint(ac_pPainter, ac_pOption, ac_pParent, true);
   mv_Terminal_2->paint(ac_pPainter, ac_pOption, ac_pParent, true);
-
 }
 
 QString CMicrophone::mf_ToolTipGetType()
@@ -241,35 +242,10 @@ void CMicrophone::mf_SetDialogSettingsMap(IComponent::DialogSettingsMap ac_Setti
 
 SAMPLE* CMicrophone::mf_dfGetVoltage(int& av_nSamplesAvailable)
 {
-  //Pa_ReadStream(mv_pAudioInputStream, mv_pAudioData, FRAMES_PER_BUFFER);
-  //SAMPLE *VoltageVector = (SAMPLE*)mv_pAudioData;
-  //av_nSamplesAvailable = FRAMES_PER_BUFFER;
- // AcquisitionGuard.lock();
-  if (mv_bMaydenVoyage)
-  {
-    mf_SetupHardware();
-    mv_bMaydenVoyage = false;
-  }
-  while (BuffersInUse == 0)
-  {
-    Sleep(1);
-  }
-  //SAMPLE * VoltageVector = new SAMPLE[BuffersInUse * FRAMES_PER_BUFFER];
-  //
-  //int ptr = 0;
-  //int i = 0;
-  ////AcquisitionGuard.lock();
-  //while (BuffersInUse > 0)
-  //{
-  //  memcpy(&VoltageVector[ptr], mv_pAudioBuffers[i], FRAMES_PER_BUFFER*sizeof(float));
-  //  i++;
-  //  ptr += FRAMES_PER_BUFFER;
-  //  BuffersInUse--;
-  //}
-  //AcquisitionGuard.unlock();
-  BuffersInUse = 0;
   av_nSamplesAvailable = FRAMES_PER_BUFFER;
-  return mv_pAudioBuffers[0];
+  SAMPLE * sample = new SAMPLE;
+  *sample = mv_OutputVoltage;
+  return sample;
 }
 
 
@@ -300,4 +276,33 @@ void CMicrophone::mf_Save(QJsonObject &json)
   json["name"] = "CMicrophone";
   json["positionX"] = this->pos().x();
   json["positionY"] = this->pos().y();
+}
+
+void CMicrophone::Process_(DspSignalBus &inputs, DspSignalBus &outputs)
+{
+  if (mv_bMaydenVoyage)
+  {
+    mf_SetupHardware();
+    mv_bMaydenVoyage = false;
+  }
+  while (BuffersInUse == 0)
+  {
+    Sleep(1);
+  }
+  // Current
+  double lv_dfMaxCurrent = NAN;
+  bool lv_bHaveMaxCurrent = inputs.GetValue(mv_Ports[0].mv_sCurrent_IN, lv_dfMaxCurrent);
+  if (lv_bHaveMaxCurrent && !isnan(lv_dfMaxCurrent)) {
+    mv_dfCurrentOut = lv_dfMaxCurrent;
+  }
+
+  mv_OutputVoltage = *mv_pAudioBuffers[0];
+  
+  BuffersInUse = 0;
+  
+  outputs.SetValue(mv_Ports[1].mv_sVoltage_OUT, mv_OutputVoltage);
+  outputs.SetValue(mv_Ports[1].mv_sCurrent_OUT, mv_dfCurrentOut);
+
+  outputs.SetValue(mv_Ports[0].mv_sVoltage_OUT, 0.0);
+  outputs.SetValue(mv_Ports[0].mv_sCurrent_OUT, mv_dfCurrentOut);
 }

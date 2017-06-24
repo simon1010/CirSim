@@ -37,6 +37,7 @@ public:
     Element_ProgrammableVoltageSource,
     Element_Capacitor,
     Element_Microphone,
+    Element_Speaker,
     
     Element_Total
   }; 

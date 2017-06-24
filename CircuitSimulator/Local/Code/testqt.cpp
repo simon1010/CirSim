@@ -18,6 +18,7 @@
 #include <Ground.h>
 #include <Wire.h>
 #include <Circuit.h>
+#include <Speaker.h>
 #include <Capacitor.h>
 #include <qcustomplot.h>
 #include <Microphone.h>
@@ -66,6 +67,7 @@ void TestQt::mf_SetupFactory()
   TypeMap["CCapacitor"]                 = &createInstance<CCapacitor>;
   TypeMap["CMicrophone"]                = &createInstance<CMicrophone>;
   TypeMap["CProgrammableVoltageSource"] = &createInstance<CProgrammableVoltageSource>;
+  TypeMap["CSpeaker"]                   = &createInstance<CSpeaker>;
 }
 
 void TestQt::mf_SetupPlotter()
@@ -105,9 +107,9 @@ void TestQt::update()
 
   // calculate two new data points
   static double lastPointKey = 0;
-  int lv_nSamples = 1;
-  if (key - lastPointKey > 0.0001) // at most add point every .1 ms
-  { 
+  //int lv_nSamples = 1;
+ // if (key - lastPointKey > 0.0001) // at most add point every .1 ms
+  //{ 
     SAMPLE* value0 = new SAMPLE;
     int lv_nSamples = 1;
     value0[0] = -2.;
@@ -139,7 +141,7 @@ void TestQt::update()
     // rescale value (vertical) axis to fit the current data:
     ui.Plotter->graph(0)->rescaleValueAxis();
     lastPointKey = key;
-  }
+ // }
   // make key axis range scroll with the data (at a constant range size of 8):
   //ui.Plotter->xAxis->setRange(key + 0.25, 8, Qt::AlignRight);
   ui.Plotter->xAxis->setRange(key + 0.025,8, Qt::AlignRight);
@@ -162,8 +164,8 @@ void TestQt::update()
 
  // /*end plot test*/
 
-  mv_LiveViewTime->setPlainText(Time);
-  mv_LiveViewLogger->setPlainText(CGridUtils::sc_xTheGrid->mf_szGetTheGridText());
+  mv_LiveViewTime.setPlainText(Time);
+  mv_LiveViewLogger.setPlainText(CGridUtils::sc_xTheGrid->mf_szGetTheGridText());
 
   qApp->processEvents(QEventLoop::AllEvents);
 }
@@ -175,19 +177,19 @@ void TestQt::resizeEvent(QResizeEvent * event)
 
 void TestQt::mf_SetupLogger()
 {
-  mv_LiveViewLogger = new QGraphicsTextItem(CGridUtils::sc_xTheGrid->mf_szGetTheGridText());
-  mv_LiveViewTime = new QGraphicsTextItem();
+  mv_LiveViewLogger.setPlainText(CGridUtils::sc_xTheGrid->mf_szGetTheGridText());// = { QGraphicsTextItem(CGridUtils::sc_xTheGrid->mf_szGetTheGridText()) };
+ // mv_LiveViewTime
   
   QPoint graphicsViewPosition = mapToGlobal(ui.graphicsView->pos());
   QRect graphicsViewRect = ui.graphicsView->rect();
   double graphicsView_X_Boundary = graphicsViewPosition.x() + graphicsViewRect.width();
   double graphicsView_Y_Boundary = graphicsViewPosition.y() + graphicsViewRect.height();
 
-  mv_LiveViewTime->setPos(QPointF(graphicsView_X_Boundary - 50, graphicsView_X_Boundary - 50));
-  mv_LiveViewLogger->setPos(QPointF(graphicsView_X_Boundary - 30, graphicsView_X_Boundary - 30));
+  mv_LiveViewTime.setPos(QPointF(graphicsView_X_Boundary - 50, graphicsView_X_Boundary - 50));
+  mv_LiveViewLogger.setPos(QPointF(graphicsView_X_Boundary - 30, graphicsView_X_Boundary - 30));
 
-  CGridUtils::sc_xTheGrid->addItem(mv_LiveViewTime);
-  CGridUtils::sc_xTheGrid->addItem(mv_LiveViewLogger);
+  CGridUtils::sc_xTheGrid->addItem(&mv_LiveViewTime);
+  CGridUtils::sc_xTheGrid->addItem(&mv_LiveViewLogger);
 }
 
 void TestQt::mf_SetupCursor()
@@ -224,6 +226,7 @@ void TestQt::ShowContextMenu(const QPoint& pos) // this is a slot
   myMenu.addAction("Ground", this, SLOT(ms_xSelectGround()));
   myMenu.addAction("Capacitor", this, SLOT(ms_xSelectCapacitor()));
   myMenu.addAction("Microphone", this, SLOT(ms_xSelectMicrophone()));
+  myMenu.addAction("Speaker", this, SLOT(ms_xSelectSpeaker()));
   
   QAction* selectedItem = myMenu.exec(globalPos); 
 }
@@ -325,6 +328,12 @@ void TestQt::ms_xSelectCapacitor()
   ui.statusbar->showMessage("Element_Capacitor");
 }
 
+void TestQt::ms_xSelectSpeaker()
+{
+  SelectedElemenet = SimulationUtils::ElectronicElements::Element_Speaker;
+  ui.statusbar->showMessage("Element_Capacitor");
+}
+
 void TestQt::ms_xSelectMicrophone()
 {
   SelectedElemenet = SimulationUtils::ElectronicElements::Element_Microphone;
@@ -390,7 +399,7 @@ void TestQt::mousePressEvent(QMouseEvent * event)
         grabMouse();
         mv_SpawnWire = new CWire(lv_xElementPosition, CGridUtils::sc_xTheGrid, ui.graphicsView);
         CGridUtils::sc_xTheGrid->addItem(mv_SpawnWire);
-        mv_LineStartsFrom = new QPointF(lv_xElementPosition.x() + 10, lv_xElementPosition.y() + 10);
+        mv_LineStartsFrom = new QPointF(lv_xElementPosition.x() + 15, lv_xElementPosition.y() + 15);
         QMainWindow::mousePressEvent(event);
         return;
         break;
@@ -415,6 +424,9 @@ void TestQt::mousePressEvent(QMouseEvent * event)
         break;
       case SimulationUtils::ElectronicElements::Element_Microphone:
         Element = new CMicrophone(lv_xElementPosition, CGridUtils::sc_xTheGrid, ui.graphicsView);
+        break;
+      case SimulationUtils::ElectronicElements::Element_Speaker:
+        Element = new CSpeaker(lv_xElementPosition, CGridUtils::sc_xTheGrid, ui.graphicsView);
         break;
       default:
         Element = new CVoltageSource(lv_xElementPosition, CGridUtils::sc_xTheGrid, ui.graphicsView);
@@ -467,7 +479,7 @@ void TestQt::mouseMoveEvent(QMouseEvent * event)
       MouseBoundary_y = graphicsViewPosition.y();
     }
     
-    QCursor::setPos(QPoint(MouseBoundary_x, MouseBoundary_y));
+    //QCursor::setPos(QPoint(MouseBoundary_x, MouseBoundary_y));
     rubberBand->setGeometry(QRect(mapToGlobal(rubberBandStartsFrom), mapToGlobal(event->pos())).normalized());
     rubberBandItemSelectionRectangle = QRect(rubberBandStartsFrom, event->pos());
   }
@@ -556,6 +568,9 @@ void TestQt::ms_xOpenProject()
     return;
   }
   
+
+  CGridUtils::sc_xTheGrid->removeItem(&mv_LiveViewTime);
+  CGridUtils::sc_xTheGrid->removeItem(&mv_LiveViewLogger);
   CGridUtils::sc_xTheGrid->clear();
   mf_SetupLogger();
 
@@ -581,8 +596,8 @@ void TestQt::ms_xOpenProject()
     }
     else
     {
-      auto x = ComponentJSonObject["positionX"].toInt() - 10;
-      auto y = ComponentJSonObject["positionY"].toInt() - 10;
+      auto x = ComponentJSonObject["positionX"].toInt()- 12;
+      auto y = ComponentJSonObject["positionY"].toInt()- 12;
 
       IComponent* lv_Component = TypeMap[lv_ComponentType.toStdString()](QPointF(x, y), CGridUtils::sc_xTheGrid, ui.graphicsView);
       CGridUtils::sc_xTheGrid->addItem(lv_Component);
