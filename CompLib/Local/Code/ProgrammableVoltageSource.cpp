@@ -3,13 +3,17 @@
 #include <QStyleOptionGraphicsItem>
 #include <QPainter>
 #include <QWidget>
-
+#include <mutex>
 #define _USE_MATH_DEFINES
 #include <math.h>
 
 const double CProgrammableVoltageSource::sc_dfDefaultMaxVoltage = 1.0;
 
 int CProgrammableVoltageSource::sv_nPVSID = 0;
+
+std::mutex g_samples_mutex;
+std::list<SAMPLE> samples;
+std::list<double> times;
 
 CProgrammableVoltageSource::CProgrammableVoltageSource(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphicsView *ac_pPrent) : IComponent(ac_Position, ac_pScene, ac_pPrent)
 {
@@ -31,8 +35,8 @@ CProgrammableVoltageSource::CProgrammableVoltageSource(QPointF ac_Position, QGra
   mv_dfBias = 0.;
 
   // DSP
-  mc_dfStartFreq = 1.;
-  mc_dfStopFreq = 1000.;
+  mc_dfStartFreq = 10.;
+  mc_dfStopFreq = 500.;
   mc_dfSweepDuration = 30.;
 
   mv_tElapsedTime = 0;
@@ -115,7 +119,7 @@ double triangleFunc(double x)
   return 1 - (x - M_PI)*(2 / M_PI);
 }
 
-SAMPLE* CProgrammableVoltageSource::mf_dfGetVoltage(int &av_nAvailableSamples)
+SAMPLE* CProgrammableVoltageSource::mf_dfGetVoltage(int &av_nAvailableSamples, double ** av_pTimesVec)
 {  
   //SAMPLE * sample = new SAMPLE;
   ////double w = 2 * M_PI*(sim.t - freqTimeZero)*frequency + phaseShift;
@@ -140,9 +144,15 @@ SAMPLE* CProgrammableVoltageSource::mf_dfGetVoltage(int &av_nAvailableSamples)
   //  av_nAvailableSamples = 1;
   //  return sample;  
 
-  av_nAvailableSamples = 1;
-  SAMPLE * sample = new SAMPLE;
-  *sample = mv_VoltageOut;
+  std::lock_guard<std::mutex> guard(g_samples_mutex);
+  av_nAvailableSamples = samples.size();//1;
+  SAMPLE * sample = new SAMPLE[samples.size()];
+  *av_pTimesVec = new double[samples.size()];
+  copy(samples.begin(), samples.end(), sample);
+  copy(times.begin(), times.end(), *av_pTimesVec);
+  
+  times.clear();
+  samples.clear();
   return sample;
 }
 
@@ -162,14 +172,24 @@ void CProgrammableVoltageSource::Process_(DspSignalBus &inputs, DspSignalBus &ou
     mv_dfCurrentOut = lv_dfMaxCurrent;
   }
 
-  mv_tElapsedTime += mv_nTickDuration;//194000;
+  //194000;
   _super::Process_(inputs, outputs);
 
-  bool useSweep = false;
+  bool useSweep = true;
+  if (!useSweep)
+    mv_tElapsedTime += 80000;//mv_nTickDuration;
 
-  mv_VoltageOut = useSweep ? mf_dfGetSweep(mv_nTickDuration)
-    : mv_dfMaxVoltage * sin(2 * M_PI * 15 * mv_tElapsedTime * pow(10, -9));
-    
+  mv_dfElapsedTime += mv_nTickDuration;
+
+  mv_VoltageOut = useSweep ? mf_dfGetSweep(194000)//mv_nTickDuration)//
+    : mv_dfMaxVoltage * sin(2 * M_PI * 100 * mv_tElapsedTime * pow(10, -9));
+  
+  {
+    std::lock_guard<std::mutex> guard(g_samples_mutex);
+    samples.push_back(mv_VoltageOut);
+    times.push_back(mv_dfElapsedTime * pow(10, -9));
+  }
+
   outputs.SetValue(mv_Ports[1].mv_sVoltage_OUT, mv_VoltageOut);
   outputs.SetValue(mv_Ports[1].mv_sCurrent_OUT, mv_dfCurrentOut);
 

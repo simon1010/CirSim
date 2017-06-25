@@ -81,95 +81,96 @@ void TestQt::mf_SetupFactory()
 void TestQt::mf_SetupPlotter()
 {
   ui.Plotter->addGraph();
-  ui.Plotter->graph(0)->setPen(QPen(Qt::red, 1)); // line color red for graph
-  //ui.Plotter->graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20))); // first graph will be filled with translucent blue
+  ui.Plotter->graph(0)->setPen(QPen(Qt::red, 1));
   ui.Plotter->graph(0)->setAdaptiveSampling(true);
-  //ui.Plotter->graph(0)->setAntialiasedFill(false);
- 
- // (see QCPAxisRect::setupFullAxesBox for a quicker method to do this)
-  ui.Plotter->xAxis->setTickLabelType(QCPAxis::ltDateTime);
-  ui.Plotter->xAxis->setDateTimeFormat("hh:mm:ss");
-  ui.Plotter->xAxis->setAutoTickStep(false);
-  ui.Plotter->xAxis->setTickStep(2);
-  ui.Plotter->axisRect()->setupFullAxesBox();
+
+  //ui.Plotter->xAxis->setTickLabelType(QCPAxis::ltNumber);
+  //ui.Plotter->xAxis->setDateTimeFormat("hh:mm:ss");
+  //ui.Plotter->xAxis->setAutoTickStep(true);
+  //ui.Plotter->xAxis->setTickStep(1);
+  //ui.Plotter->axisRect()->setupFullAxesBox();
+
   // make left and bottom axes always transfer their ranges to right and top axes:
   connect(ui.Plotter->xAxis, SIGNAL(rangeChanged(QCPRange)), ui.Plotter->xAxis2, SLOT(setRange(QCPRange)));
   connect(ui.Plotter->yAxis, SIGNAL(rangeChanged(QCPRange)), ui.Plotter->yAxis2, SLOT(setRange(QCPRange)));
-  // Note: we could have also just called ui.Plotter->rescaleAxes(); instead
-  // Allow user to drag axis ranges with mouse, zoom with mouse wheel and select graphs by clicking:
-  ui.Plotter->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
 }
 
 
-
+double keyVal = 0;
+double block = 0;
 // continuous loop
 void TestQt::update()
 {
+  // calculate frames per second:
+  static double lastFpsKey;
   int Elapsed = SimulationUtils::SimulationTime.elapsed();
   QString Time;
   double key = QDateTime::currentDateTime().toMSecsSinceEpoch() / 1000.0; // seconds
   Time.sprintf("Absolute time %f", key);
+  const double deltaT = key - lastFpsKey;
+  // /*test plot*/
 
- // /*test plot*/
-
-  // calculate two new data points
+   // calculate two new data points
   static double lastPointKey = 0;
-  //int lv_nSamples = 1;
- // if (key - lastPointKey > 0.0001) // at most add point every .1 ms
-  //{ 
-    SAMPLE* value0 = new SAMPLE;
-    int lv_nSamples = 1;
-    value0[0] = -2.;
+  SAMPLE* data = new SAMPLE;
+  int lv_nSamples = 1;
+  data[0] = -2.;
+
+  block += deltaT;
+  if (block >= 0)
+  {
+    block = 0;
     if (nullptr != SimulationUtils::TheScopeValue)
     {
-      value0 = SimulationUtils::TheScopeValue(lv_nSamples);
-    }
+      double * timeVector = new double;
+      data = SimulationUtils::TheScopeValue(lv_nSamples, &timeVector);
+      const double increment = deltaT / lv_nSamples;
 
-    if (lv_nSamples > 1)
-    {
-      QVector<qreal> keys(lv_nSamples);
-      QVector<qreal> values(lv_nSamples);
-      for (int i = 0; i < lv_nSamples; ++i)
+      if (lv_nSamples > 1)
       {
-        keys[i] = (key);
-        key += (0.0001 / lv_nSamples);
-        values[i] = (value0[i]);
+        QVector<double> keys(lv_nSamples);
+        QVector<qreal> values(lv_nSamples);
+        for (int i = 0; i < lv_nSamples; ++i)
+        {
+          keys[i] = timeVector[i];//(keyVal);
+          //keyVal += increment;
+          values[i] = (data[i]);
+        }
+        ui.Plotter->graph(0)->addData(keys, values);
       }
-      ui.Plotter->graph(0)->addData(keys, values);
-    }
-    else
-    {
-      ui.Plotter->graph(0)->addData(key, value0[0]);
-    }
-       
-    // remove data of lines that's outside visible range:
-    ui.Plotter->graph(0)->removeDataBefore(key - 8);
-   
-    // rescale value (vertical) axis to fit the current data:
-    ui.Plotter->graph(0)->rescaleValueAxis();
-    lastPointKey = key;
- // }
-  // make key axis range scroll with the data (at a constant range size of 8):
-  //ui.Plotter->xAxis->setRange(key + 0.25, 8, Qt::AlignRight);
-  ui.Plotter->xAxis->setRange(key + 0.025,8, Qt::AlignRight);
-  ui.Plotter->replot();
+      else
+      {
+        ui.Plotter->graph(0)->addData(key, data[0]);
+      }
 
-  // calculate frames per second:
-  static double lastFpsKey;
+      ui.Plotter->graph(0)->removeDataBefore(timeVector[0] - 5); // datele mele minus 5s
+      //if(timeVector[0] > 5)
+      ui.Plotter->xAxis->setRange(timeVector[0], 5, Qt::AlignRight); // de unde e timeVec[0] + 5 secunde de unde e
+      
+      
+      //ui.Plotter->xAxis->setRange(timeVector[0], timeVector[lv_nSamples - 1], Qt::AlignRight);
+     // ui.Plotter->xAxis->setRange(timeVector[0], 10);
+      // rescale value (vertical) axis to fit the current data:
+      ui.Plotter->graph(0)->rescaleValueAxis(false);
+      lastPointKey = key;
+
+      ui.Plotter->replot();
+    }
+  }
   static int frameCount;
   ++frameCount;
-  if (key - lastFpsKey > 2) // average fps over 2 seconds
+  if (deltaT > 2) // average fps over 2 seconds
   {
     ui.statusbar->showMessage(
       QString("%1 FPS, Total Data points: %2")
-      .arg(frameCount / (key - lastFpsKey), 0, 'f', 0)
+      .arg(frameCount / (deltaT), 0, 'f', 0)
       .arg(ui.Plotter->graph(0)->data()->count())
       , 0);
     lastFpsKey = key;
     frameCount = 0;
   }
 
- // /*end plot test*/
+  // /*end plot test*/
 
   mv_LiveViewTime.setPlainText(Time);
   mv_LiveViewLogger.setPlainText(CGridUtils::sc_xTheGrid->mf_szGetTheGridText());

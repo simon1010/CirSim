@@ -22,7 +22,7 @@ public:
   enum { Type = SimulationUtils::ElectronicElements::Element_Speaker };
   int type() const { return Type; }
 
-  SAMPLE * mf_dfGetVoltage(int& av_nSamplesAvailable);
+  SAMPLE * mf_dfGetVoltage(int& av_nSamplesAvailable, double ** av_pTimesVec);
 
   void mf_Save(QJsonObject & json);
 

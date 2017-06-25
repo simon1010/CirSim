@@ -35,7 +35,7 @@ public:
   void mf_SetMaxVoltage(const double ac_dfMaxVoltage);
   double mf_dfGetMaxVoltage() const;
   
-  SAMPLE *mf_dfGetVoltage(int& av_nSamplesAvailable);
+  SAMPLE *mf_dfGetVoltage(int& av_nSamplesAvailable, double ** av_pTimesVec);
  
   void mf_Save(QJsonObject &json);
 
@@ -78,6 +78,7 @@ private:
   bool mv_bIncrement;
   int mv_nIncrement;
   double mv_tElapsedTime;
+  double mv_dfElapsedTime = { 0. };
   double mv_VoltageOut;
 };
 

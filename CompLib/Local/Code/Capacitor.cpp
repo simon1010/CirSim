@@ -4,9 +4,15 @@
 #include <QPainter>
 #include <QWidget>
 
+#include <mutex>
+
 const double CCapacitor::sc_dfDefaultCapacitance = 500; //microFarads
 
 int CCapacitor::sv_nCapacitorID = 0;
+
+std::mutex g_cap_mutex;
+std::list<SAMPLE> Cap_samples;
+std::list<double> Cap_times;
 
 CCapacitor::CCapacitor(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphicsView *ac_pPrent) : IComponent(ac_Position, ac_pScene, ac_pPrent)
 {
@@ -112,11 +118,16 @@ double CCapacitor::mf_dfGetVoltage()
   return mv_dfoutputVoltage;
 }
 
-SAMPLE* CCapacitor::mf_dfGetVoltage(int &av_nAvailableSamples)
+SAMPLE* CCapacitor::mf_dfGetVoltage(int &av_nAvailableSamples, double**  av_pTimesVec)
 {
-  av_nAvailableSamples = 1;
-  SAMPLE * sample = new SAMPLE;
-  *sample = mv_dfoutputVoltage;
+  std::lock_guard<std::mutex> guard(g_cap_mutex);
+  av_nAvailableSamples = Cap_samples.size();
+  SAMPLE * sample = new SAMPLE[Cap_samples.size()];
+  *av_pTimesVec = new double[Cap_samples.size()];
+  copy(Cap_samples.begin(), Cap_samples.end(), sample);
+  copy(Cap_times.begin(), Cap_times.end(), *av_pTimesVec);
+  Cap_samples.clear();
+  Cap_times.clear();
   return sample;
 }
 
@@ -178,6 +189,13 @@ void CCapacitor::Process_(DspSignalBus &inputs, DspSignalBus &outputs)
     lv_P1_CurrentOut = lv_P0_CurrentIn;
   }
 
+  {
+    std::lock_guard<std::mutex> guard(g_cap_mutex);
+    Cap_samples.push_back(mv_dfoutputVoltage);
+    mv_dfElapsedTime += mv_nTickDuration;
+    Cap_times.push_back(mv_dfElapsedTime * pow(10, -9));
+  }
+
   outputs.SetValue(mv_Ports[0].mv_sVoltage_OUT, lv_P0_VoltageOut);
   outputs.SetValue(mv_Ports[0].mv_sCurrent_OUT, lv_P0_CurrentOut);
   outputs.SetValue(mv_Ports[1].mv_sVoltage_OUT, lv_P1_VoltageOut);
@@ -187,7 +205,7 @@ void CCapacitor::Process_(DspSignalBus &inputs, DspSignalBus &outputs)
 void CCapacitor::mf_DoCapacitor(const double ac_P0_VoltageIn, const double ac_P1_VoltageIn, DspSignalBus &inputs, DspSignalBus &outputs)
 {
   _super::Process_(inputs, outputs);
-  mv_dfResistance = /*mv_nTickDuration*/1940000 / mv_dfCapacitance; // dt / C = Rth
+  mv_dfResistance = mv_nTickDuration / mv_dfCapacitance; // dt / C = Rth
   if (!isnan(mv_dfCapVoltage) && !mv_bCircuitStable)
   {
     mv_bCircuitStable = true;

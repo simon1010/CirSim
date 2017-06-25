@@ -258,8 +258,7 @@ void IComponent::mf_ShowSettingsDialog()
 
 void IComponent::ms_xViewInScope()
 {
-  using std::placeholders::_1;
-  SimulationUtils::TheScopeValue = std::bind(&IComponent::mf_dfGetVoltage, this, _1);
+  SimulationUtils::TheScopeValue = std::bind(&IComponent::mf_dfGetVoltage, this, std::placeholders::_1, std::placeholders::_2);
 }
 
 void IComponent::ms_xPropertiesDialog()

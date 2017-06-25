@@ -44,7 +44,7 @@ double CGround::mf_dfGetVoltage()
   return 0;
 }
 
-SAMPLE* CGround::mf_dfGetVoltage(int &av_nAvailableSamples)
+SAMPLE* CGround::mf_dfGetVoltage(int &av_nAvailableSamples, double ** av_pTimesVec)
 {
   av_nAvailableSamples = 1;
   SAMPLE * sample = new SAMPLE;

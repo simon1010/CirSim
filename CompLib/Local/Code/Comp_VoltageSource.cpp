@@ -106,7 +106,7 @@ void CVoltageSource::mf_SetDialogSettingsMap(IComponent::DialogSettingsMap ac_Ne
   mf_SetVoltage(ac_NewSettings[QString("Voltage")]);
 }
 
-SAMPLE* CVoltageSource::mf_dfGetVoltage(int &av_nAvailableSamples)
+SAMPLE* CVoltageSource::mf_dfGetVoltage(int &av_nAvailableSamples, double ** av_pTimesVec)
 {
   av_nAvailableSamples = 1;
   SAMPLE * sample = new SAMPLE;

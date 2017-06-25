@@ -138,7 +138,7 @@ const int CSpeaker::mf_nGetInstanceNumber() const
   return 1; // todo
 }
 
-SAMPLE* CSpeaker::mf_dfGetVoltage(int& av_nSamplesAvailable)
+SAMPLE* CSpeaker::mf_dfGetVoltage(int& av_nSamplesAvailable, double ** av_pTimesVec)
 {
   av_nSamplesAvailable = FRAMES_PER_BUFFER;
   SAMPLE * sample = new SAMPLE;

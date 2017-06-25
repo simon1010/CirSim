@@ -24,7 +24,7 @@ public:
   int type() const { return Type; }
   void mf_SetVoltage(const double ac_dfVoltage);
   double mf_dfGetVoltage();
-  SAMPLE* mf_dfGetVoltage(int &av_nAvailableSamples);
+  SAMPLE* mf_dfGetVoltage(int &av_nAvailableSamples, double ** av_pTimesVec);
 
   void mf_Save(QJsonObject &json);
   void mf_Load(QJsonObject &json) override;

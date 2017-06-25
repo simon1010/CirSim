@@ -28,7 +28,7 @@ public:
   double mf_dfGetCapacitance() const;
 
   double mf_dfGetVoltage();
-  SAMPLE* mf_dfGetVoltage(int &av_nAvailableSamples);
+  SAMPLE* mf_dfGetVoltage(int &av_nAvailableSamples, double ** av_pTimesVec);
 
   void mf_Save(QJsonObject &json);
   void mf_Load(QJsonObject &json) override;
@@ -62,6 +62,7 @@ private:
   double mv_dfPreviousOutputVoltage;
   double mv_dfResistance;
   double mv_EquivalentResistance;
+  double mv_dfElapsedTime = { 0. };
 };
 
 #endif

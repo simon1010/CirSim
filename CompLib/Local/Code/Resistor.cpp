@@ -93,7 +93,7 @@ double CResistor::mf_dfGetVoltage()
   return mv_dfVoltageAcrossResistor;
 }
 
-SAMPLE* CResistor::mf_dfGetVoltage(int &av_nAvailableSamples)
+SAMPLE* CResistor::mf_dfGetVoltage(int &av_nAvailableSamples, double ** av_pTimesVec)
 {
   av_nAvailableSamples = 1;
   SAMPLE * sample = new SAMPLE;

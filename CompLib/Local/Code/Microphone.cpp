@@ -240,7 +240,7 @@ void CMicrophone::mf_SetDialogSettingsMap(IComponent::DialogSettingsMap ac_Setti
   mv_nImpedance = ac_SettingsMap[QString("Impedance")];
 }
 
-SAMPLE* CMicrophone::mf_dfGetVoltage(int& av_nSamplesAvailable)
+SAMPLE* CMicrophone::mf_dfGetVoltage(int& av_nSamplesAvailable, double ** av_pTimesVec)
 {
   av_nSamplesAvailable = FRAMES_PER_BUFFER;
   SAMPLE * sample = new SAMPLE;

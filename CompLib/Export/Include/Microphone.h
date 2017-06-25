@@ -28,7 +28,7 @@ public:
   int mv_nImpedance;
   int mf_nGetImpedance();
 
-  SAMPLE * mf_dfGetVoltage(int& av_nSamplesAvailable);
+  SAMPLE * mf_dfGetVoltage(int& av_nSamplesAvailable, double ** av_pTimesVec);
 
   void mf_SetupHardware();
   friend static int CallBack(const void *inputBuffer, void *outputBuffer,

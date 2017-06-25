@@ -72,7 +72,7 @@ protected:
   virtual QString mf_ToolTipGetValue() = 0;
   virtual QString mf_ToolTipGetUnit() = 0;
 
-  virtual SAMPLE *mf_dfGetVoltage(int& av_nSamplesAvailable) = 0;
+  virtual SAMPLE *mf_dfGetVoltage(int& av_nSamplesAvailable, double ** av_pTimesVec) = 0;
 
   virtual void mf_PreDestroy();
   

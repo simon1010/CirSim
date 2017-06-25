@@ -22,7 +22,7 @@ public:
   int type() const { return Type; }
 
   double mf_dfGetVoltage();
-  SAMPLE* mf_dfGetVoltage(int &av_nAvailableSamples);
+  SAMPLE* mf_dfGetVoltage(int &av_nAvailableSamples, double ** av_pTimesVec);
 
   void mf_Save(QJsonObject &json);
 private:

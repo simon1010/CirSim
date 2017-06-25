@@ -29,7 +29,7 @@ public:
   int mf_nGetResistance();
 
   double mf_dfGetVoltage();
-  SAMPLE* mf_dfGetVoltage(int &av_nAvailableSamples);
+  SAMPLE* mf_dfGetVoltage(int &av_nAvailableSamples, double ** av_pTimesVec);
 
   void mf_Save(QJsonObject &json);
   void mf_Load(QJsonObject &json) override;

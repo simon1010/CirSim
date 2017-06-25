@@ -23,7 +23,7 @@ public:
   //typedef double(IComponent::*ScopeValue)();
   //static ScopeValue TheScopeValue;
 
-  static std::function<SAMPLE*(int&)> TheScopeValue;
+  static std::function<SAMPLE*(int&, double**)> TheScopeValue;
   static int AvailableSamples;
 
   // http://doc.qt.io/qt-4.8/qgraphicsitem.html#type

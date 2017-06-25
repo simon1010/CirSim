@@ -10,7 +10,7 @@
 
 QTime SimulationUtils::SimulationTime = QTime::currentTime();
 
-std::function<float*(int&)> SimulationUtils::TheScopeValue = nullptr;
+std::function<float*(int&, double**)> SimulationUtils::TheScopeValue = nullptr;
 
 void SimulationUtils::sf_PrintElementsToFile(const QList<QGraphicsItem*>& ac_QList_AllElements, const char * ac_LogFile)
 {
