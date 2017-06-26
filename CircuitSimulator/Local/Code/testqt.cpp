@@ -140,7 +140,7 @@ void TestQt::update()
       }
       else
       {
-        ui.Plotter->graph(0)->addData(key, data[0]);
+        ui.Plotter->graph(0)->addData(timeVector[0], data[0]);
       }
 
       ui.Plotter->graph(0)->removeDataBefore(timeVector[0] - 5); // datele mele minus 5s

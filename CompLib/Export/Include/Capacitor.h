@@ -62,7 +62,7 @@ private:
   double mv_dfPreviousOutputVoltage;
   double mv_dfResistance;
   double mv_EquivalentResistance;
-  double mv_dfElapsedTime = { 0. };
+  //double mv_dfElapsedTime = { 0. };
 };
 
 #endif

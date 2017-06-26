@@ -20,8 +20,9 @@ static int gNumNoInputs = 0;
 int CMicrophone::BuffersInUse = 0;
 SAMPLE** CMicrophone::mv_pAudioBuffers = nullptr;
 std::mutex CMicrophone::AcquisitionGuard;
-
 int CMicrophone::sv_nMicrophoneID = 0;
+std::list<SAMPLE> Mic_samples;
+std::list<double> Mic_times;
 
 CMicrophone::CMicrophone(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphicsView *ac_pParent) :
 IComponent(ac_Position, ac_pScene, ac_pParent)
@@ -93,20 +94,21 @@ static int CallBack(const void *inputBuffer, void *outputBuffer,
 
   if (inputBuffer == NULL)
   {
-    for (i = 0; i<framesPerBuffer; i++)
-    {
-      *out++ = 0;  /* left - silent */
-     // *out++ = 0;  /* right - silent */
-    }
-    gNumNoInputs += 1;
+    return paContinue;
+    //for (i = 0; i<framesPerBuffer; i++)
+    //{
+    //  *out++ = 0;  /* left - silent */
+    // // *out++ = 0;  /* right - silent */
+    //}
+    //gNumNoInputs += 1;
   }
   else
   {
     
-    for (i = 0; i<framesPerBuffer; i++)
+    for (i = 0; i < framesPerBuffer; i++)
     {
       *out++ = *in++;          /* left - clean */
-     // *out++ = *in++;          /* right - clean */
+      //*out++ = *in++;          /* right - clean */
     }
   }
   CMicrophone::BuffersInUse++;
@@ -245,8 +247,25 @@ SAMPLE* CMicrophone::mf_dfGetVoltage(int& av_nSamplesAvailable, double ** av_pTi
   av_nSamplesAvailable = FRAMES_PER_BUFFER;
   SAMPLE * sample = new SAMPLE;
   *sample = mv_OutputVoltage;
+  *av_pTimesVec = new double[1];
+  av_pTimesVec[0][0] = mv_dfElapsedTime;
   return sample;
 }
+
+//SAMPLE* CMicrophone::mf_dfGetVoltage(int &av_nAvailableSamples, double**  av_pTimesVec)
+//{
+//  CMicrophone::AcquisitionGuard.lock();
+//  av_nAvailableSamples = Mic_samples.size();
+//  SAMPLE * sample = new SAMPLE[Mic_samples.size()];
+//  *av_pTimesVec = new double[Mic_samples.size()];
+//  copy(Mic_samples.begin(), Mic_samples.end(), sample);
+//  copy(Mic_times.begin(), Mic_times.end(), *av_pTimesVec);
+//  Mic_samples.clear();
+//  Mic_times.clear();
+//  CMicrophone::AcquisitionGuard.unlock();
+//  return sample;
+//}
+
 
 
 void CMicrophone::mf_ShowSettingsDialog()
@@ -296,8 +315,18 @@ void CMicrophone::Process_(DspSignalBus &inputs, DspSignalBus &outputs)
     mv_dfCurrentOut = lv_dfMaxCurrent;
   }
 
-  mv_OutputVoltage = *mv_pAudioBuffers[0];
-  
+  CMicrophone::AcquisitionGuard.lock();
+    mv_OutputVoltage = *mv_pAudioBuffers[0];
+    //for(int i = 0; i < 512; i++)
+    //  Mic_samples.push_back(mv_pAudioBuffers[0][i]);
+    __super::Process_(inputs, outputs);
+    mv_dfElapsedTime += (mv_nTickDuration * pow(10, -9));
+    //double incrementTime = 1. / 44000.;
+    //for (int i = 0; i < 512; i++, incrementTime += incrementTime) {
+    //  Mic_times.push_back(mv_dfElapsedTime + incrementTime);
+    //}
+  CMicrophone::AcquisitionGuard.unlock();
+
   BuffersInUse = 0;
   
   outputs.SetValue(mv_Ports[1].mv_sVoltage_OUT, mv_OutputVoltage);

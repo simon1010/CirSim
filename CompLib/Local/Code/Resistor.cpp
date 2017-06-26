@@ -1,7 +1,11 @@
 #include "Resistor.h"
-
+#include <mutex>
 // Used to identify each resistor in the classic notation: e.g. R1, R2, ... Rn 
 int CResistor::sv_nResistorID = 0;
+
+std::mutex g_res_mutex;
+std::list<SAMPLE> Res_samples;
+std::list<double> Res_times;
 
 CResistor::CResistor(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphicsView *ac_pParent) : 
 IComponent(ac_Position, ac_pScene, ac_pParent)
@@ -93,11 +97,16 @@ double CResistor::mf_dfGetVoltage()
   return mv_dfVoltageAcrossResistor;
 }
 
-SAMPLE* CResistor::mf_dfGetVoltage(int &av_nAvailableSamples, double ** av_pTimesVec)
+SAMPLE* CResistor::mf_dfGetVoltage(int &av_nAvailableSamples, double**  av_pTimesVec)
 {
-  av_nAvailableSamples = 1;
-  SAMPLE * sample = new SAMPLE;
-  *sample = mv_dfVoltageAcrossResistor;
+  std::lock_guard<std::mutex> guard(g_res_mutex);
+  av_nAvailableSamples = Res_samples.size();
+  SAMPLE * sample = new SAMPLE[Res_samples.size()];
+  *av_pTimesVec = new double[Res_samples.size()];
+  copy(Res_samples.begin(), Res_samples.end(), sample);
+  copy(Res_times.begin(), Res_times.end(), *av_pTimesVec);
+  Res_samples.clear();
+  Res_times.clear();
   return sample;
 }
 
@@ -191,6 +200,15 @@ void CResistor::Process_(DspSignalBus &inputs, DspSignalBus &outputs)
     lv_P1_VoltageOut = lv_P0_VoltageIn;
     lv_P1_CurrentOut = lv_P0_CurrentIn;
   }
+
+  {
+    __super::Process_(inputs, outputs);
+    std::lock_guard<std::mutex> guard(g_res_mutex);
+    Res_samples.push_back(lv_P1_VoltageOut);
+    mv_dfElapsedTime += mv_nTickDuration;
+    Res_times.push_back(mv_dfElapsedTime * pow(10, -9));
+  }
+
 
   outputs.SetValue(mv_Ports[0].mv_sVoltage_OUT, lv_P0_VoltageOut);
   outputs.SetValue(mv_Ports[0].mv_sCurrent_OUT, lv_P0_CurrentOut);

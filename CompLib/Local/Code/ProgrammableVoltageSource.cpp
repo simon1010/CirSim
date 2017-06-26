@@ -35,9 +35,9 @@ CProgrammableVoltageSource::CProgrammableVoltageSource(QPointF ac_Position, QGra
   mv_dfBias = 0.;
 
   // DSP
-  mc_dfStartFreq = 10.;
-  mc_dfStopFreq = 500.;
-  mc_dfSweepDuration = 30.;
+  mc_dfStartFreq = 1;
+  mc_dfStopFreq = 200.;
+  mc_dfSweepDuration = 10.;
 
   mv_tElapsedTime = 0;
   mv_dfCurrentOut = NAN;
@@ -177,11 +177,11 @@ void CProgrammableVoltageSource::Process_(DspSignalBus &inputs, DspSignalBus &ou
 
   bool useSweep = true;
   if (!useSweep)
-    mv_tElapsedTime += 80000;//mv_nTickDuration;
+    mv_tElapsedTime += 50000;//mv_nTickDuration;//mv_nTickDuration;
 
   mv_dfElapsedTime += mv_nTickDuration;
 
-  mv_VoltageOut = useSweep ? mf_dfGetSweep(194000)//mv_nTickDuration)//
+  mv_VoltageOut = useSweep ? mf_dfGetSweep(mv_nTickDuration)//mv_nTickDuration)//
     : mv_dfMaxVoltage * sin(2 * M_PI * 100 * mv_tElapsedTime * pow(10, -9));
   
   {

@@ -49,6 +49,7 @@ protected:
   const string mc_sCompID;
   static int sv_nCompNr;
   int64_t mv_nTickDuration;
+  double mv_dfElapsedTime = { 0. };
   std::chrono::steady_clock::time_point mv_LastTime;
   bool mv_bMaidenTrip;
   // convenience

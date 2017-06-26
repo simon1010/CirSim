@@ -42,7 +42,6 @@ private:
 
   double mv_dfVoltageAcrossResistor;
   double mv_dfCurrent;
-
   static int sv_nResistorID;
 
   virtual DialogSettingsMap mf_GetDialogSettingsMap();

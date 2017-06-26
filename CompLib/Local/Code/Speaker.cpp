@@ -1,14 +1,18 @@
 #include <Speaker.h>
-
+#include <mutex>
 #define SAMPLE_RATE         (44100)
 #define PA_SAMPLE_TYPE      paFloat32
-#define FRAMES_PER_BUFFER   (1)
+#define FRAMES_PER_BUFFER   (512)
 #define BUFFERS             (1)
 
 double CSpeaker::mv_OutputSample = 0.;
 #include <fstream>
 static const char* sc_CapFileName = "c:\\CIRSIM_LOGGING\\SpeakerLog.csv";
 std::ofstream CapLog;
+
+std::mutex g_spk_mutex;
+std::vector<float> Spk_samples;
+std::list<double> Spk_times;
 
 CSpeaker::CSpeaker(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphicsView *ac_pParent):
   IComponent(ac_Position, ac_pScene, ac_pParent)
@@ -22,6 +26,12 @@ CSpeaker::CSpeaker(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphicsView
 
   mf_AddTerminal(mv_Terminal_1);
   mf_AddTerminal(mv_Terminal_2);
+
+  Spk_samples.resize(2000);
+  for (int i = 0; i < Spk_samples.size(); i++)
+  {
+    Spk_samples[i] = 0.;
+  }
 }
 
 CSpeaker::~CSpeaker()
@@ -153,6 +163,7 @@ void CSpeaker::mf_Save(QJsonObject &json)
   json["positionY"] = this->pos().y();
 }
 
+int iter = { 0 };
 
 void CSpeaker::Process_(DspSignalBus &inputs, DspSignalBus &outputs)
 {
@@ -185,8 +196,11 @@ void CSpeaker::Process_(DspSignalBus &inputs, DspSignalBus &outputs)
   if (inputs.GetValue(mv_Ports[1].mv_sCurrent_IN, lv_Reader)) lv_P1_CurrentIn = lv_Reader;
 
   // make some noise
-  mv_OutputSample = lv_P0_VoltageIn;
-
+  {
+    std::lock_guard<std::mutex> guard(g_spk_mutex);
+    Spk_samples[iter] = (float)lv_P0_VoltageIn;
+    iter++;
+  }
   // make transparent
   lv_P0_VoltageOut = lv_P1_VoltageIn;
   lv_P0_CurrentOut = lv_P1_CurrentIn;
@@ -211,13 +225,44 @@ int CSpeaker::SpeakerCallBack(const void *inputBuffer, void *outputBuffer,
   (void)timeInfo; /* Prevent unused variable warnings. */
   (void)statusFlags;
   (void)inputBuffer;
+  
+  if (iter < 512)
+    return paContinue;
 
-  for (i = 0; i < framesPerBuffer; i++)
   {
-    *out++ = mv_OutputSample;  /* left */
-    //*out++ = mv_OutputSample;  /* right */
-    CapLog << mv_OutputSample << std::endl;
+    std::lock_guard<std::mutex> guard(g_spk_mutex);
+    CapLog << iter << std::endl;
+    
+    float f1 = Spk_samples[0];
+    float f2 = Spk_samples[1];
+    float f3 = Spk_samples[2];
+    float f4 = Spk_samples[3];
+    float f5 = Spk_samples[4];
+    float f6 = Spk_samples[5];
+
+    for (i = 0; i < framesPerBuffer; i++)
+    {
+      if (i < framesPerBuffer - 6)
+      {
+        f1 = Spk_samples[i + 6];
+        f2 = f1;
+        f3 = f2;
+        f4 = f3;
+        f5 = f4;
+        f6 = f5;
+      }
+      *out++ = Spk_samples[i];//(f1 + f2 + f3 + f4 + f5 + f6 ) / 6; //Spk_samples[i];  /* left */
+      //*out++ = Spk_samples[i];//(f1 + f2 + f3 + f4 + f5 + f6) / 6;;  /* right */
+    }
+    iter = 0;
   }
 
+  for (auto it : Spk_samples)
+  {
+    it = 0.;
+  }
+
+  //Sleep(10);
+  
   return paContinue;
 }

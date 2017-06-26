@@ -78,7 +78,7 @@ private:
   bool mv_bIncrement;
   int mv_nIncrement;
   double mv_tElapsedTime;
-  double mv_dfElapsedTime = { 0. };
+  //double mv_dfElapsedTime = { 0. };
   double mv_VoltageOut;
 };
 
