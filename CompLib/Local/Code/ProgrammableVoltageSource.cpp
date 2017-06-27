@@ -35,8 +35,8 @@ CProgrammableVoltageSource::CProgrammableVoltageSource(QPointF ac_Position, QGra
   mv_dfBias = 0.;
 
   // DSP
-  mc_dfStartFreq = 1;
-  mc_dfStopFreq = 200.;
+  mc_dfStartFreq = 100;
+  mc_dfStopFreq = 1000.;
   mc_dfSweepDuration = 10.;
 
   mv_tElapsedTime = 0;

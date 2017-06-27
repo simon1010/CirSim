@@ -2,16 +2,17 @@
 #include <mutex>
 #define SAMPLE_RATE         (44100)
 #define PA_SAMPLE_TYPE      paFloat32
-#define FRAMES_PER_BUFFER   (512)
-#define BUFFERS             (1)
-
+#define FRAMES_PER_BUFFER   (128)
+#define FLOAT_BUFFER_SIZE   (512)
 double CSpeaker::mv_OutputSample = 0.;
 #include <fstream>
 static const char* sc_CapFileName = "c:\\CIRSIM_LOGGING\\SpeakerLog.csv";
 std::ofstream CapLog;
 
 std::mutex g_spk_mutex;
-std::vector<float> Spk_samples;
+typedef std::vector<float> t_FloatBuffer;
+
+t_FloatBuffer Spk_samples;
 std::list<double> Spk_times;
 
 CSpeaker::CSpeaker(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphicsView *ac_pParent):
@@ -27,7 +28,7 @@ CSpeaker::CSpeaker(QPointF ac_Position, QGraphicsScene* ac_pScene, QGraphicsView
   mf_AddTerminal(mv_Terminal_1);
   mf_AddTerminal(mv_Terminal_2);
 
-  Spk_samples.resize(2000);
+  Spk_samples.resize(FLOAT_BUFFER_SIZE);
   for (int i = 0; i < Spk_samples.size(); i++)
   {
     Spk_samples[i] = 0.;
@@ -58,7 +59,7 @@ void CSpeaker::mf_SetupHardware()
     _ASSERT(!"not Initialized");
   }
 
-  outputParameters.channelCount = 1;       /* stereo output */
+  outputParameters.channelCount = 2;       /* stereo output */
   outputParameters.sampleFormat = paFloat32; /* 32 bit floating point output */
   outputParameters.suggestedLatency = Pa_GetDeviceInfo(outputParameters.device)->defaultLowOutputLatency;
   outputParameters.hostApiSpecificStreamInfo = NULL;
@@ -69,9 +70,9 @@ void CSpeaker::mf_SetupHardware()
     &outputParameters,
     SAMPLE_RATE,
     FRAMES_PER_BUFFER,
-    NULL,      //paClipOff         
-    CSpeaker::SpeakerCallBack,
-    NULL);
+    NULL,      /* we won't output out of range samples so don't bother clipping them */
+    &CSpeaker::SpeakerCallBack,
+    nullptr);
 
   err = Pa_StartStream(stream);
 
@@ -198,8 +199,17 @@ void CSpeaker::Process_(DspSignalBus &inputs, DspSignalBus &outputs)
   // make some noise
   {
     std::lock_guard<std::mutex> guard(g_spk_mutex);
-    Spk_samples[iter] = (float)lv_P0_VoltageIn;
-    iter++;
+    
+    if (iter < FLOAT_BUFFER_SIZE)
+    {
+      Spk_samples[iter] = (float)lv_P0_VoltageIn;
+      iter++;
+    }
+    else
+    {
+      Spk_samples[0] = (float)lv_P0_VoltageIn;
+      iter = 1;
+    }
   }
   // make transparent
   lv_P0_VoltageOut = lv_P1_VoltageIn;
@@ -212,6 +222,8 @@ void CSpeaker::Process_(DspSignalBus &inputs, DspSignalBus &outputs)
   outputs.SetValue(mv_Ports[1].mv_sVoltage_OUT, lv_P1_VoltageOut);
   outputs.SetValue(mv_Ports[1].mv_sCurrent_OUT, lv_P1_CurrentOut);
 }
+
+int callBackIter = 0;
 
 int CSpeaker::SpeakerCallBack(const void *inputBuffer, void *outputBuffer,
   unsigned long framesPerBuffer,
@@ -226,43 +238,39 @@ int CSpeaker::SpeakerCallBack(const void *inputBuffer, void *outputBuffer,
   (void)statusFlags;
   (void)inputBuffer;
   
-  if (iter < 512)
-    return paContinue;
-
   {
     std::lock_guard<std::mutex> guard(g_spk_mutex);
-    CapLog << iter << std::endl;
-    
-    float f1 = Spk_samples[0];
-    float f2 = Spk_samples[1];
-    float f3 = Spk_samples[2];
-    float f4 = Spk_samples[3];
-    float f5 = Spk_samples[4];
-    float f6 = Spk_samples[5];
-
-    for (i = 0; i < framesPerBuffer; i++)
-    {
-      if (i < framesPerBuffer - 6)
+  
+      if (framesPerBuffer + callBackIter < FLOAT_BUFFER_SIZE)
       {
-        f1 = Spk_samples[i + 6];
-        f2 = f1;
-        f3 = f2;
-        f4 = f3;
-        f5 = f4;
-        f6 = f5;
+        for (i = callBackIter; i < framesPerBuffer + callBackIter; i++)
+        {
+          *out++ = Spk_samples[i];
+          *out++ = Spk_samples[i];
+          CapLog << Spk_samples[i] << endl;
+        }
       }
-      *out++ = Spk_samples[i];//(f1 + f2 + f3 + f4 + f5 + f6 ) / 6; //Spk_samples[i];  /* left */
-      //*out++ = Spk_samples[i];//(f1 + f2 + f3 + f4 + f5 + f6) / 6;;  /* right */
-    }
-    iter = 0;
-  }
+      else
+      {
+        int diff = (framesPerBuffer + callBackIter) - FLOAT_BUFFER_SIZE;
+        for (int i = callBackIter; i < FLOAT_BUFFER_SIZE; i++)
+        {
+          *out++ = Spk_samples[i];
+          *out++ = Spk_samples[i];
+        }
+        for (int i = 0; i < diff; i++)
+        {
+          *out++ = Spk_samples[i];
+          *out++ = Spk_samples[i];
+        }
+      }
 
-  for (auto it : Spk_samples)
-  {
-    it = 0.;
-  }
+      if (callBackIter + framesPerBuffer < FLOAT_BUFFER_SIZE)
+        callBackIter += framesPerBuffer;
+      else
+        callBackIter = 0;
 
-  //Sleep(10);
+  }
   
   return paContinue;
 }
